@@ -1,0 +1,119 @@
+# FedSpeak Configuration
+# Based on Document 02 ground truth catalog and Document 03 validated parameters
+
+# Target keywords from Document 02 catalog
+keywords:
+  - word: "transitory"
+    type: "deletion"
+    context: "inflation narrative"
+    shift_id: "SHIFT-2021-01"
+    significance: |
+      Fed used "transitory" to describe inflation surge from April-November 2021.
+      Removal in December 2021 signaled shift from temporary to persistent
+      inflation framing, indicating policy pivot toward rate increases.
+    enabled: true
+    priority: "high"
+
+  - word: "accommodative"
+    type: "deletion"
+    context: "policy stance"
+    shift_id: "SHIFT-2018-01"
+    significance: |
+      "Accommodative" described Fed's supportive policy stance.
+      Removal in September 2018 signaled end of post-crisis accommodation,
+      transition to neutral/restrictive policy.
+    enabled: true
+    priority: "high"
+
+  - word: "patient"
+    type: "deletion"
+    context: "forward guidance"
+    shift_id: "SHIFT-2015-01"
+    significance: |
+      "Patient" in 2014-2015 signaled Fed would wait before raising rates.
+      Removal in March 2015 indicated liftoff was imminent (occurred Dec 2015).
+    enabled: true
+    priority: "medium"
+
+  - word: "considerable time"
+    type: "substitution"
+    context: "forward guidance"
+    shift_id: "SHIFT-2014-01"
+    significance: |
+      "Considerable time" was forward guidance phrase 2013-2014.
+      Substitution with "patient" in December 2014 marked transition
+      toward liftoff preparation.
+    enabled: true
+    priority: "medium"
+
+  - word: "full range of tools"
+    type: "addition"
+    context: "crisis response"
+    shift_id: "SHIFT-2020-01"
+    significance: |
+      Added in March 2020 during COVID crisis.
+      Signaled Fed's readiness to use unconventional policy tools
+      (QE, forward guidance, emergency facilities).
+    enabled: true
+    priority: "high"
+
+# Detection algorithm parameters (from Document 03 testing)
+detection:
+  # Number of consecutive documents at count=0 to confirm removal
+  sustained_removal_threshold: 3
+
+  # Baseline calculation window (months)
+  baseline_window_months: 6
+
+  # Minimum documents needed for baseline calculation
+  min_baseline_samples: 3
+
+  # Primary document type for detection
+  focus_document_type: "policy_statement"  # minutes lag 3 weeks
+
+# Text extraction validation thresholds
+validation:
+  min_word_count_statement: 100
+  min_word_count_minutes: 1000
+
+# Corpus configuration
+corpus:
+  start_date: "2008-01-01"  # Pre-2008 returns 404s (Document 01 finding)
+  data_dir: "data/"
+  raw_subdir: "raw/"
+  processed_subdir: "processed/"
+  metadata_subdir: "metadata/"
+
+# Document download settings
+download:
+  delay_seconds: 1        # Rate limiting (respectful server usage)
+  retry_attempts: 3       # Maximum retry attempts
+  timeout_seconds: 30     # Request timeout
+  backoff_base: 1         # Exponential backoff base (1s, 2s, 4s)
+  user_agent: "FedSpeak/1.0 (Academic Research)"
+
+# URL templates for Fed documents
+url_templates:
+  policy_statement: "https://www.federalreserve.gov/newsevents/pressreleases/monetary{date}a.htm"
+  fomc_minutes: "https://www.federalreserve.gov/monetarypolicy/fomcminutes{date}.htm"
+  beige_book: "https://www.federalreserve.gov/monetarypolicy/beigebook{date}.htm"
+
+# Alert configuration
+alerts:
+  output_dir: "results/alerts/"
+  output_formats:
+    - "json"
+    - "text"
+  include_visualization: true
+  visualization_dir: "results/visualizations/"
+  confidence_levels:
+    high: "matches known pattern from catalog"
+    medium: "new word following known pattern"
+    low: "uncertain pattern requiring manual review"
+
+# Logging configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  log_dir: "logs/"
+  log_to_console: true
+  log_to_file: true

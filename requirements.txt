@@ -1,0 +1,13 @@
+# Core dependencies (from architecture validation)
+beautifulsoup4==4.12.2
+lxml==5.1.0
+pdfplumber==0.10.3
+pandas==2.1.4
+matplotlib==3.8.2
+requests==2.31.0
+pyyaml==6.0.1
+
+# Development dependencies
+pytest==7.4.3
+pytest-cov==4.1.0
+black==23.12.1

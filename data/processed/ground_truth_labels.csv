@@ -1,0 +1,55 @@
+date,label,doc_type,word,count,present,expected_status,filepath,datetime,year_month,shift_status
+20200129,Jan 2020,policy_statement,transitory,0,False,before,data/processed/policy_statement_20200129.html.txt,2020-01-29,2020-01,before
+20200129,Jan 2020,fomc_minutes,transitory,0,False,before,data/processed/fomc_minutes_20200129.html.txt,2020-01-29,2020-01,before
+20200318,Mar 2020,policy_statement,transitory,0,False,before,data/processed/policy_statement_20200318.html.txt,2020-03-18,2020-03,before
+20200610,Jun 2020,policy_statement,transitory,0,False,before,data/processed/policy_statement_20200610.html.txt,2020-06-10,2020-06,before
+20200610,Jun 2020,fomc_minutes,transitory,0,False,before,data/processed/fomc_minutes_20200610.html.txt,2020-06-10,2020-06,before
+20200916,Sep 2020,policy_statement,transitory,0,False,before,data/processed/policy_statement_20200916.html.txt,2020-09-16,2020-09,before
+20200916,Sep 2020,fomc_minutes,transitory,0,False,before,data/processed/fomc_minutes_20200916.html.txt,2020-09-16,2020-09,before
+20201105,Nov 2020,policy_statement,transitory,0,False,before,data/processed/policy_statement_20201105.html.txt,2020-11-05,2020-11,before
+20201216,Dec 2020,policy_statement,transitory,0,False,before,data/processed/policy_statement_20201216.html.txt,2020-12-16,2020-12,before
+20201216,Dec 2020,fomc_minutes,transitory,0,False,before,data/processed/fomc_minutes_20201216.html.txt,2020-12-16,2020-12,before
+20210127,Jan 2021,policy_statement,transitory,0,False,before,data/processed/policy_statement_20210127.html.txt,2021-01-27,2021-01,before
+20210127,Jan 2021,fomc_minutes,transitory,0,False,before,data/processed/fomc_minutes_20210127.html.txt,2021-01-27,2021-01,before
+20210317,Mar 2021,policy_statement,transitory,0,False,before,data/processed/policy_statement_20210317.html.txt,2021-03-17,2021-03,before
+20210317,Mar 2021,fomc_minutes,transitory,2,True,before,data/processed/fomc_minutes_20210317.html.txt,2021-03-17,2021-03,before
+20210428,Apr 2021,policy_statement,transitory,1,True,during - FIRST,data/processed/policy_statement_20210428.html.txt,2021-04-28,2021-04,during
+20210428,Apr 2021,fomc_minutes,transitory,8,True,during - FIRST,data/processed/fomc_minutes_20210428.html.txt,2021-04-28,2021-04,during
+20210616,Jun 2021,policy_statement,transitory,1,True,during,data/processed/policy_statement_20210616.html.txt,2021-06-16,2021-06,during
+20210616,Jun 2021,fomc_minutes,transitory,8,True,during,data/processed/fomc_minutes_20210616.html.txt,2021-06-16,2021-06,during
+20210728,Jul 2021,fomc_minutes,transitory,8,True,during - minutes,data/processed/fomc_minutes_20210728.html.txt,2021-07-28,2021-07,during
+20210922,Sep 2021,policy_statement,transitory,1,True,during,data/processed/policy_statement_20210922.html.txt,2021-09-22,2021-09,during
+20210922,Sep 2021,fomc_minutes,transitory,4,True,during,data/processed/fomc_minutes_20210922.html.txt,2021-09-22,2021-09,during
+20211103,Nov 2021,policy_statement,transitory,1,True,during,data/processed/policy_statement_20211103.html.txt,2021-11-03,2021-11,during
+20211103,Nov 2021,fomc_minutes,transitory,5,True,during,data/processed/fomc_minutes_20211103.html.txt,2021-11-03,2021-11,during
+20211215,Dec 2021,policy_statement,transitory,0,False,after - REMOVED,data/processed/policy_statement_20211215.html.txt,2021-12-15,2021-12,after
+20211215,Dec 2021,fomc_minutes,transitory,1,True,after - REMOVED,data/processed/fomc_minutes_20211215.html.txt,2021-12-15,2021-12,after
+20220126,Jan 2022,policy_statement,transitory,0,False,after,data/processed/policy_statement_20220126.html.txt,2022-01-26,2022-01,after
+20220126,Jan 2022,fomc_minutes,transitory,0,False,after,data/processed/fomc_minutes_20220126.html.txt,2022-01-26,2022-01,after
+20220316,Mar 2022,policy_statement,transitory,0,False,after,data/processed/policy_statement_20220316.html.txt,2022-03-16,2022-03,after
+20220316,Mar 2022,fomc_minutes,transitory,0,False,after,data/processed/fomc_minutes_20220316.html.txt,2022-03-16,2022-03,after
+20220504,May 2022,policy_statement,transitory,0,False,after,data/processed/policy_statement_20220504.html.txt,2022-05-04,2022-05,after
+20220615,Jun 2022,policy_statement,transitory,0,False,after,data/processed/policy_statement_20220615.html.txt,2022-06-15,2022-06,after
+20170201,Feb 2017,policy_statement,accommodative,2,True,before,data/processed/policy_statement_20170201.html.txt,2017-02-01,2017-02,before
+20170614,Jun 2017,policy_statement,accommodative,1,True,before,data/processed/policy_statement_20170614.html.txt,2017-06-14,2017-06,before
+20170614,Jun 2017,fomc_minutes,accommodative,8,True,before,data/processed/fomc_minutes_20170614.html.txt,2017-06-14,2017-06,before
+20170920,Sep 2017,policy_statement,accommodative,1,True,before,data/processed/policy_statement_20170920.html.txt,2017-09-20,2017-09,before
+20171213,Dec 2017,policy_statement,accommodative,1,True,before,data/processed/policy_statement_20171213.html.txt,2017-12-13,2017-12,before
+20171213,Dec 2017,fomc_minutes,accommodative,7,True,before,data/processed/fomc_minutes_20171213.html.txt,2017-12-13,2017-12,before
+20180131,Jan 2018,policy_statement,accommodative,1,True,before,data/processed/policy_statement_20180131.html.txt,2018-01-31,2018-01,before
+20180321,Mar 2018,policy_statement,accommodative,1,True,before,data/processed/policy_statement_20180321.html.txt,2018-03-21,2018-03,before
+20180321,Mar 2018,fomc_minutes,accommodative,12,True,before,data/processed/fomc_minutes_20180321.html.txt,2018-03-21,2018-03,before
+20180613,Jun 2018,policy_statement,accommodative,1,True,before,data/processed/policy_statement_20180613.html.txt,2018-06-13,2018-06,before
+20180613,Jun 2018,fomc_minutes,accommodative,7,True,before,data/processed/fomc_minutes_20180613.html.txt,2018-06-13,2018-06,before
+20180926,Sep 2018,policy_statement,accommodative,0,False,after - REMOVED,data/processed/policy_statement_20180926.html.txt,2018-09-26,2018-09,after
+20180926,Sep 2018,fomc_minutes,accommodative,11,True,after - REMOVED,data/processed/fomc_minutes_20180926.html.txt,2018-09-26,2018-09,after
+20181219,Dec 2018,policy_statement,accommodative,0,False,after,data/processed/policy_statement_20181219.html.txt,2018-12-19,2018-12,after
+20181219,Dec 2018,fomc_minutes,accommodative,5,True,after,data/processed/fomc_minutes_20181219.html.txt,2018-12-19,2018-12,after
+20190130,Jan 2019,policy_statement,accommodative,0,False,after,data/processed/policy_statement_20190130.html.txt,2019-01-30,2019-01,after
+20190130,Jan 2019,fomc_minutes,accommodative,4,True,after,data/processed/fomc_minutes_20190130.html.txt,2019-01-30,2019-01,after
+20190320,Mar 2019,policy_statement,accommodative,0,False,after,data/processed/policy_statement_20190320.html.txt,2019-03-20,2019-03,after
+20190619,Jun 2019,policy_statement,accommodative,0,False,after,data/processed/policy_statement_20190619.html.txt,2019-06-19,2019-06,after
+20190619,Jun 2019,fomc_minutes,accommodative,7,True,after,data/processed/fomc_minutes_20190619.html.txt,2019-06-19,2019-06,after
+20190918,Sep 2019,policy_statement,accommodative,0,False,after,data/processed/policy_statement_20190918.html.txt,2019-09-18,2019-09,after
+20191211,Dec 2019,policy_statement,accommodative,0,False,after,data/processed/policy_statement_20191211.html.txt,2019-12-11,2019-12,after
+20191211,Dec 2019,fomc_minutes,accommodative,5,True,after,data/processed/fomc_minutes_20191211.html.txt,2019-12-11,2019-12,after

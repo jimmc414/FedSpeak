@@ -1,0 +1,56 @@
+{
+  "by_type": {
+    "count": {
+      "beige_book": 1,
+      "fomc_minutes": 28,
+      "policy_statement": 34,
+      "press_transcript": 4
+    },
+    "min": {
+      "beige_book": 16043,
+      "fomc_minutes": 6611,
+      "policy_statement": 143,
+      "press_transcript": 6581
+    },
+    "max": {
+      "beige_book": 16043,
+      "fomc_minutes": 14135,
+      "policy_statement": 810,
+      "press_transcript": 9413
+    },
+    "median": {
+      "beige_book": 16043.0,
+      "fomc_minutes": 8708.0,
+      "policy_statement": 448.0,
+      "press_transcript": 7760.0
+    },
+    "mean": {
+      "beige_book": 16043.0,
+      "fomc_minutes": 9208.0,
+      "policy_statement": 447.0,
+      "press_transcript": 7879.0
+    }
+  },
+  "by_format": {
+    "count": {
+      "html": 63,
+      "pdf": 4
+    },
+    "min": {
+      "html": 143,
+      "pdf": 6581
+    },
+    "max": {
+      "html": 16043,
+      "pdf": 9413
+    },
+    "median": {
+      "html": 572.0,
+      "pdf": 7760.0
+    },
+    "mean": {
+      "html": 4589.0,
+      "pdf": 7879.0
+    }
+  }
+}

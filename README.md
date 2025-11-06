@@ -19,6 +19,11 @@ FedSpeak automatically detects when the Federal Reserve changes language in its 
 
 <img width="2037" height="1288" alt="image" src="https://github.com/user-attachments/assets/6db20696-2da6-438e-b53d-18e568866d7e" />
 
+...
+
+<img width="2143" height="1948" alt="image" src="https://github.com/user-attachments/assets/29e1d69c-f104-4084-b15e-33c1d58b629e" />
+
+
 
 ## Quick Start (with Claude Code)
 

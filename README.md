@@ -13,6 +13,9 @@ FedSpeak automatically detects when the Federal Reserve changes language in its 
 - **Historical context**: Links shifts to significance and policy implications
 - **AI agent ready**: Comprehensive documentation and prompts for Claude Code automation
 
+<img width="2139" height="1299" alt="image" src="https://github.com/user-attachments/assets/07ba7c00-ce98-44c8-adb2-2a7982e67d58" />
+
+
 ## Quick Start
 
 ### 1. Installation

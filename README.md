@@ -18,7 +18,7 @@ FedSpeak automatically detects when the Federal Reserve changes language in its 
 
 ## Quick Start (with Claude Code)
 
-### 0. Open Claude Code and type
+### 0. Open Claude Code in 'Plan Mode'(optional but recommended) and type
 
 ```text
 lets give this project a test drive. please read @prompts/AGENT_PROMPT_COMPREHENSIVE.md

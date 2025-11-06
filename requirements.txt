@@ -6,6 +6,7 @@ pandas==2.1.4
 matplotlib==3.8.2
 requests==2.31.0
 pyyaml==6.0.1
+tqdm==4.66.1  # Progress bars for downloads
 
 # Development dependencies
 pytest==7.4.3

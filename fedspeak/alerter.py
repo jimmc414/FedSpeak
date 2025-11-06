@@ -118,6 +118,12 @@ class AlertGenerator:
             'visualization': str(viz_path) if viz_path else None
         }
 
+        # Add synonym details if available
+        if shift.synonym_details:
+            alert['synonym_details'] = shift.synonym_details
+            # Add synonym breakdown to change section
+            alert['change']['synonym_breakdown'] = shift.synonym_details.get('synonym_counts', {})
+
         return alert
 
     def _gather_evidence(self, shift: Shift, time_series: pd.DataFrame) -> Dict:
@@ -174,20 +180,45 @@ class AlertGenerator:
             Path to saved PNG file
         """
         try:
-            # Filter to this word
-            word_data = time_series[time_series['word'] == shift.word].copy()
-            word_data = word_data.sort_values('date')
-
-            if len(word_data) == 0:
-                return None
-
             # Create figure
             fig, ax = plt.subplots(figsize=(12, 6))
 
-            # Plot count over time
-            ax.plot(word_data['date'], word_data['count'],
-                   marker='o', linewidth=2, markersize=8,
-                   label=f"'{shift.word}' count")
+            # Check if we have synonym data to visualize
+            if shift.synonym_details and 'primary_word' in time_series.columns:
+                # Filter to primary word (all synonyms + group)
+                primary_word = shift.synonym_details['primary_word']
+                word_data = time_series[time_series['primary_word'] == primary_word].copy()
+
+                if len(word_data) == 0:
+                    return None
+
+                # Plot individual synonyms (dotted lines)
+                individual_synonyms = word_data[word_data['is_group'] == False]
+                for synonym in shift.synonym_details.get('synonym_counts', {}).keys():
+                    syn_data = individual_synonyms[individual_synonyms['word'] == synonym].sort_values('date')
+                    if len(syn_data) > 0:
+                        ax.plot(syn_data['date'], syn_data['count'],
+                               linestyle=':', linewidth=1.5, marker='.',
+                               markersize=5, alpha=0.7, label=f"'{synonym}'")
+
+                # Plot group total (bold line)
+                group_data = word_data[word_data['is_group'] == True].sort_values('date')
+                if len(group_data) > 0:
+                    ax.plot(group_data['date'], group_data['count'],
+                           linewidth=3, marker='o', markersize=8,
+                           color='#2E86AB', label=f"'{primary_word}' GROUP TOTAL")
+
+            else:
+                # Standard visualization (no synonyms)
+                word_data = time_series[time_series['word'] == shift.word].copy()
+                word_data = word_data.sort_values('date')
+
+                if len(word_data) == 0:
+                    return None
+
+                ax.plot(word_data['date'], word_data['count'],
+                       marker='o', linewidth=2, markersize=8,
+                       label=f"'{shift.word}' count")
 
             # Mark shift date
             ax.axvline(shift.date, color='red', linestyle='--',
@@ -196,11 +227,12 @@ class AlertGenerator:
             # Formatting
             ax.set_xlabel('Date', fontsize=12)
             ax.set_ylabel('Count per Document', fontsize=12)
-            ax.set_title(f"FedSpeak: '{shift.word}' Frequency Timeline\n"
+            title_word = shift.synonym_details['primary_word'] if shift.synonym_details else shift.word
+            ax.set_title(f"FedSpeak: '{title_word}' Frequency Timeline\n"
                         f"{shift.shift_type.capitalize()} on {shift.date.date()}",
                         fontsize=14, fontweight='bold')
 
-            ax.legend(fontsize=10)
+            ax.legend(fontsize=9, loc='best')
             ax.grid(True, alpha=0.3)
 
             # Format x-axis dates
@@ -239,7 +271,10 @@ class AlertGenerator:
         lines.append("")
 
         # Header
-        lines.append(f"Word: \"{alert['word']}\"")
+        word_display = f"\"{alert['word']}\""
+        if 'synonym_details' in alert:
+            word_display += " (synonym group)"
+        lines.append(f"Word: {word_display}")
         lines.append(f"Shift Type: {alert['shift_type'].upper()}")
         lines.append(f"Document: {alert['document']['doc_type']} - {alert['document']['date']}")
         lines.append(f"Confidence: {alert['confidence'].upper()}")
@@ -248,6 +283,14 @@ class AlertGenerator:
         # Change
         lines.append("Change:")
         lines.append(f"  {alert['change']['change_description']}")
+
+        # Synonym breakdown if available
+        if 'synonym_breakdown' in alert['change'] and alert['change']['synonym_breakdown']:
+            lines.append("")
+            lines.append("  Synonym Usage:")
+            for syn_word, syn_count in alert['change']['synonym_breakdown'].items():
+                lines.append(f"    - {syn_word}: {syn_count} occurrence{'s' if syn_count != 1 else ''}")
+
         lines.append("")
 
         # Context

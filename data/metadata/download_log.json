@@ -1,0 +1,92 @@
+[
+  {
+    "doc_type": "policy_statement",
+    "date": "19940101",
+    "success": false,
+    "filepath": null,
+    "file_size": 0,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary19940101a.htm",
+    "error": "404 Not Found - document may not exist",
+    "timestamp": "2025-11-04T00:51:15.315970"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "19940212",
+    "success": false,
+    "filepath": null,
+    "file_size": 0,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary19940212a.htm",
+    "error": "404 Not Found - document may not exist",
+    "timestamp": "2025-11-04T00:51:15.406632"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "19940326",
+    "success": false,
+    "filepath": null,
+    "file_size": 0,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary19940326a.htm",
+    "error": "404 Not Found - document may not exist",
+    "timestamp": "2025-11-04T00:51:15.503743"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "19940507",
+    "success": false,
+    "filepath": null,
+    "file_size": 0,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary19940507a.htm",
+    "error": "404 Not Found - document may not exist",
+    "timestamp": "2025-11-04T00:51:15.597106"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "19940618",
+    "success": false,
+    "filepath": null,
+    "file_size": 0,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary19940618a.htm",
+    "error": "404 Not Found - document may not exist",
+    "timestamp": "2025-11-04T00:51:15.708003"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "19940730",
+    "success": false,
+    "filepath": null,
+    "file_size": 0,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary19940730a.htm",
+    "error": "404 Not Found - document may not exist",
+    "timestamp": "2025-11-04T00:51:15.818112"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "19940910",
+    "success": false,
+    "filepath": null,
+    "file_size": 0,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary19940910a.htm",
+    "error": "404 Not Found - document may not exist",
+    "timestamp": "2025-11-04T00:51:15.919794"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "19941022",
+    "success": false,
+    "filepath": null,
+    "file_size": 0,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary19941022a.htm",
+    "error": "404 Not Found - document may not exist",
+    "timestamp": "2025-11-04T00:51:16.015946"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "19941203",
+    "success": false,
+    "filepath": null,
+    "file_size": 0,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary19941203a.htm",
+    "error": "404 Not Found - document may not exist",
+    "timestamp": "2025-11-04T00:51:16.114900"
+  }
+]

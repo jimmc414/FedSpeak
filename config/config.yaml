@@ -13,6 +13,10 @@ keywords:
       inflation framing, indicating policy pivot toward rate increases.
     enabled: true
     priority: "high"
+    synonyms:
+      - "transient"
+      - "temporary"
+      - "short-lived"
 
   - word: "accommodative"
     type: "deletion"
@@ -24,6 +28,10 @@ keywords:
       transition to neutral/restrictive policy.
     enabled: true
     priority: "high"
+    synonyms:
+      - "supportive"
+      - "accommodating"
+      - "easy"
 
   - word: "patient"
     type: "deletion"
@@ -34,6 +42,10 @@ keywords:
       Removal in March 2015 indicated liftoff was imminent (occurred Dec 2015).
     enabled: true
     priority: "medium"
+    synonyms:
+      - "gradual"
+      - "measured"
+      - "deliberate"
 
   - word: "considerable time"
     type: "substitution"
@@ -45,6 +57,10 @@ keywords:
       toward liftoff preparation.
     enabled: true
     priority: "medium"
+    synonyms:
+      - "extended period"
+      - "substantial period"
+      - "significant time"
 
   - word: "full range of tools"
     type: "addition"
@@ -56,6 +72,10 @@ keywords:
       (QE, forward guidance, emergency facilities).
     enabled: true
     priority: "high"
+    synonyms:
+      - "all available tools"
+      - "complete toolkit"
+      - "entire toolkit"
 
 # Detection algorithm parameters (from Document 03 testing)
 detection:
@@ -78,7 +98,8 @@ validation:
 
 # Corpus configuration
 corpus:
-  start_date: "2008-01-01"  # Pre-2008 returns 404s (Document 01 finding)
+  start_date: "1994-01-01"  # Extended corpus from when Fed started online publishing
+  end_date: "2025-12-31"    # Through present
   data_dir: "data/"
   raw_subdir: "raw/"
   processed_subdir: "processed/"

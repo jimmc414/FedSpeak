@@ -37,7 +37,11 @@ class TextExtractor:
     Handles format evolution:
     - Modern format (2013+): <div id="article">
     - Legacy format (2008-2012): <div id="leftText">
-    - Fallback: <div id="generalContentText"> or <body>
+    - Historical format (1994-2007): <div id="generalContentText">
+    - Ultimate fallback: <body> (handles all pre-2000 formats)
+
+    The cascading selector approach automatically handles all Fed website
+    versions from 1994 onwards.
     """
 
     def __init__(self, config: Optional[Dict] = None):

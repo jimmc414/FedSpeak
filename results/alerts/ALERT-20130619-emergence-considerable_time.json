@@ -1,0 +1,28 @@
+{
+  "alert_id": "ALERT-20130619-emergence-considerable_time",
+  "timestamp": "2025-11-02T19:54:32.473346",
+  "shift_type": "emergence",
+  "word": "considerable time",
+  "document": {
+    "doc_id": "press_transcript_20130619.pdf",
+    "doc_type": "policy_statement",
+    "date": "2013-06-19"
+  },
+  "change": {
+    "previous_count": 0.0,
+    "current_count": 1,
+    "change_description": "0.0 \u2192 1"
+  },
+  "context": {
+    "category": "forward guidance",
+    "shift_id": "SHIFT-2014-01",
+    "significance": "\"Considerable time\" was forward guidance phrase 2013-2014.\nSubstitution with \"patient\" in December 2014 marked transition\ntoward liftoff preparation.\n",
+    "priority": "medium"
+  },
+  "evidence": {
+    "prior_occurrences": 0,
+    "first_occurrence": true
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/considerable_time_timeline.png"
+}

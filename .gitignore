@@ -1,69 +1,95 @@
+
+# Outputs
+*_output.txt
+output.txt
+
+# Env
+.env
+
+# Editors
+.project
+.settings
+.springBeans
+**/.favorites.json
+**/.idea
+**/.vscode
+**/*.Session.vim
+**/*.sw[a-z]
+**/*.vim
+**/*.zwc
+**/*~
+
+# OS generated files
+**/._*
+**/.AppleDouble
+**/.dccache
+**/.dropbox
+**/.dropbox.attr
+**/.dropbox.cache
+**/.DS_Store
+**/.DS_STORE
+**/.lnk
+**/.LSOverride
+**/$RECYCLE.BIN/
+**/Desktop.ini
+**/ehthumbs.db
+**/Thumbs.db
+
+# Files that might appear in the root of a volume
+**/.com.apple.timemachine.donotpresent
+**/.DocumentRevisions-V100
+**/.fseventsd
+**/.Spotlight-V100
+**/.TemporaryItems
+**/.Trashes
+**/.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+**/.apdisk
+**/.AppleDB
+**/.AppleDesktop
+**/Network Trash Folder
+**/Temporary Items
+
+# Temp files
+**/.temp
+**/.tmp
+tmp/
+
+# Files that commonly contain secrets
+**/*.key
+**/*.pem
+**/*.pfx
+**/*.p12
+**/*.jks
+**/*.keystore
+**/*.pkcs12
+**/*.pkcs8
+**/*.pkpass
+**/*.secrets
+
+# Logs
+**/*.log
+
+# Build directories
+**/_build/
+**/dist
+build/
+out/
+target/
+
 # Python
 __pycache__/
-*.py[cod]
+__pypackages__/
+.ipynb_checkpoints
 *$py.class
-*.so
-.Python
-build/
+celerybeat-schedule
 develop-eggs/
-dist/
-downloads/
+dmypy.json
 eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Virtual environments
-venv/
-ENV/
-env/
-.venv
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-
-# FedSpeak specific
-data/raw/*.html
-data/raw/*.pdf
-data/processed/*.txt
-data/metadata/*.json
-data/metadata/*.csv
-logs/*.log
-results/alerts/*.json
-results/alerts/*.txt
-results/visualizations/*.png
-
-# Keep directory structure
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-!data/metadata/.gitkeep
-!logs/.gitkeep
-!results/alerts/.gitkeep
-!results/visualizations/.gitkeep
-
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb
-
-# Testing
-.coverage
-htmlcov/
-.pytest_cache/
-.tox/
-
-# Backup files
-*.bak
-*~
+ipython_config.py
+local_settings.py
+pip-delete-this-directory.txt
+pip-log.txt
+pip-wheel-metadata/
+venv

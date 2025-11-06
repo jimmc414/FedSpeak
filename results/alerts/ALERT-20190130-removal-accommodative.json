@@ -1,0 +1,55 @@
+{
+  "alert_id": "ALERT-20190130-removal-accommodative",
+  "timestamp": "2025-11-02T19:54:31.110584",
+  "shift_type": "removal",
+  "word": "accommodative",
+  "document": {
+    "doc_id": "policy_statement_20190130.html",
+    "doc_type": "policy_statement",
+    "date": "2019-01-30"
+  },
+  "change": {
+    "previous_count": 4.0,
+    "current_count": 0,
+    "change_description": "4.0 \u2192 0"
+  },
+  "context": {
+    "category": "policy stance",
+    "shift_id": "SHIFT-2018-01",
+    "significance": "\"Accommodative\" described Fed's supportive policy stance.\nRemoval in September 2018 signaled end of post-crisis accommodation,\ntransition to neutral/restrictive policy.\n",
+    "priority": "high"
+  },
+  "evidence": {
+    "previous_occurrences": [
+      {
+        "date": "2018-03-21",
+        "count": 1,
+        "doc_id": "policy_statement_20180321.html"
+      },
+      {
+        "date": "2018-06-13",
+        "count": 7,
+        "doc_id": "fomc_minutes_20180613.html"
+      },
+      {
+        "date": "2018-06-13",
+        "count": 1,
+        "doc_id": "policy_statement_20180613.html"
+      },
+      {
+        "date": "2018-09-26",
+        "count": 11,
+        "doc_id": "fomc_minutes_20180926.html"
+      },
+      {
+        "date": "2018-12-19",
+        "count": 5,
+        "doc_id": "fomc_minutes_20181219.html"
+      }
+    ],
+    "sustained_absence": false,
+    "next_3_docs_count": 7
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/accommodative_timeline.png"
+}

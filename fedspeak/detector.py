@@ -29,6 +29,7 @@ class Shift:
     current_count: int
     confidence: str  # 'high', 'medium', 'low'
     metadata: Dict = None
+    synonym_details: Optional[Dict] = None  # Synonym usage details for group shifts
 
 
 class ShiftDetector:
@@ -67,25 +68,38 @@ class ShiftDetector:
 
         shifts = []
 
-        # Group by word
-        for word in time_series['word'].unique():
-            word_data = time_series[time_series['word'] == word].copy()
+        # Filter to GROUP rows for detection (detect on synonym groups, not individual words)
+        if 'is_group' in time_series.columns:
+            group_rows = time_series[time_series['is_group'] == True].copy()
+            logger.info(f"Detecting on {len(group_rows['primary_word'].unique())} synonym groups")
+        else:
+            # Backward compatibility: if no is_group column, use all rows
+            group_rows = time_series.copy()
+
+        # Group by primary word (or word if no primary_word column)
+        grouping_column = 'primary_word' if 'primary_word' in group_rows.columns else 'word'
+
+        for primary_word in group_rows[grouping_column].unique():
+            word_data = group_rows[group_rows[grouping_column] == primary_word].copy()
             word_data = word_data.sort_values('date').reset_index(drop=True)
 
-            # Detect emergence and removal for this word
-            word_shifts = self._detect_word_shifts(word, word_data)
+            # Detect emergence and removal for this word/group
+            # Pass full time_series so we can look up synonym details
+            word_shifts = self._detect_word_shifts(primary_word, word_data, time_series)
             shifts.extend(word_shifts)
 
         logger.info(f"Detected {len(shifts)} shifts")
         return shifts
 
-    def _detect_word_shifts(self, word: str, word_data: pd.DataFrame) -> List[Shift]:
+    def _detect_word_shifts(self, word: str, word_data: pd.DataFrame,
+                           full_time_series: pd.DataFrame) -> List[Shift]:
         """
         Detect shifts for a single word.
 
         Args:
             word: Target word
             word_data: DataFrame filtered to this word, sorted by date
+            full_time_series: Full time-series DataFrame (for synonym lookup)
 
         Returns:
             List of Shift objects for this word
@@ -105,7 +119,8 @@ class ShiftDetector:
 
             # EMERGENCE DETECTION (0 → >0)
             emergence_shift = self._detect_emergence(
-                word, current_count, baseline, date, doc_id, doc_type
+                word, current_count, baseline, date, doc_id, doc_type,
+                full_time_series
             )
             if emergence_shift:
                 shifts.append(emergence_shift)
@@ -114,7 +129,7 @@ class ShiftDetector:
             # REMOVAL DETECTION (>0 → 0, sustained)
             removal_shift = self._detect_removal(
                 word, current_count, baseline, date, doc_id, doc_type,
-                word_data, idx
+                word_data, idx, full_time_series
             )
             if removal_shift:
                 shifts.append(removal_shift)
@@ -128,7 +143,8 @@ class ShiftDetector:
                          baseline: float,
                          date: datetime,
                          doc_id: str,
-                         doc_type: str) -> Optional[Shift]:
+                         doc_type: str,
+                         full_time_series: pd.DataFrame) -> Optional[Shift]:
         """
         Detect emergence (0 → >0).
 
@@ -139,11 +155,17 @@ class ShiftDetector:
             current_count: Count in current document
             baseline: Historical average
             date, doc_id, doc_type: Document identifiers
+            full_time_series: Full time-series for synonym lookup
 
         Returns:
             Shift object if emergence detected, None otherwise
         """
         if baseline == 0 and current_count > 0:
+            # Extract synonym details if this is a group shift
+            synonym_details = self._extract_synonym_details(
+                word, date, doc_id, full_time_series
+            )
+
             return Shift(
                 shift_type='emergence',
                 word=word,
@@ -153,7 +175,8 @@ class ShiftDetector:
                 previous_count=baseline,
                 current_count=current_count,
                 confidence='high',  # First occurrence is definitive
-                metadata={'algorithm': 'emergence_0_to_positive'}
+                metadata={'algorithm': 'emergence_0_to_positive'},
+                synonym_details=synonym_details
             )
 
         return None
@@ -166,7 +189,8 @@ class ShiftDetector:
                        doc_id: str,
                        doc_type: str,
                        word_data: pd.DataFrame,
-                       current_idx: int) -> Optional[Shift]:
+                       current_idx: int,
+                       full_time_series: pd.DataFrame) -> Optional[Shift]:
         """
         Detect sustained removal (>0 → 0 with consistent prior usage).
 
@@ -185,6 +209,7 @@ class ShiftDetector:
             date, doc_id, doc_type: Document identifiers
             word_data: Full time-series for this word
             current_idx: Index of current row in word_data
+            full_time_series: Full time-series for synonym lookup
 
         Returns:
             Shift object if sustained removal detected, None otherwise
@@ -207,6 +232,11 @@ class ShiftDetector:
         past_with_word = sum(past_docs['count'] > 0)
 
         if past_with_word >= 2:
+            # Extract synonym details if this is a group shift
+            synonym_details = self._extract_synonym_details(
+                word, date, doc_id, full_time_series
+            )
+
             return Shift(
                 shift_type='removal',
                 word=word,
@@ -220,11 +250,55 @@ class ShiftDetector:
                     'algorithm': 'sustained_removal_0day',
                     'past_docs_checked': len(past_docs),
                     'past_docs_with_word': past_with_word
-                }
+                },
+                synonym_details=synonym_details
             )
 
         logger.debug(f"'{word}' not consistently present in past, not removal")
         return None
+
+    def _extract_synonym_details(self,
+                                 primary_word: str,
+                                 date: datetime,
+                                 doc_id: str,
+                                 full_time_series: pd.DataFrame) -> Optional[Dict]:
+        """
+        Extract synonym usage details for a shift.
+
+        Args:
+            primary_word: Primary keyword
+            date: Document date
+            doc_id: Document ID
+            full_time_series: Full time-series DataFrame
+
+        Returns:
+            Dictionary with synonym details, or None if not applicable
+        """
+        # Check if time-series has synonym columns
+        if 'is_group' not in full_time_series.columns:
+            return None
+
+        # Get all rows for this document and primary word (excluding GROUP row)
+        synonym_rows = full_time_series[
+            (full_time_series['date'] == date) &
+            (full_time_series['doc_id'] == doc_id) &
+            (full_time_series['primary_word'] == primary_word) &
+            (full_time_series['is_group'] == False)
+        ]
+
+        if len(synonym_rows) == 0:
+            return None
+
+        # Build synonym details
+        synonyms_present = synonym_rows[synonym_rows['count'] > 0]['word'].tolist()
+        synonym_counts = dict(zip(synonym_rows['word'], synonym_rows['count']))
+
+        return {
+            'primary_word': primary_word,
+            'synonyms_present': synonyms_present,
+            'synonym_counts': synonym_counts,
+            'total_synonyms_tracked': len(synonym_rows)
+        }
 
     def validate_shift(self, shift: Shift, document_text: Optional[str] = None) -> bool:
         """

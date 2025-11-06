@@ -1,0 +1,331 @@
+date,doc_id,doc_type,word,count,baseline
+2008-12-16,policy_statement_20081216.html,policy_statement,accommodative,0,0.0
+2008-12-16,fomc_minutes_20081216.html,fomc_minutes,accommodative,0,0.0
+2008-12-16,policy_statement_20081216.html,policy_statement,considerable time,0,0.0
+2008-12-16,fomc_minutes_20081216.html,fomc_minutes,considerable time,0,0.0
+2008-12-16,policy_statement_20081216.html,policy_statement,full range of tools,0,0.0
+2008-12-16,fomc_minutes_20081216.html,fomc_minutes,full range of tools,0,0.0
+2008-12-16,policy_statement_20081216.html,policy_statement,patient,0,0.0
+2008-12-16,fomc_minutes_20081216.html,fomc_minutes,patient,0,0.0
+2008-12-16,fomc_minutes_20081216.html,fomc_minutes,transitory,0,0.0
+2008-12-16,policy_statement_20081216.html,policy_statement,transitory,0,0.0
+2010-12-14,fomc_minutes_20101214.html,fomc_minutes,accommodative,4,0.0
+2010-12-14,fomc_minutes_20101214.html,fomc_minutes,considerable time,0,0.0
+2010-12-14,fomc_minutes_20101214.html,fomc_minutes,full range of tools,0,0.0
+2010-12-14,fomc_minutes_20101214.html,fomc_minutes,patient,0,0.0
+2010-12-14,fomc_minutes_20101214.html,fomc_minutes,transitory,1,0.0
+2013-06-19,press_transcript_20130619.pdf,policy_statement,accommodative,3,0.0
+2013-06-19,press_transcript_20130619.pdf,policy_statement,considerable time,1,0.0
+2013-06-19,press_transcript_20130619.pdf,policy_statement,full range of tools,0,0.0
+2013-06-19,press_transcript_20130619.pdf,policy_statement,patient,1,0.0
+2013-06-19,press_transcript_20130619.pdf,policy_statement,transitory,2,0.0
+2013-09-18,policy_statement_20130918.html,policy_statement,accommodative,3,0.0
+2013-09-18,policy_statement_20130918.html,policy_statement,considerable time,1,0.0
+2013-09-18,policy_statement_20130918.html,policy_statement,full range of tools,0,0.0
+2013-09-18,policy_statement_20130918.html,policy_statement,patient,0,0.0
+2013-09-18,policy_statement_20130918.html,policy_statement,transitory,0,0.0
+2013-12-18,fomc_minutes_20131218.html,fomc_minutes,accommodative,10,0.0
+2013-12-18,fomc_minutes_20131218.html,fomc_minutes,considerable time,1,0.0
+2013-12-18,fomc_minutes_20131218.html,fomc_minutes,full range of tools,0,0.0
+2013-12-18,fomc_minutes_20131218.html,fomc_minutes,patient,0,0.0
+2013-12-18,fomc_minutes_20131218.html,fomc_minutes,transitory,1,0.0
+2016-12-14,press_transcript_20161214.pdf,policy_statement,accommodative,1,0.0
+2016-12-14,press_transcript_20161214.pdf,policy_statement,considerable time,0,0.0
+2016-12-14,press_transcript_20161214.pdf,policy_statement,full range of tools,0,0.0
+2016-12-14,press_transcript_20161214.pdf,policy_statement,patient,0,0.0
+2016-12-14,press_transcript_20161214.pdf,policy_statement,transitory,1,0.0
+2017-02-01,policy_statement_20170201.html,policy_statement,accommodative,2,0.0
+2017-02-01,policy_statement_20170201.html,policy_statement,considerable time,0,0.0
+2017-02-01,policy_statement_20170201.html,policy_statement,full range of tools,0,0.0
+2017-02-01,policy_statement_20170201.html,policy_statement,patient,0,0.0
+2017-02-01,policy_statement_20170201.html,policy_statement,transitory,0,0.0
+2017-06-14,policy_statement_20170614.html,policy_statement,accommodative,1,0.0
+2017-06-14,fomc_minutes_20170614.html,fomc_minutes,accommodative,8,0.0
+2017-06-14,fomc_minutes_20170614.html,fomc_minutes,considerable time,0,0.0
+2017-06-14,policy_statement_20170614.html,policy_statement,considerable time,0,0.0
+2017-06-14,fomc_minutes_20170614.html,fomc_minutes,full range of tools,1,0.0
+2017-06-14,policy_statement_20170614.html,policy_statement,full range of tools,0,0.0
+2017-06-14,fomc_minutes_20170614.html,fomc_minutes,patient,0,0.0
+2017-06-14,policy_statement_20170614.html,policy_statement,patient,0,0.0
+2017-06-14,fomc_minutes_20170614.html,fomc_minutes,transitory,5,0.0
+2017-06-14,policy_statement_20170614.html,policy_statement,transitory,0,0.0
+2017-09-20,policy_statement_20170920.html,policy_statement,accommodative,1,0.0
+2017-09-20,policy_statement_20170920.html,policy_statement,considerable time,0,0.0
+2017-09-20,policy_statement_20170920.html,policy_statement,full range of tools,0,0.0
+2017-09-20,policy_statement_20170920.html,policy_statement,patient,0,0.0
+2017-09-20,policy_statement_20170920.html,policy_statement,transitory,0,0.0
+2017-12-13,policy_statement_20171213.html,policy_statement,accommodative,1,0.0
+2017-12-13,fomc_minutes_20171213.html,fomc_minutes,accommodative,7,0.0
+2017-12-13,policy_statement_20171213.html,policy_statement,considerable time,0,0.0
+2017-12-13,fomc_minutes_20171213.html,fomc_minutes,considerable time,0,0.0
+2017-12-13,fomc_minutes_20171213.html,fomc_minutes,full range of tools,0,0.0
+2017-12-13,policy_statement_20171213.html,policy_statement,full range of tools,0,0.0
+2017-12-13,policy_statement_20171213.html,policy_statement,patient,0,0.0
+2017-12-13,fomc_minutes_20171213.html,fomc_minutes,patient,0,0.0
+2017-12-13,policy_statement_20171213.html,policy_statement,transitory,0,0.0
+2017-12-13,fomc_minutes_20171213.html,fomc_minutes,transitory,4,0.0
+2018-01-31,policy_statement_20180131.html,policy_statement,accommodative,1,3.0
+2018-01-31,policy_statement_20180131.html,policy_statement,considerable time,0,0.0
+2018-01-31,policy_statement_20180131.html,policy_statement,full range of tools,0,0.0
+2018-01-31,policy_statement_20180131.html,policy_statement,patient,0,0.0
+2018-01-31,policy_statement_20180131.html,policy_statement,transitory,0,1.3333333333333333
+2018-03-21,policy_statement_20180321.html,policy_statement,accommodative,1,3.0
+2018-03-21,fomc_minutes_20180321.html,fomc_minutes,accommodative,12,3.0
+2018-03-21,policy_statement_20180321.html,policy_statement,considerable time,0,0.0
+2018-03-21,fomc_minutes_20180321.html,fomc_minutes,considerable time,0,0.0
+2018-03-21,policy_statement_20180321.html,policy_statement,full range of tools,0,0.0
+2018-03-21,fomc_minutes_20180321.html,fomc_minutes,full range of tools,0,0.0
+2018-03-21,fomc_minutes_20180321.html,fomc_minutes,patient,0,0.0
+2018-03-21,policy_statement_20180321.html,policy_statement,patient,0,0.0
+2018-03-21,policy_statement_20180321.html,policy_statement,transitory,0,1.3333333333333333
+2018-03-21,fomc_minutes_20180321.html,fomc_minutes,transitory,2,1.3333333333333333
+2018-06-13,fomc_minutes_20180613.html,fomc_minutes,accommodative,7,4.666666666666667
+2018-06-13,policy_statement_20180613.html,policy_statement,accommodative,1,4.666666666666667
+2018-06-13,policy_statement_20180613.html,policy_statement,considerable time,0,0.0
+2018-06-13,fomc_minutes_20180613.html,fomc_minutes,considerable time,0,0.0
+2018-06-13,policy_statement_20180613.html,policy_statement,full range of tools,0,0.0
+2018-06-13,fomc_minutes_20180613.html,fomc_minutes,full range of tools,0,0.0
+2018-06-13,policy_statement_20180613.html,policy_statement,patient,0,0.0
+2018-06-13,fomc_minutes_20180613.html,fomc_minutes,patient,0,0.0
+2018-06-13,policy_statement_20180613.html,policy_statement,transitory,0,0.6666666666666666
+2018-06-13,fomc_minutes_20180613.html,fomc_minutes,transitory,0,0.6666666666666666
+2018-09-26,policy_statement_20180926.html,policy_statement,accommodative,0,0.0
+2018-09-26,fomc_minutes_20180926.html,fomc_minutes,accommodative,11,0.0
+2018-09-26,policy_statement_20180926.html,policy_statement,considerable time,0,0.0
+2018-09-26,fomc_minutes_20180926.html,fomc_minutes,considerable time,0,0.0
+2018-09-26,policy_statement_20180926.html,policy_statement,full range of tools,0,0.0
+2018-09-26,fomc_minutes_20180926.html,fomc_minutes,full range of tools,0,0.0
+2018-09-26,policy_statement_20180926.html,policy_statement,patient,0,0.0
+2018-09-26,fomc_minutes_20180926.html,fomc_minutes,patient,0,0.0
+2018-09-26,policy_statement_20180926.html,policy_statement,transitory,0,0.0
+2018-09-26,fomc_minutes_20180926.html,fomc_minutes,transitory,1,0.0
+2018-12-19,fomc_minutes_20181219.html,fomc_minutes,accommodative,5,0.0
+2018-12-19,policy_statement_20181219.html,policy_statement,accommodative,0,0.0
+2018-12-19,fomc_minutes_20181219.html,fomc_minutes,considerable time,0,0.0
+2018-12-19,policy_statement_20181219.html,policy_statement,considerable time,0,0.0
+2018-12-19,fomc_minutes_20181219.html,fomc_minutes,full range of tools,0,0.0
+2018-12-19,policy_statement_20181219.html,policy_statement,full range of tools,0,0.0
+2018-12-19,fomc_minutes_20181219.html,fomc_minutes,patient,1,0.0
+2018-12-19,policy_statement_20181219.html,policy_statement,patient,0,0.0
+2018-12-19,fomc_minutes_20181219.html,fomc_minutes,transitory,2,0.0
+2018-12-19,policy_statement_20181219.html,policy_statement,transitory,0,0.0
+2019-01-30,fomc_minutes_20190130.html,fomc_minutes,accommodative,4,4.0
+2019-01-30,policy_statement_20190130.html,policy_statement,accommodative,0,4.0
+2019-01-30,fomc_minutes_20190130.html,fomc_minutes,considerable time,0,0.0
+2019-01-30,policy_statement_20190130.html,policy_statement,considerable time,0,0.0
+2019-01-30,policy_statement_20190130.html,policy_statement,full range of tools,0,0.0
+2019-01-30,fomc_minutes_20190130.html,fomc_minutes,full range of tools,1,0.0
+2019-01-30,fomc_minutes_20190130.html,fomc_minutes,patient,13,0.25
+2019-01-30,policy_statement_20190130.html,policy_statement,patient,1,0.25
+2019-01-30,fomc_minutes_20190130.html,fomc_minutes,transitory,0,0.75
+2019-01-30,policy_statement_20190130.html,policy_statement,transitory,0,0.75
+2019-03-20,policy_statement_20190320.html,policy_statement,accommodative,0,3.3333333333333335
+2019-03-20,policy_statement_20190320.html,policy_statement,considerable time,0,0.0
+2019-03-20,policy_statement_20190320.html,policy_statement,full range of tools,0,0.16666666666666666
+2019-03-20,policy_statement_20190320.html,policy_statement,patient,1,2.5
+2019-03-20,policy_statement_20190320.html,policy_statement,transitory,0,0.5
+2019-06-19,fomc_minutes_20190619.html,fomc_minutes,accommodative,7,1.3333333333333333
+2019-06-19,policy_statement_20190619.html,policy_statement,accommodative,0,1.3333333333333333
+2019-06-19,fomc_minutes_20190619.html,fomc_minutes,considerable time,0,0.0
+2019-06-19,policy_statement_20190619.html,policy_statement,considerable time,0,0.0
+2019-06-19,fomc_minutes_20190619.html,fomc_minutes,full range of tools,0,0.3333333333333333
+2019-06-19,policy_statement_20190619.html,policy_statement,full range of tools,0,0.3333333333333333
+2019-06-19,fomc_minutes_20190619.html,fomc_minutes,patient,1,5.0
+2019-06-19,policy_statement_20190619.html,policy_statement,patient,0,5.0
+2019-06-19,fomc_minutes_20190619.html,fomc_minutes,transitory,2,0.0
+2019-06-19,policy_statement_20190619.html,policy_statement,transitory,0,0.0
+2019-09-18,policy_statement_20190918.html,policy_statement,accommodative,0,0.0
+2019-09-18,policy_statement_20190918.html,policy_statement,considerable time,0,0.0
+2019-09-18,policy_statement_20190918.html,policy_statement,full range of tools,0,0.0
+2019-09-18,policy_statement_20190918.html,policy_statement,patient,0,0.0
+2019-09-18,policy_statement_20190918.html,policy_statement,transitory,0,0.0
+2019-12-11,policy_statement_20191211.html,policy_statement,accommodative,0,2.3333333333333335
+2019-12-11,fomc_minutes_20191211.html,fomc_minutes,accommodative,5,2.3333333333333335
+2019-12-11,policy_statement_20191211.html,policy_statement,considerable time,0,0.0
+2019-12-11,fomc_minutes_20191211.html,fomc_minutes,considerable time,0,0.0
+2019-12-11,policy_statement_20191211.html,policy_statement,full range of tools,0,0.0
+2019-12-11,fomc_minutes_20191211.html,fomc_minutes,full range of tools,0,0.0
+2019-12-11,policy_statement_20191211.html,policy_statement,patient,0,0.3333333333333333
+2019-12-11,fomc_minutes_20191211.html,fomc_minutes,patient,0,0.3333333333333333
+2019-12-11,policy_statement_20191211.html,policy_statement,transitory,0,0.6666666666666666
+2019-12-11,fomc_minutes_20191211.html,fomc_minutes,transitory,1,0.6666666666666666
+2020-01-29,policy_statement_20200129.html,policy_statement,accommodative,0,1.6666666666666667
+2020-01-29,fomc_minutes_20200129.html,fomc_minutes,accommodative,10,1.6666666666666667
+2020-01-29,policy_statement_20200129.html,policy_statement,considerable time,0,0.0
+2020-01-29,fomc_minutes_20200129.html,fomc_minutes,considerable time,0,0.0
+2020-01-29,policy_statement_20200129.html,policy_statement,full range of tools,0,0.0
+2020-01-29,fomc_minutes_20200129.html,fomc_minutes,full range of tools,0,0.0
+2020-01-29,fomc_minutes_20200129.html,fomc_minutes,patient,0,0.0
+2020-01-29,policy_statement_20200129.html,policy_statement,patient,0,0.0
+2020-01-29,policy_statement_20200129.html,policy_statement,transitory,0,0.3333333333333333
+2020-01-29,fomc_minutes_20200129.html,fomc_minutes,transitory,0,0.3333333333333333
+2020-03-18,policy_statement_20200318.html,policy_statement,accommodative,0,3.75
+2020-03-18,policy_statement_20200318.html,policy_statement,considerable time,0,0.0
+2020-03-18,policy_statement_20200318.html,policy_statement,full range of tools,0,0.0
+2020-03-18,policy_statement_20200318.html,policy_statement,patient,0,0.0
+2020-03-18,policy_statement_20200318.html,policy_statement,transitory,0,0.25
+2020-04-29,fomc_minutes_20200429.html,fomc_minutes,accommodative,1,3.0
+2020-04-29,press_transcript_20200429.pdf,policy_statement,accommodative,1,3.0
+2020-04-29,fomc_minutes_20200429.html,fomc_minutes,considerable time,0,0.0
+2020-04-29,press_transcript_20200429.pdf,policy_statement,considerable time,0,0.0
+2020-04-29,fomc_minutes_20200429.html,fomc_minutes,full range of tools,3,0.0
+2020-04-29,press_transcript_20200429.pdf,policy_statement,full range of tools,0,0.0
+2020-04-29,fomc_minutes_20200429.html,fomc_minutes,patient,0,0.0
+2020-04-29,press_transcript_20200429.pdf,policy_statement,patient,1,0.0
+2020-04-29,press_transcript_20200429.pdf,policy_statement,transitory,0,0.2
+2020-04-29,fomc_minutes_20200429.html,fomc_minutes,transitory,0,0.2
+2020-06-10,policy_statement_20200610.html,policy_statement,accommodative,0,2.4
+2020-06-10,fomc_minutes_20200610.html,fomc_minutes,accommodative,7,2.4
+2020-06-10,policy_statement_20200610.html,policy_statement,considerable time,0,0.0
+2020-06-10,fomc_minutes_20200610.html,fomc_minutes,considerable time,0,0.0
+2020-06-10,policy_statement_20200610.html,policy_statement,full range of tools,1,0.6
+2020-06-10,fomc_minutes_20200610.html,fomc_minutes,full range of tools,4,0.6
+2020-06-10,policy_statement_20200610.html,policy_statement,patient,0,0.2
+2020-06-10,fomc_minutes_20200610.html,fomc_minutes,patient,0,0.2
+2020-06-10,fomc_minutes_20200610.html,fomc_minutes,transitory,0,0.0
+2020-06-10,policy_statement_20200610.html,policy_statement,transitory,0,0.0
+2020-09-16,fomc_minutes_20200916.html,fomc_minutes,accommodative,19,2.25
+2020-09-16,policy_statement_20200916.html,policy_statement,accommodative,2,2.25
+2020-09-16,fomc_minutes_20200916.html,fomc_minutes,considerable time,0,0.0
+2020-09-16,policy_statement_20200916.html,policy_statement,considerable time,0,0.0
+2020-09-16,policy_statement_20200916.html,policy_statement,full range of tools,1,2.0
+2020-09-16,fomc_minutes_20200916.html,fomc_minutes,full range of tools,3,2.0
+2020-09-16,policy_statement_20200916.html,policy_statement,patient,0,0.25
+2020-09-16,fomc_minutes_20200916.html,fomc_minutes,patient,0,0.25
+2020-09-16,fomc_minutes_20200916.html,fomc_minutes,transitory,0,0.0
+2020-09-16,policy_statement_20200916.html,policy_statement,transitory,0,0.0
+2020-11-05,policy_statement_20201105.html,policy_statement,accommodative,3,7.0
+2020-11-05,policy_statement_20201105.html,policy_statement,considerable time,0,0.0
+2020-11-05,policy_statement_20201105.html,policy_statement,full range of tools,1,2.25
+2020-11-05,policy_statement_20201105.html,policy_statement,patient,0,0.0
+2020-11-05,policy_statement_20201105.html,policy_statement,transitory,0,0.0
+2020-12-16,policy_statement_20201216.html,policy_statement,accommodative,3,8.0
+2020-12-16,fomc_minutes_20201216.html,fomc_minutes,accommodative,19,8.0
+2020-12-16,policy_statement_20201216.html,policy_statement,considerable time,0,0.0
+2020-12-16,fomc_minutes_20201216.html,fomc_minutes,considerable time,0,0.0
+2020-12-16,policy_statement_20201216.html,policy_statement,full range of tools,1,1.6666666666666667
+2020-12-16,fomc_minutes_20201216.html,fomc_minutes,full range of tools,3,1.6666666666666667
+2020-12-16,policy_statement_20201216.html,policy_statement,patient,0,0.0
+2020-12-16,fomc_minutes_20201216.html,fomc_minutes,patient,0,0.0
+2020-12-16,policy_statement_20201216.html,policy_statement,transitory,0,0.0
+2020-12-16,fomc_minutes_20201216.html,fomc_minutes,transitory,0,0.0
+2021-01-27,policy_statement_20210127.html,policy_statement,accommodative,3,9.2
+2021-01-27,fomc_minutes_20210127.html,fomc_minutes,accommodative,21,9.2
+2021-01-27,fomc_minutes_20210127.html,fomc_minutes,considerable time,0,0.0
+2021-01-27,policy_statement_20210127.html,policy_statement,considerable time,0,0.0
+2021-01-27,policy_statement_20210127.html,policy_statement,full range of tools,1,1.8
+2021-01-27,fomc_minutes_20210127.html,fomc_minutes,full range of tools,4,1.8
+2021-01-27,fomc_minutes_20210127.html,fomc_minutes,patient,0,0.0
+2021-01-27,policy_statement_20210127.html,policy_statement,patient,0,0.0
+2021-01-27,policy_statement_20210127.html,policy_statement,transitory,0,0.0
+2021-01-27,fomc_minutes_20210127.html,fomc_minutes,transitory,0,0.0
+2021-03-17,fomc_minutes_20210317.html,fomc_minutes,accommodative,21,9.8
+2021-03-17,policy_statement_20210317.html,policy_statement,accommodative,3,9.8
+2021-03-17,fomc_minutes_20210317.html,fomc_minutes,considerable time,0,0.0
+2021-03-17,policy_statement_20210317.html,policy_statement,considerable time,0,0.0
+2021-03-17,fomc_minutes_20210317.html,fomc_minutes,full range of tools,3,2.0
+2021-03-17,policy_statement_20210317.html,policy_statement,full range of tools,1,2.0
+2021-03-17,fomc_minutes_20210317.html,fomc_minutes,patient,0,0.0
+2021-03-17,policy_statement_20210317.html,policy_statement,patient,0,0.0
+2021-03-17,fomc_minutes_20210317.html,fomc_minutes,transitory,2,0.0
+2021-03-17,policy_statement_20210317.html,policy_statement,transitory,0,0.0
+2021-04-28,fomc_minutes_20210428.html,fomc_minutes,accommodative,18,10.428571428571429
+2021-04-28,policy_statement_20210428.html,policy_statement,accommodative,3,10.428571428571429
+2021-04-28,policy_statement_20210428.html,policy_statement,considerable time,0,0.0
+2021-04-28,fomc_minutes_20210428.html,fomc_minutes,considerable time,0,0.0
+2021-04-28,fomc_minutes_20210428.html,fomc_minutes,full range of tools,3,2.0
+2021-04-28,policy_statement_20210428.html,policy_statement,full range of tools,1,2.0
+2021-04-28,fomc_minutes_20210428.html,fomc_minutes,patient,0,0.0
+2021-04-28,policy_statement_20210428.html,policy_statement,patient,0,0.0
+2021-04-28,fomc_minutes_20210428.html,fomc_minutes,transitory,8,0.2857142857142857
+2021-04-28,policy_statement_20210428.html,policy_statement,transitory,1,0.2857142857142857
+2021-06-16,policy_statement_20210616.html,policy_statement,accommodative,3,11.5
+2021-06-16,fomc_minutes_20210616.html,fomc_minutes,accommodative,18,11.5
+2021-06-16,fomc_minutes_20210616.html,fomc_minutes,considerable time,0,0.0
+2021-06-16,policy_statement_20210616.html,policy_statement,considerable time,0,0.0
+2021-06-16,fomc_minutes_20210616.html,fomc_minutes,full range of tools,3,2.1666666666666665
+2021-06-16,policy_statement_20210616.html,policy_statement,full range of tools,1,2.1666666666666665
+2021-06-16,fomc_minutes_20210616.html,fomc_minutes,patient,1,0.0
+2021-06-16,policy_statement_20210616.html,policy_statement,patient,0,0.0
+2021-06-16,fomc_minutes_20210616.html,fomc_minutes,transitory,8,1.8333333333333333
+2021-06-16,policy_statement_20210616.html,policy_statement,transitory,1,1.8333333333333333
+2021-07-28,fomc_minutes_20210728.html,fomc_minutes,accommodative,22,11.0
+2021-07-28,fomc_minutes_20210728.html,fomc_minutes,considerable time,0,0.0
+2021-07-28,fomc_minutes_20210728.html,fomc_minutes,full range of tools,3,2.0
+2021-07-28,fomc_minutes_20210728.html,fomc_minutes,patient,1,0.16666666666666666
+2021-07-28,fomc_minutes_20210728.html,fomc_minutes,transitory,8,3.3333333333333335
+2021-09-22,policy_statement_20210922.html,policy_statement,accommodative,3,12.8
+2021-09-22,fomc_minutes_20210922.html,fomc_minutes,accommodative,15,12.8
+2021-09-22,policy_statement_20210922.html,policy_statement,considerable time,0,0.0
+2021-09-22,fomc_minutes_20210922.html,fomc_minutes,considerable time,0,0.0
+2021-09-22,policy_statement_20210922.html,policy_statement,full range of tools,1,2.2
+2021-09-22,fomc_minutes_20210922.html,fomc_minutes,full range of tools,3,2.2
+2021-09-22,policy_statement_20210922.html,policy_statement,patient,0,0.4
+2021-09-22,fomc_minutes_20210922.html,fomc_minutes,patient,0,0.4
+2021-09-22,policy_statement_20210922.html,policy_statement,transitory,1,5.2
+2021-09-22,fomc_minutes_20210922.html,fomc_minutes,transitory,4,5.2
+2021-11-03,policy_statement_20211103.html,policy_statement,accommodative,3,12.2
+2021-11-03,fomc_minutes_20211103.html,fomc_minutes,accommodative,15,12.2
+2021-11-03,policy_statement_20211103.html,policy_statement,considerable time,0,0.0
+2021-11-03,fomc_minutes_20211103.html,fomc_minutes,considerable time,0,0.0
+2021-11-03,policy_statement_20211103.html,policy_statement,full range of tools,1,2.2
+2021-11-03,fomc_minutes_20211103.html,fomc_minutes,full range of tools,2,2.2
+2021-11-03,policy_statement_20211103.html,policy_statement,patient,0,0.4
+2021-11-03,fomc_minutes_20211103.html,fomc_minutes,patient,1,0.4
+2021-11-03,policy_statement_20211103.html,policy_statement,transitory,1,4.4
+2021-11-03,fomc_minutes_20211103.html,fomc_minutes,transitory,5,4.4
+2021-12-15,policy_statement_20211215.html,policy_statement,accommodative,2,11.6
+2021-12-15,fomc_minutes_20211215.html,fomc_minutes,accommodative,17,11.6
+2021-12-15,policy_statement_20211215.html,policy_statement,considerable time,0,0.0
+2021-12-15,fomc_minutes_20211215.html,fomc_minutes,considerable time,0,0.0
+2021-12-15,policy_statement_20211215.html,policy_statement,full range of tools,1,2.0
+2021-12-15,fomc_minutes_20211215.html,fomc_minutes,full range of tools,3,2.0
+2021-12-15,policy_statement_20211215.html,policy_statement,patient,0,0.4
+2021-12-15,fomc_minutes_20211215.html,fomc_minutes,patient,0,0.4
+2021-12-15,policy_statement_20211215.html,policy_statement,transitory,0,3.8
+2021-12-15,fomc_minutes_20211215.html,fomc_minutes,transitory,1,3.8
+2022-01-26,fomc_minutes_20220126.html,fomc_minutes,accommodative,13,9.166666666666666
+2022-01-26,policy_statement_20220126.html,policy_statement,accommodative,2,9.166666666666666
+2022-01-26,fomc_minutes_20220126.html,fomc_minutes,considerable time,0,0.0
+2022-01-26,policy_statement_20220126.html,policy_statement,considerable time,0,0.0
+2022-01-26,fomc_minutes_20220126.html,fomc_minutes,full range of tools,2,1.8333333333333333
+2022-01-26,policy_statement_20220126.html,policy_statement,full range of tools,0,1.8333333333333333
+2022-01-26,fomc_minutes_20220126.html,fomc_minutes,patient,0,0.16666666666666666
+2022-01-26,policy_statement_20220126.html,policy_statement,patient,0,0.16666666666666666
+2022-01-26,fomc_minutes_20220126.html,fomc_minutes,transitory,0,2.0
+2022-01-26,policy_statement_20220126.html,policy_statement,transitory,0,2.0
+2022-03-16,fomc_minutes_20220316.html,fomc_minutes,accommodative,3,8.75
+2022-03-16,policy_statement_20220316.html,policy_statement,accommodative,0,8.75
+2022-03-16,fomc_minutes_20220316.html,fomc_minutes,considerable time,0,0.0
+2022-03-16,policy_statement_20220316.html,policy_statement,considerable time,0,0.0
+2022-03-16,fomc_minutes_20220316.html,fomc_minutes,full range of tools,0,1.625
+2022-03-16,policy_statement_20220316.html,policy_statement,full range of tools,0,1.625
+2022-03-16,fomc_minutes_20220316.html,fomc_minutes,patient,0,0.125
+2022-03-16,policy_statement_20220316.html,policy_statement,patient,0,0.125
+2022-03-16,policy_statement_20220316.html,policy_statement,transitory,0,1.5
+2022-03-16,fomc_minutes_20220316.html,fomc_minutes,transitory,0,1.5
+2022-05-04,policy_statement_20220504.html,policy_statement,accommodative,0,6.166666666666667
+2022-05-04,policy_statement_20220504.html,policy_statement,considerable time,0,0.0
+2022-05-04,policy_statement_20220504.html,policy_statement,full range of tools,0,1.0
+2022-05-04,policy_statement_20220504.html,policy_statement,patient,0,0.0
+2022-05-04,policy_statement_20220504.html,policy_statement,transitory,0,0.16666666666666666
+2022-06-15,policy_statement_20220615.html,policy_statement,accommodative,0,3.6
+2022-06-15,policy_statement_20220615.html,policy_statement,considerable time,0,0.0
+2022-06-15,policy_statement_20220615.html,policy_statement,full range of tools,0,0.4
+2022-06-15,policy_statement_20220615.html,policy_statement,patient,0,0.0
+2022-06-15,policy_statement_20220615.html,policy_statement,transitory,0,0.0
+2023-02-01,fomc_minutes_20230201.html,fomc_minutes,accommodative,0,0.0
+2023-02-01,fomc_minutes_20230201.html,fomc_minutes,considerable time,0,0.0
+2023-02-01,fomc_minutes_20230201.html,fomc_minutes,full range of tools,0,0.0
+2023-02-01,fomc_minutes_20230201.html,fomc_minutes,patient,0,0.0
+2023-02-01,fomc_minutes_20230201.html,fomc_minutes,transitory,1,0.0
+2023-03-22,policy_statement_20230322.html,policy_statement,accommodative,0,0.0
+2023-03-22,press_transcript_20230322.pdf,policy_statement,accommodative,0,0.0
+2023-03-22,policy_statement_20230322.html,policy_statement,considerable time,0,0.0
+2023-03-22,press_transcript_20230322.pdf,policy_statement,considerable time,0,0.0
+2023-03-22,policy_statement_20230322.html,policy_statement,full range of tools,0,0.0
+2023-03-22,press_transcript_20230322.pdf,policy_statement,full range of tools,0,0.0
+2023-03-22,policy_statement_20230322.html,policy_statement,patient,0,0.0
+2023-03-22,press_transcript_20230322.pdf,policy_statement,patient,0,0.0
+2023-03-22,policy_statement_20230322.html,policy_statement,transitory,0,0.0
+2023-03-22,press_transcript_20230322.pdf,policy_statement,transitory,0,0.0

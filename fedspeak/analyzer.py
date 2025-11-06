@@ -54,8 +54,34 @@ class LanguageAnalyzer:
             if kw.get('enabled', True)
         ]
 
-        logger.info(f"LanguageAnalyzer initialized with {len(self.keywords)} keywords")
-        logger.debug(f"Keywords: {self.keywords}")
+        # Build synonym mappings for synonym group tracking
+        self.synonym_groups = {}  # primary_word -> [synonyms]
+        self.synonym_to_primary = {}  # synonym -> primary_word
+        self.all_tracked_words = []  # all words to track (primaries + synonyms)
+
+        for kw in config.get('keywords', []):
+            if not kw.get('enabled', True):
+                continue
+
+            primary_word = kw['word']
+            synonyms = kw.get('synonyms', [])
+
+            # Store synonym group
+            if synonyms:
+                self.synonym_groups[primary_word] = synonyms
+                # Build reverse mapping for each synonym
+                for synonym in synonyms:
+                    self.synonym_to_primary[synonym] = primary_word
+
+            # Track primary word + its synonyms
+            self.all_tracked_words.append(primary_word)
+            self.all_tracked_words.extend(synonyms)
+
+        logger.info(f"LanguageAnalyzer initialized with {len(self.keywords)} primary keywords")
+        logger.info(f"Synonym groups: {len(self.synonym_groups)} keywords with synonyms")
+        logger.info(f"Total tracked words: {len(self.all_tracked_words)} (including synonyms)")
+        logger.debug(f"Primary keywords: {self.keywords}")
+        logger.debug(f"Synonym groups: {self.synonym_groups}")
 
         # Detection parameters
         self.baseline_window_months = config['detection']['baseline_window_months']
@@ -112,11 +138,21 @@ class LanguageAnalyzer:
         with open(filepath, 'r', encoding='utf-8') as f:
             text = f.read()
 
-        # Count each keyword
+        # Count all tracked words (primaries + synonyms)
         word_counts = {}
-        for word in self.keywords:
+        for word in self.all_tracked_words:
             count = self.count_word_in_document(text, word)
             word_counts[word] = count
+
+        # Calculate group totals for words with synonyms
+        for primary_word in self.synonym_groups:
+            # Sum primary word + all its synonyms
+            group_total = word_counts.get(primary_word, 0)
+            for synonym in self.synonym_groups[primary_word]:
+                group_total += word_counts.get(synonym, 0)
+
+            # Store group total with _GROUP suffix
+            word_counts[f"{primary_word}_GROUP"] = group_total
 
         # Total words (for context)
         total_words = len(text.split())
@@ -145,12 +181,28 @@ class LanguageAnalyzer:
 
         for metrics in metrics_list:
             for word, count in metrics.word_counts.items():
+                # Determine if this is a GROUP row
+                is_group = word.endswith('_GROUP')
+
+                # Determine primary word
+                if is_group:
+                    # Remove _GROUP suffix to get primary word
+                    primary_word = word.replace('_GROUP', '')
+                elif word in self.synonym_to_primary:
+                    # This is a synonym - get its primary word
+                    primary_word = self.synonym_to_primary[word]
+                else:
+                    # This is a primary word itself
+                    primary_word = word
+
                 rows.append({
                     'date': metrics.date,
                     'doc_id': metrics.doc_id,
                     'doc_type': metrics.doc_type,
                     'word': word,
-                    'count': count
+                    'count': count,
+                    'is_group': is_group,
+                    'primary_word': primary_word
                 })
 
         df = pd.DataFrame(rows)
@@ -159,6 +211,7 @@ class LanguageAnalyzer:
         df = df.sort_values('date').reset_index(drop=True)
 
         logger.info(f"Built time-series with {len(df)} observations")
+        logger.debug(f"Columns: {df.columns.tolist()}")
 
         return df
 

@@ -1,0 +1,23 @@
+======================================================================
+  FEDSPEAK LANGUAGE SHIFT DETECTED
+======================================================================
+
+Word: "considerable time"
+Shift Type: EMERGENCE
+Document: policy_statement - 2013-09-18
+Confidence: HIGH
+
+Change:
+  0.0 → 1
+
+Historical Significance:
+  "Considerable time" was forward guidance phrase 2013-2014.
+  Substitution with "patient" in December 2014 marked transition
+  toward liftoff preparation.
+  
+
+Evidence:
+
+Timeline: results/visualizations/considerable_time_timeline.png
+
+======================================================================

@@ -1,0 +1,28 @@
+{
+  "alert_id": "ALERT-20130619-emergence-accommodative",
+  "timestamp": "2025-11-02T19:54:29.537270",
+  "shift_type": "emergence",
+  "word": "accommodative",
+  "document": {
+    "doc_id": "press_transcript_20130619.pdf",
+    "doc_type": "policy_statement",
+    "date": "2013-06-19"
+  },
+  "change": {
+    "previous_count": 0.0,
+    "current_count": 3,
+    "change_description": "0.0 \u2192 3"
+  },
+  "context": {
+    "category": "policy stance",
+    "shift_id": "SHIFT-2018-01",
+    "significance": "\"Accommodative\" described Fed's supportive policy stance.\nRemoval in September 2018 signaled end of post-crisis accommodation,\ntransition to neutral/restrictive policy.\n",
+    "priority": "high"
+  },
+  "evidence": {
+    "prior_occurrences": 1,
+    "first_occurrence": true
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/accommodative_timeline.png"
+}

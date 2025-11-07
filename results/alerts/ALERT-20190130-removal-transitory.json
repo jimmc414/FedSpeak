@@ -1,6 +1,6 @@
 {
   "alert_id": "ALERT-20190130-removal-transitory",
-  "timestamp": "2025-11-02T19:54:34.748618",
+  "timestamp": "2025-11-06T19:10:09.064358",
   "shift_type": "removal",
   "word": "transitory",
   "document": {
@@ -9,9 +9,15 @@
     "date": "2019-01-30"
   },
   "change": {
-    "previous_count": 0.75,
+    "previous_count": 1.1111111111111112,
     "current_count": 0,
-    "change_description": "0.8 \u2192 0"
+    "change_description": "1.1 \u2192 0",
+    "synonym_breakdown": {
+      "short-lived": 0,
+      "temporary": 0,
+      "transient": 0,
+      "transitory": 0
+    }
   },
   "context": {
     "category": "inflation narrative",
@@ -21,16 +27,6 @@
   },
   "evidence": {
     "previous_occurrences": [
-      {
-        "date": "2017-06-14",
-        "count": 5,
-        "doc_id": "fomc_minutes_20170614.html"
-      },
-      {
-        "date": "2017-12-13",
-        "count": 4,
-        "doc_id": "fomc_minutes_20171213.html"
-      },
       {
         "date": "2018-03-21",
         "count": 2,
@@ -42,14 +38,35 @@
         "doc_id": "fomc_minutes_20180926.html"
       },
       {
+        "date": "2018-09-26",
+        "count": 1,
+        "doc_id": "fomc_minutes_20180926"
+      },
+      {
         "date": "2018-12-19",
         "count": 2,
         "doc_id": "fomc_minutes_20181219.html"
+      },
+      {
+        "date": "2018-12-19",
+        "count": 2,
+        "doc_id": "fomc_minutes_20181219"
       }
     ],
-    "sustained_absence": false,
-    "next_3_docs_count": 2
+    "sustained_absence": true,
+    "next_3_docs_count": 0
   },
   "confidence": "high",
-  "visualization": "results/visualizations/transitory_timeline.png"
+  "visualization": "results/visualizations/transitory_timeline.png",
+  "synonym_details": {
+    "primary_word": "transitory",
+    "synonyms_present": [],
+    "synonym_counts": {
+      "short-lived": 0,
+      "temporary": 0,
+      "transient": 0,
+      "transitory": 0
+    },
+    "total_synonyms_tracked": 4
+  }
 }

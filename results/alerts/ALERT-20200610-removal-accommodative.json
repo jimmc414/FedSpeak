@@ -1,17 +1,23 @@
 {
   "alert_id": "ALERT-20200610-removal-accommodative",
-  "timestamp": "2025-11-02T19:54:31.776726",
+  "timestamp": "2025-11-06T19:09:47.577429",
   "shift_type": "removal",
   "word": "accommodative",
   "document": {
-    "doc_id": "policy_statement_20200610.html",
+    "doc_id": "policy_statement_20200610",
     "doc_type": "policy_statement",
     "date": "2020-06-10"
   },
   "change": {
-    "previous_count": 2.4,
+    "previous_count": 2.4615384615384617,
     "current_count": 0,
-    "change_description": "2.4 \u2192 0"
+    "change_description": "2.5 \u2192 0",
+    "synonym_breakdown": {
+      "accommodating": 0,
+      "accommodative": 0,
+      "easy": 0,
+      "supportive": 0
+    }
   },
   "context": {
     "category": "policy stance",
@@ -22,19 +28,14 @@
   "evidence": {
     "previous_occurrences": [
       {
-        "date": "2019-06-19",
-        "count": 7,
-        "doc_id": "fomc_minutes_20190619.html"
-      },
-      {
-        "date": "2019-12-11",
-        "count": 5,
-        "doc_id": "fomc_minutes_20191211.html"
+        "date": "2020-01-29",
+        "count": 10,
+        "doc_id": "fomc_minutes_20200129.html"
       },
       {
         "date": "2020-01-29",
         "count": 10,
-        "doc_id": "fomc_minutes_20200129.html"
+        "doc_id": "fomc_minutes_20200129"
       },
       {
         "date": "2020-04-29",
@@ -45,11 +46,27 @@
         "date": "2020-04-29",
         "count": 1,
         "doc_id": "press_transcript_20200429.pdf"
+      },
+      {
+        "date": "2020-04-29",
+        "count": 1,
+        "doc_id": "fomc_minutes_20200429"
       }
     ],
     "sustained_absence": false,
-    "next_3_docs_count": 24
+    "next_3_docs_count": 4
   },
   "confidence": "high",
-  "visualization": "results/visualizations/accommodative_timeline.png"
+  "visualization": "results/visualizations/accommodative_timeline.png",
+  "synonym_details": {
+    "primary_word": "accommodative",
+    "synonyms_present": [],
+    "synonym_counts": {
+      "accommodating": 0,
+      "accommodative": 0,
+      "easy": 0,
+      "supportive": 0
+    },
+    "total_synonyms_tracked": 4
+  }
 }

@@ -1,0 +1,27 @@
+======================================================================
+  FEDSPEAK LANGUAGE SHIFT DETECTED
+======================================================================
+
+Word: "patient"
+Shift Type: REMOVAL
+Document: policy_statement - 2019-06-19
+Confidence: HIGH
+
+Change:
+  5.0 → 0
+
+Historical Significance:
+  "Patient" in 2014-2015 signaled Fed would wait before raising rates.
+  Removal in March 2015 indicated liftoff was imminent (occurred Dec 2015).
+  
+
+Evidence:
+  Previous occurrences: 5
+    - 2019-01-30: count=1
+    - 2019-01-30: count=13
+    - 2019-03-20: count=1
+  Sustained absence: Yes
+
+Timeline: results/visualizations/patient_timeline.png
+
+======================================================================

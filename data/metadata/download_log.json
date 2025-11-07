@@ -88,5 +88,1455 @@
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary19941203a.htm",
     "error": "404 Not Found - document may not exist",
     "timestamp": "2025-11-04T00:51:16.114900"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20080130",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20080130.html",
+    "file_size": 78716,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20080130a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:26.392949"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20080318",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20080318.html",
+    "file_size": 79021,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20080318a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:27.575809"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20080430",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20080430.html",
+    "file_size": 79077,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20080430a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:27.293617"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20080625",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20080625.html",
+    "file_size": 78735,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20080625a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:28.431064"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20080805",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20080805.html",
+    "file_size": 78657,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20080805a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:29.574169"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20080916",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20080916.html",
+    "file_size": 78506,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20080916a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:30.733574"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20081029",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20081029.html",
+    "file_size": 78981,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20081029a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:31.868171"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20081216",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20081216.html",
+    "file_size": 79389,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20081216a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T22:59:52.268087"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20090128",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20090128.html",
+    "file_size": 80290,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20090128a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:33.046821"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20090318",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20090318.html",
+    "file_size": 79841,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20090318a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:34.216313"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20090429",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20090429.html",
+    "file_size": 79811,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20090429a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:35.348080"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20090624",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20090624.html",
+    "file_size": 79472,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20090624a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:36.513540"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20090812",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20090812.html",
+    "file_size": 79745,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20090812a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:37.656314"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20090923",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20090923.html",
+    "file_size": 79870,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20090923a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:38.775476"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20091104",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20091104.html",
+    "file_size": 80080,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20091104a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:39.921008"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20091216",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20091216.html",
+    "file_size": 80881,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20091216a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:41.090395"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20100127",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20100127.html",
+    "file_size": 80633,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20100127a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:42.245069"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20100316",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20100316.html",
+    "file_size": 80092,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20100316a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:43.379684"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20100428",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20100428.html",
+    "file_size": 79834,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20100428a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:44.496389"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20100623",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20100623.html",
+    "file_size": 79554,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20100623a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:45.624051"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20100810",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20100810.html",
+    "file_size": 80548,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20100810a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:46.770314"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20100921",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20100921.html",
+    "file_size": 80006,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20100921a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:47.926368"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20101103",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20101103.html",
+    "file_size": 80595,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20101103a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:49.059141"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20101214",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20101214.html",
+    "file_size": 80444,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20101214a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:50.211917"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20110126",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20110126.html",
+    "file_size": 80077,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20110126a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:51.359290"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20110315",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20110315.html",
+    "file_size": 80219,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20110315a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:52.486111"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20110427",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20110427.html",
+    "file_size": 80284,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20110427a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:53.628569"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20110622",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20110622.html",
+    "file_size": 80229,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20110622a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:54.759190"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20110809",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20110809.html",
+    "file_size": 80702,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20110809a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:55.881536"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20110921",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20110921.html",
+    "file_size": 81935,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20110921a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:57.043099"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20111102",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20111102.html",
+    "file_size": 80649,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20111102a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:58.159360"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20111213",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20111213.html",
+    "file_size": 80292,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20111213a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:57.871042"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20120125",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20120125.html",
+    "file_size": 80178,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20120125a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:39:59.024972"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20120313",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20120313.html",
+    "file_size": 80227,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20120313a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:00.188545"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20120425",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20120425.html",
+    "file_size": 80278,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20120425a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:01.316403"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20120620",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20120620.html",
+    "file_size": 81388,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20120620a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:02.476800"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20120801",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20120801.html",
+    "file_size": 80356,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20120801a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:03.608658"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20120913",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20120913.html",
+    "file_size": 81185,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20120913a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:04.740253"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20121024",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20121024.html",
+    "file_size": 81169,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20121024a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:05.884051"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20121212",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20121212.html",
+    "file_size": 82221,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20121212a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:07.046489"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20130130",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20130130.html",
+    "file_size": 81807,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20130130a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:08.210300"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20130320",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20130320.html",
+    "file_size": 81844,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20130320a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:09.356728"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20130501",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20130501.html",
+    "file_size": 81919,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20130501a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:10.566313"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20130619",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20130619.html",
+    "file_size": 82131,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20130619a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:11.694470"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20130731",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20130731.html",
+    "file_size": 82107,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20130731a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:12.870752"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20130918",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20130918.html",
+    "file_size": 83105,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20130918a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T22:59:53.428262"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20131030",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20131030.html",
+    "file_size": 82644,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20131030a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:14.055792"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20131218",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20131218.html",
+    "file_size": 83432,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20131218a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:15.224630"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20140129",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20140129.html",
+    "file_size": 83357,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20140129a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:16.382518"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20140319",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20140319.html",
+    "file_size": 83653,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20140319a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:17.509022"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20140430",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20140430.html",
+    "file_size": 83141,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20140430a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:18.642108"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20140618",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20140618.html",
+    "file_size": 83071,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20140618a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:19.782666"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20140730",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20140730.html",
+    "file_size": 83990,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20140730a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:20.947506"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20140917",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20140917.html",
+    "file_size": 83719,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20140917a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:22.086578"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20141029",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20141029.html",
+    "file_size": 83102,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20141029a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:23.232082"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20141217",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20141217.html",
+    "file_size": 82456,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20141217a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:24.369784"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20150128",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20150128.html",
+    "file_size": 81457,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20150128a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:25.511591"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20150318",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20150318.html",
+    "file_size": 81370,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20150318a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:26.656962"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20150429",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20150429.html",
+    "file_size": 81261,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20150429a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:27.775269"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20150617",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20150617.html",
+    "file_size": 81117,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20150617a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:28.895739"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20150729",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20150729.html",
+    "file_size": 81086,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20150729a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:30.068189"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20150917",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20150917.html",
+    "file_size": 81387,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20150917a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:29.756634"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20151028",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20151028.html",
+    "file_size": 81297,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20151028a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:30.893035"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20151216",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20151216.html",
+    "file_size": 81325,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20151216a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:32.029689"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20160127",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20160127.html",
+    "file_size": 81184,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20160127a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:33.159480"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20160316",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20160316.html",
+    "file_size": 81242,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20160316a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:34.548183"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20160427",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20160427.html",
+    "file_size": 81268,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20160427a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:35.713377"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20160615",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20160615.html",
+    "file_size": 81038,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20160615a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:36.840971"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20160727",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20160727.html",
+    "file_size": 81182,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20160727a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:38.068537"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20160921",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20160921.html",
+    "file_size": 81398,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20160921a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:39.240852"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20161102",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20161102.html",
+    "file_size": 81370,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20161102a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:40.383271"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20161214",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20161214.html",
+    "file_size": 81029,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20161214a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:41.512616"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20170201",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20170201.html",
+    "file_size": 81807,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20170201a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:08.078177"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20170315",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20170315.html",
+    "file_size": 81212,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20170315a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:42.682044"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20170503",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20170503.html",
+    "file_size": 81193,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20170503a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:43.839188"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20170614",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20170614.html",
+    "file_size": 81719,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20170614a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:09.144513"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20170726",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20170726.html",
+    "file_size": 81077,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20170726a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:44.977754"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20170920",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20170920.html",
+    "file_size": 81583,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20170920a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:10.234491"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20171101",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20171101.html",
+    "file_size": 81133,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20171101a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:46.127123"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20171213",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20171213.html",
+    "file_size": 81242,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20171213a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:11.372655"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20180131",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20180131.html",
+    "file_size": 80783,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20180131a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:12.505555"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20180321",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20180321.html",
+    "file_size": 80944,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20180321a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:13.651025"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20180502",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20180502.html",
+    "file_size": 80430,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20180502a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:47.313638"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20180613",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20180613.html",
+    "file_size": 80122,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20180613a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:14.847591"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20180801",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20180801.html",
+    "file_size": 79733,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20180801a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:48.471158"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20180926",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20180926.html",
+    "file_size": 79942,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20180926a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:16.069982"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20181108",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20181108.html",
+    "file_size": 79686,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20181108a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:49.684184"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20181219",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20181219.html",
+    "file_size": 80203,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20181219a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T22:59:54.561785"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20190130",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20190130.html",
+    "file_size": 80189,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20190130a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:17.264394"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20190320",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20190320.html",
+    "file_size": 80282,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20190320a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:18.482289"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20190501",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20190501.html",
+    "file_size": 79782,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20190501a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:50.893293"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20190619",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20190619.html",
+    "file_size": 80354,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20190619a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:19.693616"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20190731",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20190731.html",
+    "file_size": 80312,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20190731a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:52.070006"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20190918",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20190918.html",
+    "file_size": 80538,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20190918a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:20.922696"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20191030",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20191030.html",
+    "file_size": 79979,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20191030a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:53.224931"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20191211",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20191211.html",
+    "file_size": 80107,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20191211a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:22.114611"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20200129",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20200129.html",
+    "file_size": 80113,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200129a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:53:49.947733"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20200303",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20200303.html",
+    "file_size": 78482,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200303a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:54.397781"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20200315",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20200315.html",
+    "file_size": 82858,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200315a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:55.559018"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20200323",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20200323.html",
+    "file_size": 82731,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200323a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:56.713257"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20200429",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20200429.html",
+    "file_size": 80504,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200429a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:57.861134"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20200610",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20200610.html",
+    "file_size": 80830,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200610a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:53:52.303539"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20200729",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20200729.html",
+    "file_size": 80640,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200729a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:40:59.039511"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20200916",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20200916.html",
+    "file_size": 81588,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200916a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:53:53.466519"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20201105",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20201105.html",
+    "file_size": 81047,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20201105a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:53:54.631684"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20201216",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20201216.html",
+    "file_size": 81158,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20201216a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:53:55.812783"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20210127",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20210127.html",
+    "file_size": 81229,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210127a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:53:56.936623"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20210317",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20210317.html",
+    "file_size": 81191,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210317a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:53:58.061304"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20210428",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20210428.html",
+    "file_size": 81179,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210428a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:53:59.195006"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20210616",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20210616.html",
+    "file_size": 81139,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210616a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T22:59:55.700353"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20210728",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20210728.html",
+    "file_size": 80892,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210728a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:00.315183"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20210922",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20210922.html",
+    "file_size": 81341,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20210922a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:00.326791"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20211103",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20211103.html",
+    "file_size": 82020,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20211103a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:01.453926"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20211215",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20211215.html",
+    "file_size": 81416,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20211215a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:02.601933"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20220126",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20220126.html",
+    "file_size": 80781,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220126a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:03.732202"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20220316",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20220316.html",
+    "file_size": 80274,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220316a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:04.853778"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20220504",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20220504.html",
+    "file_size": 80789,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220504a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:05.965840"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20220615",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20220615.html",
+    "file_size": 80419,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220615a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T23:54:07.031217"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20220727",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20220727.html",
+    "file_size": 79750,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220727a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:00.171358"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20220921",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20220921.html",
+    "file_size": 79757,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20220921a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:01.356221"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20221102",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20221102.html",
+    "file_size": 80391,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20221102a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:02.512647"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20221214",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20221214.html",
+    "file_size": 80392,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20221214a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:03.640704"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20230201",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20230201.html",
+    "file_size": 80138,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230201a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:04.777388"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20230322",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20230322.html",
+    "file_size": 80664,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230322a.htm",
+    "error": null,
+    "timestamp": "2025-10-30T22:59:56.826535"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20230503",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20230503.html",
+    "file_size": 80117,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230503a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:05.943632"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20230614",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20230614.html",
+    "file_size": 80187,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230614a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:07.071104"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20230726",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20230726.html",
+    "file_size": 80144,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230726a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:08.255704"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20230920",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20230920.html",
+    "file_size": 80191,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230920a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:09.375132"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20231101",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20231101.html",
+    "file_size": 80225,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20231101a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:10.522508"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20231213",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20231213.html",
+    "file_size": 80279,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20231213a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:11.697304"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20240131",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20240131.html",
+    "file_size": 80091,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240131a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:12.839636"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20240320",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20240320.html",
+    "file_size": 80051,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240320a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:14.027564"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20240501",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20240501.html",
+    "file_size": 80537,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240501a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:15.185489"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20240612",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20240612.html",
+    "file_size": 80139,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240612a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:16.314674"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20240731",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20240731.html",
+    "file_size": 80219,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240731a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:17.440153"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20240918",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20240918.html",
+    "file_size": 80218,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20240918a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:18.584758"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20241107",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20241107.html",
+    "file_size": 79993,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20241107a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:19.703243"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20241218",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20241218.html",
+    "file_size": 80146,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20241218a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T14:41:20.830071"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20250129",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20250129.html",
+    "file_size": 79922,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250129a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T19:08:36.931264"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20250319",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20250319.html",
+    "file_size": 80306,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250319a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T19:08:38.045196"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20250507",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20250507.html",
+    "file_size": 79726,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250507a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T19:08:39.158349"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20250618",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20250618.html",
+    "file_size": 79572,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250618a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T19:08:39.534098"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20250730",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20250730.html",
+    "file_size": 80427,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250730a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T19:08:40.635848"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20250917",
+    "success": true,
+    "filepath": "data/raw/policy_statement_20250917.html",
+    "file_size": 80470,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250917a.htm",
+    "error": null,
+    "timestamp": "2025-11-06T19:08:41.746330"
+  },
+  {
+    "doc_type": "policy_statement",
+    "date": "20251105",
+    "success": false,
+    "filepath": null,
+    "file_size": 0,
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20251105a.htm",
+    "error": "404 Not Found - document may not exist",
+    "timestamp": "2025-11-06T19:08:41.860457"
   }
 ]

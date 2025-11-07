@@ -2,13 +2,19 @@
   FEDSPEAK LANGUAGE SHIFT DETECTED
 ======================================================================
 
-Word: "patient"
+Word: "patient" (synonym group)
 Shift Type: REMOVAL
 Document: policy_statement - 2021-09-22
 Confidence: HIGH
 
 Change:
-  0.4 → 0
+  2.7 → 0
+
+  Synonym Usage:
+    - deliberate: 0 occurrences
+    - gradual: 0 occurrences
+    - measured: 0 occurrences
+    - patient: 0 occurrences
 
 Historical Significance:
   "Patient" in 2014-2015 signaled Fed would wait before raising rates.
@@ -17,8 +23,8 @@ Historical Significance:
 
 Evidence:
   Previous occurrences: 5
-    - 2020-04-29: count=1
     - 2021-06-16: count=1
+    - 2021-07-28: count=1
     - 2021-07-28: count=1
   Sustained absence: No
 

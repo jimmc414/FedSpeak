@@ -1,0 +1,72 @@
+{
+  "alert_id": "ALERT-20200729-removal-considerable_time",
+  "timestamp": "2025-11-06T19:09:50.454020",
+  "shift_type": "removal",
+  "word": "considerable time",
+  "document": {
+    "doc_id": "policy_statement_20200729",
+    "doc_type": "policy_statement",
+    "date": "2020-07-29"
+  },
+  "change": {
+    "previous_count": 0.23076923076923078,
+    "current_count": 0,
+    "change_description": "0.2 \u2192 0",
+    "synonym_breakdown": {
+      "considerable time": 0,
+      "extended period": 0,
+      "significant time": 0,
+      "substantial period": 0
+    }
+  },
+  "context": {
+    "category": "forward guidance",
+    "shift_id": "SHIFT-2014-01",
+    "significance": "\"Considerable time\" was forward guidance phrase 2013-2014.\nSubstitution with \"patient\" in December 2014 marked transition\ntoward liftoff preparation.\n",
+    "priority": "medium"
+  },
+  "evidence": {
+    "previous_occurrences": [
+      {
+        "date": "2014-06-18",
+        "count": 1,
+        "doc_id": "policy_statement_20140618"
+      },
+      {
+        "date": "2014-07-30",
+        "count": 2,
+        "doc_id": "policy_statement_20140730"
+      },
+      {
+        "date": "2014-09-17",
+        "count": 2,
+        "doc_id": "policy_statement_20140917"
+      },
+      {
+        "date": "2014-10-29",
+        "count": 1,
+        "doc_id": "policy_statement_20141029"
+      },
+      {
+        "date": "2014-12-17",
+        "count": 1,
+        "doc_id": "policy_statement_20141217"
+      }
+    ],
+    "sustained_absence": true,
+    "next_3_docs_count": 0
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/considerable_time_timeline.png",
+  "synonym_details": {
+    "primary_word": "considerable time",
+    "synonyms_present": [],
+    "synonym_counts": {
+      "considerable time": 0,
+      "extended period": 0,
+      "significant time": 0,
+      "substantial period": 0
+    },
+    "total_synonyms_tracked": 4
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "alert_id": "ALERT-20161214-emergence-transitory",
+  "timestamp": "2025-11-02T19:54:34.284445",
+  "shift_type": "emergence",
+  "word": "transitory",
+  "document": {
+    "doc_id": "press_transcript_20161214.pdf",
+    "doc_type": "policy_statement",
+    "date": "2016-12-14"
+  },
+  "change": {
+    "previous_count": 0.0,
+    "current_count": 1,
+    "change_description": "0.0 \u2192 1"
+  },
+  "context": {
+    "category": "inflation narrative",
+    "shift_id": "SHIFT-2021-01",
+    "significance": "Fed used \"transitory\" to describe inflation surge from April-November 2021.\nRemoval in December 2021 signaled shift from temporary to persistent\ninflation framing, indicating policy pivot toward rate increases.\n",
+    "priority": "high"
+  },
+  "evidence": {
+    "prior_occurrences": 3,
+    "first_occurrence": true
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/transitory_timeline.png"
+}

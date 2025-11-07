@@ -1,0 +1,67 @@
+{
+  "alert_id": "ALERT-20190320-removal-full_range_of_tools",
+  "timestamp": "2025-11-06T14:42:58.618324",
+  "shift_type": "removal",
+  "word": "full range of tools",
+  "document": {
+    "doc_id": "policy_statement_20190320.html",
+    "doc_type": "policy_statement",
+    "date": "2019-03-20"
+  },
+  "change": {
+    "previous_count": 0.15384615384615385,
+    "current_count": 0,
+    "change_description": "0.2 \u2192 0",
+    "synonym_breakdown": {
+      "all available tools": 0,
+      "complete toolkit": 0,
+      "entire toolkit": 0,
+      "full range of tools": 0
+    }
+  },
+  "context": {
+    "category": "crisis response",
+    "shift_id": "SHIFT-2020-01",
+    "significance": "Added in March 2020 during COVID crisis.\nSignaled Fed's readiness to use unconventional policy tools\n(QE, forward guidance, emergency facilities).\n",
+    "priority": "high"
+  },
+  "evidence": {
+    "previous_occurrences": [
+      {
+        "date": "2017-06-14",
+        "count": 1,
+        "doc_id": "fomc_minutes_20170614.html"
+      },
+      {
+        "date": "2017-06-14",
+        "count": 1,
+        "doc_id": "fomc_minutes_20170614"
+      },
+      {
+        "date": "2019-01-30",
+        "count": 1,
+        "doc_id": "fomc_minutes_20190130"
+      },
+      {
+        "date": "2019-01-30",
+        "count": 1,
+        "doc_id": "fomc_minutes_20190130.html"
+      }
+    ],
+    "sustained_absence": true,
+    "next_3_docs_count": 0
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/full_range_of_tools_timeline.png",
+  "synonym_details": {
+    "primary_word": "full range of tools",
+    "synonyms_present": [],
+    "synonym_counts": {
+      "all available tools": 0,
+      "complete toolkit": 0,
+      "entire toolkit": 0,
+      "full range of tools": 0
+    },
+    "total_synonyms_tracked": 4
+  }
+}

@@ -1,17 +1,23 @@
 {
   "alert_id": "ALERT-20220504-removal-accommodative",
-  "timestamp": "2025-11-02T19:54:32.250396",
+  "timestamp": "2025-11-06T19:09:48.409251",
   "shift_type": "removal",
   "word": "accommodative",
   "document": {
-    "doc_id": "policy_statement_20220504.html",
+    "doc_id": "policy_statement_20220504",
     "doc_type": "policy_statement",
     "date": "2022-05-04"
   },
   "change": {
-    "previous_count": 6.166666666666667,
+    "previous_count": 6.333333333333333,
     "current_count": 0,
-    "change_description": "6.2 \u2192 0"
+    "change_description": "6.3 \u2192 0",
+    "synonym_breakdown": {
+      "accommodating": 0,
+      "accommodative": 0,
+      "easy": 0,
+      "supportive": 0
+    }
   },
   "context": {
     "category": "policy stance",
@@ -22,14 +28,14 @@
   "evidence": {
     "previous_occurrences": [
       {
-        "date": "2021-12-15",
+        "date": "2022-01-26",
         "count": 2,
-        "doc_id": "policy_statement_20211215.html"
+        "doc_id": "policy_statement_20220126"
       },
       {
-        "date": "2021-12-15",
-        "count": 17,
-        "doc_id": "fomc_minutes_20211215.html"
+        "date": "2022-01-26",
+        "count": 13,
+        "doc_id": "fomc_minutes_20220126"
       },
       {
         "date": "2022-01-26",
@@ -37,9 +43,9 @@
         "doc_id": "fomc_minutes_20220126.html"
       },
       {
-        "date": "2022-01-26",
-        "count": 2,
-        "doc_id": "policy_statement_20220126.html"
+        "date": "2022-03-16",
+        "count": 3,
+        "doc_id": "fomc_minutes_20220316"
       },
       {
         "date": "2022-03-16",
@@ -51,5 +57,16 @@
     "next_3_docs_count": 0
   },
   "confidence": "high",
-  "visualization": "results/visualizations/accommodative_timeline.png"
+  "visualization": "results/visualizations/accommodative_timeline.png",
+  "synonym_details": {
+    "primary_word": "accommodative",
+    "synonyms_present": [],
+    "synonym_counts": {
+      "accommodating": 0,
+      "accommodative": 0,
+      "easy": 0,
+      "supportive": 0
+    },
+    "total_synonyms_tracked": 4
+  }
 }

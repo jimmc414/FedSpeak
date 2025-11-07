@@ -1,0 +1,31 @@
+======================================================================
+  FEDSPEAK LANGUAGE SHIFT DETECTED
+======================================================================
+
+Word: "considerable time" (synonym group)
+Shift Type: REMOVAL
+Document: policy_statement - 2009-01-28
+Confidence: HIGH
+
+Change:
+  0.3 → 0
+
+  Synonym Usage:
+    - considerable time: 0 occurrences
+    - extended period: 0 occurrences
+    - significant time: 0 occurrences
+    - substantial period: 0 occurrences
+
+Historical Significance:
+  "Considerable time" was forward guidance phrase 2013-2014.
+  Substitution with "patient" in December 2014 marked transition
+  toward liftoff preparation.
+  
+
+Evidence:
+  Previous occurrences: 0
+  Sustained absence: Yes
+
+Timeline: results/visualizations/considerable_time_timeline.png
+
+======================================================================

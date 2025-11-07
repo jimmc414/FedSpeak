@@ -1,0 +1,72 @@
+{
+  "alert_id": "ALERT-20170920-removal-transitory",
+  "timestamp": "2025-11-06T14:43:12.964716",
+  "shift_type": "removal",
+  "word": "transitory",
+  "document": {
+    "doc_id": "policy_statement_20170920",
+    "doc_type": "policy_statement",
+    "date": "2017-09-20"
+  },
+  "change": {
+    "previous_count": 2.1666666666666665,
+    "current_count": 0,
+    "change_description": "2.2 \u2192 0",
+    "synonym_breakdown": {
+      "short-lived": 0,
+      "temporary": 0,
+      "transient": 0,
+      "transitory": 0
+    }
+  },
+  "context": {
+    "category": "inflation narrative",
+    "shift_id": "SHIFT-2021-01",
+    "significance": "Fed used \"transitory\" to describe inflation surge from April-November 2021.\nRemoval in December 2021 signaled shift from temporary to persistent\ninflation framing, indicating policy pivot toward rate increases.\n",
+    "priority": "high"
+  },
+  "evidence": {
+    "previous_occurrences": [
+      {
+        "date": "2016-12-14",
+        "count": 1,
+        "doc_id": "policy_statement_20161214"
+      },
+      {
+        "date": "2016-12-14",
+        "count": 1,
+        "doc_id": "press_transcript_20161214.pdf"
+      },
+      {
+        "date": "2017-05-03",
+        "count": 1,
+        "doc_id": "policy_statement_20170503"
+      },
+      {
+        "date": "2017-06-14",
+        "count": 5,
+        "doc_id": "fomc_minutes_20170614.html"
+      },
+      {
+        "date": "2017-06-14",
+        "count": 5,
+        "doc_id": "fomc_minutes_20170614"
+      }
+    ],
+    "sustained_absence": false,
+    "next_3_docs_count": 4
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/transitory_timeline.png",
+  "synonym_details": {
+    "primary_word": "transitory",
+    "synonyms_present": [],
+    "synonym_counts": {
+      "short-lived": 0,
+      "temporary": 0,
+      "transient": 0,
+      "transitory": 0
+    },
+    "total_synonyms_tracked": 4
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "alert_id": "ALERT-20131218-emergence-patient",
+  "timestamp": "2025-11-06T19:09:54.272033",
+  "shift_type": "emergence",
+  "word": "patient",
+  "document": {
+    "doc_id": "policy_statement_20131218",
+    "doc_type": "policy_statement",
+    "date": "2013-12-18"
+  },
+  "change": {
+    "previous_count": 0.0,
+    "current_count": 1,
+    "change_description": "0.0 \u2192 1",
+    "synonym_breakdown": {
+      "deliberate": 0,
+      "gradual": 0,
+      "measured": 1,
+      "patient": 0
+    }
+  },
+  "context": {
+    "category": "forward guidance",
+    "shift_id": "SHIFT-2015-01",
+    "significance": "\"Patient\" in 2014-2015 signaled Fed would wait before raising rates.\nRemoval in March 2015 indicated liftoff was imminent (occurred Dec 2015).\n",
+    "priority": "medium"
+  },
+  "evidence": {
+    "prior_occurrences": 1,
+    "first_occurrence": true
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/patient_timeline.png",
+  "synonym_details": {
+    "primary_word": "patient",
+    "synonyms_present": [
+      "measured"
+    ],
+    "synonym_counts": {
+      "deliberate": 0,
+      "gradual": 0,
+      "measured": 1,
+      "patient": 0
+    },
+    "total_synonyms_tracked": 4
+  }
+}

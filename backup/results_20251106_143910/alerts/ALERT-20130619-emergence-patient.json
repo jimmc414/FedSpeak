@@ -1,0 +1,28 @@
+{
+  "alert_id": "ALERT-20130619-emergence-patient",
+  "timestamp": "2025-11-02T19:54:33.149619",
+  "shift_type": "emergence",
+  "word": "patient",
+  "document": {
+    "doc_id": "press_transcript_20130619.pdf",
+    "doc_type": "policy_statement",
+    "date": "2013-06-19"
+  },
+  "change": {
+    "previous_count": 0.0,
+    "current_count": 1,
+    "change_description": "0.0 \u2192 1"
+  },
+  "context": {
+    "category": "forward guidance",
+    "shift_id": "SHIFT-2015-01",
+    "significance": "\"Patient\" in 2014-2015 signaled Fed would wait before raising rates.\nRemoval in March 2015 indicated liftoff was imminent (occurred Dec 2015).\n",
+    "priority": "medium"
+  },
+  "evidence": {
+    "prior_occurrences": 0,
+    "first_occurrence": true
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/patient_timeline.png"
+}

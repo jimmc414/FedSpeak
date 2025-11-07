@@ -1,0 +1,34 @@
+======================================================================
+  FEDSPEAK LANGUAGE SHIFT DETECTED
+======================================================================
+
+Word: "full range of tools" (synonym group)
+Shift Type: REMOVAL
+Document: policy_statement - 2022-03-16
+Confidence: HIGH
+
+Change:
+  1.6 → 0
+
+  Synonym Usage:
+    - all available tools: 0 occurrences
+    - complete toolkit: 0 occurrences
+    - entire toolkit: 0 occurrences
+    - full range of tools: 0 occurrences
+
+Historical Significance:
+  Added in March 2020 during COVID crisis.
+  Signaled Fed's readiness to use unconventional policy tools
+  (QE, forward guidance, emergency facilities).
+  
+
+Evidence:
+  Previous occurrences: 5
+    - 2021-12-15: count=1
+    - 2022-01-26: count=2
+    - 2022-01-26: count=2
+  Sustained absence: Yes
+
+Timeline: results/visualizations/full_range_of_tools_timeline.png
+
+======================================================================

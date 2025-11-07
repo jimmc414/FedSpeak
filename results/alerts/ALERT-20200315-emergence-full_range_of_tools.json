@@ -1,0 +1,47 @@
+{
+  "alert_id": "ALERT-20200315-emergence-full_range_of_tools",
+  "timestamp": "2025-11-06T19:09:51.598525",
+  "shift_type": "emergence",
+  "word": "full range of tools",
+  "document": {
+    "doc_id": "policy_statement_20200315",
+    "doc_type": "policy_statement",
+    "date": "2020-03-15"
+  },
+  "change": {
+    "previous_count": 0.0,
+    "current_count": 1,
+    "change_description": "0.0 \u2192 1",
+    "synonym_breakdown": {
+      "all available tools": 0,
+      "complete toolkit": 0,
+      "entire toolkit": 0,
+      "full range of tools": 1
+    }
+  },
+  "context": {
+    "category": "crisis response",
+    "shift_id": "SHIFT-2020-01",
+    "significance": "Added in March 2020 during COVID crisis.\nSignaled Fed's readiness to use unconventional policy tools\n(QE, forward guidance, emergency facilities).\n",
+    "priority": "high"
+  },
+  "evidence": {
+    "prior_occurrences": 4,
+    "first_occurrence": true
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/full_range_of_tools_timeline.png",
+  "synonym_details": {
+    "primary_word": "full range of tools",
+    "synonyms_present": [
+      "full range of tools"
+    ],
+    "synonym_counts": {
+      "all available tools": 0,
+      "complete toolkit": 0,
+      "entire toolkit": 0,
+      "full range of tools": 1
+    },
+    "total_synonyms_tracked": 4
+  }
+}

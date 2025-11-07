@@ -1,6 +1,6 @@
 {
   "alert_id": "ALERT-20211215-removal-transitory",
-  "timestamp": "2025-11-02T19:54:34.976611",
+  "timestamp": "2025-11-06T19:10:13.210707",
   "shift_type": "removal",
   "word": "transitory",
   "document": {
@@ -9,9 +9,15 @@
     "date": "2021-12-15"
   },
   "change": {
-    "previous_count": 3.8,
+    "previous_count": 3.909090909090909,
     "current_count": 0,
-    "change_description": "3.8 \u2192 0"
+    "change_description": "3.9 \u2192 0",
+    "synonym_breakdown": {
+      "short-lived": 0,
+      "temporary": 0,
+      "transient": 0,
+      "transitory": 0
+    }
   },
   "context": {
     "category": "inflation narrative",
@@ -21,16 +27,6 @@
   },
   "evidence": {
     "previous_occurrences": [
-      {
-        "date": "2021-07-28",
-        "count": 8,
-        "doc_id": "fomc_minutes_20210728.html"
-      },
-      {
-        "date": "2021-09-22",
-        "count": 1,
-        "doc_id": "policy_statement_20210922.html"
-      },
       {
         "date": "2021-09-22",
         "count": 4,
@@ -43,13 +39,34 @@
       },
       {
         "date": "2021-11-03",
+        "count": 1,
+        "doc_id": "policy_statement_20211103"
+      },
+      {
+        "date": "2021-11-03",
         "count": 5,
         "doc_id": "fomc_minutes_20211103.html"
+      },
+      {
+        "date": "2021-11-03",
+        "count": 5,
+        "doc_id": "fomc_minutes_20211103"
       }
     ],
     "sustained_absence": true,
     "next_3_docs_count": 0
   },
   "confidence": "high",
-  "visualization": "results/visualizations/transitory_timeline.png"
+  "visualization": "results/visualizations/transitory_timeline.png",
+  "synonym_details": {
+    "primary_word": "transitory",
+    "synonyms_present": [],
+    "synonym_counts": {
+      "short-lived": 0,
+      "temporary": 0,
+      "transient": 0,
+      "transitory": 0
+    },
+    "total_synonyms_tracked": 4
+  }
 }

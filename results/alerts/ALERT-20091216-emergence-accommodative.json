@@ -1,0 +1,47 @@
+{
+  "alert_id": "ALERT-20091216-emergence-accommodative",
+  "timestamp": "2025-11-06T19:09:43.413595",
+  "shift_type": "emergence",
+  "word": "accommodative",
+  "document": {
+    "doc_id": "policy_statement_20091216",
+    "doc_type": "policy_statement",
+    "date": "2009-12-16"
+  },
+  "change": {
+    "previous_count": 0.0,
+    "current_count": 1,
+    "change_description": "0.0 \u2192 1",
+    "synonym_breakdown": {
+      "accommodating": 0,
+      "accommodative": 0,
+      "easy": 0,
+      "supportive": 1
+    }
+  },
+  "context": {
+    "category": "policy stance",
+    "shift_id": "SHIFT-2018-01",
+    "significance": "\"Accommodative\" described Fed's supportive policy stance.\nRemoval in September 2018 signaled end of post-crisis accommodation,\ntransition to neutral/restrictive policy.\n",
+    "priority": "high"
+  },
+  "evidence": {
+    "prior_occurrences": 0,
+    "first_occurrence": true
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/accommodative_timeline.png",
+  "synonym_details": {
+    "primary_word": "accommodative",
+    "synonyms_present": [
+      "supportive"
+    ],
+    "synonym_counts": {
+      "accommodating": 0,
+      "accommodative": 0,
+      "easy": 0,
+      "supportive": 1
+    },
+    "total_synonyms_tracked": 4
+  }
+}

@@ -1,0 +1,23 @@
+======================================================================
+  FEDSPEAK LANGUAGE SHIFT DETECTED
+======================================================================
+
+Word: "accommodative"
+Shift Type: EMERGENCE
+Document: policy_statement - 2017-02-01
+Confidence: HIGH
+
+Change:
+  0.0 → 2
+
+Historical Significance:
+  "Accommodative" described Fed's supportive policy stance.
+  Removal in September 2018 signaled end of post-crisis accommodation,
+  transition to neutral/restrictive policy.
+  
+
+Evidence:
+
+Timeline: results/visualizations/accommodative_timeline.png
+
+======================================================================

@@ -2,13 +2,19 @@
   FEDSPEAK LANGUAGE SHIFT DETECTED
 ======================================================================
 
-Word: "accommodative"
+Word: "accommodative" (synonym group)
 Shift Type: REMOVAL
 Document: policy_statement - 2019-01-30
 Confidence: HIGH
 
 Change:
-  4.0 → 0
+  4.7 → 0
+
+  Synonym Usage:
+    - accommodating: 0 occurrences
+    - accommodative: 0 occurrences
+    - easy: 0 occurrences
+    - supportive: 0 occurrences
 
 Historical Significance:
   "Accommodative" described Fed's supportive policy stance.
@@ -18,10 +24,10 @@ Historical Significance:
 
 Evidence:
   Previous occurrences: 5
-    - 2018-06-13: count=1
     - 2018-09-26: count=11
     - 2018-12-19: count=5
-  Sustained absence: No
+    - 2018-12-19: count=5
+  Sustained absence: Yes
 
 Timeline: results/visualizations/accommodative_timeline.png
 

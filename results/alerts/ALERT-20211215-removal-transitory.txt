@@ -2,13 +2,19 @@
   FEDSPEAK LANGUAGE SHIFT DETECTED
 ======================================================================
 
-Word: "transitory"
+Word: "transitory" (synonym group)
 Shift Type: REMOVAL
 Document: policy_statement - 2021-12-15
 Confidence: HIGH
 
 Change:
-  3.8 → 0
+  3.9 → 0
+
+  Synonym Usage:
+    - short-lived: 0 occurrences
+    - temporary: 0 occurrences
+    - transient: 0 occurrences
+    - transitory: 0 occurrences
 
 Historical Significance:
   Fed used "transitory" to describe inflation surge from April-November 2021.
@@ -18,8 +24,8 @@ Historical Significance:
 
 Evidence:
   Previous occurrences: 5
-    - 2021-09-22: count=4
     - 2021-11-03: count=1
+    - 2021-11-03: count=5
     - 2021-11-03: count=5
   Sustained absence: Yes
 

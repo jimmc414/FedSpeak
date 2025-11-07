@@ -1,0 +1,28 @@
+======================================================================
+  FEDSPEAK LANGUAGE SHIFT DETECTED
+======================================================================
+
+Word: "transitory"
+Shift Type: REMOVAL
+Document: policy_statement - 2018-03-21
+Confidence: HIGH
+
+Change:
+  1.3 → 0
+
+Historical Significance:
+  Fed used "transitory" to describe inflation surge from April-November 2021.
+  Removal in December 2021 signaled shift from temporary to persistent
+  inflation framing, indicating policy pivot toward rate increases.
+  
+
+Evidence:
+  Previous occurrences: 5
+    - 2016-12-14: count=1
+    - 2017-06-14: count=5
+    - 2017-12-13: count=4
+  Sustained absence: Yes
+
+Timeline: results/visualizations/transitory_timeline.png
+
+======================================================================

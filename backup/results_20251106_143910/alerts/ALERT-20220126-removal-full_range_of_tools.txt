@@ -1,0 +1,28 @@
+======================================================================
+  FEDSPEAK LANGUAGE SHIFT DETECTED
+======================================================================
+
+Word: "full range of tools"
+Shift Type: REMOVAL
+Document: policy_statement - 2022-01-26
+Confidence: HIGH
+
+Change:
+  1.8 → 0
+
+Historical Significance:
+  Added in March 2020 during COVID crisis.
+  Signaled Fed's readiness to use unconventional policy tools
+  (QE, forward guidance, emergency facilities).
+  
+
+Evidence:
+  Previous occurrences: 5
+    - 2021-11-03: count=2
+    - 2021-12-15: count=1
+    - 2021-12-15: count=3
+  Sustained absence: Yes
+
+Timeline: results/visualizations/full_range_of_tools_timeline.png
+
+======================================================================

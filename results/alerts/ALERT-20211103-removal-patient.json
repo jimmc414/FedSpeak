@@ -1,0 +1,72 @@
+{
+  "alert_id": "ALERT-20211103-removal-patient",
+  "timestamp": "2025-11-06T19:10:00.935833",
+  "shift_type": "removal",
+  "word": "patient",
+  "document": {
+    "doc_id": "policy_statement_20211103",
+    "doc_type": "policy_statement",
+    "date": "2021-11-03"
+  },
+  "change": {
+    "previous_count": 2.909090909090909,
+    "current_count": 0,
+    "change_description": "2.9 \u2192 0",
+    "synonym_breakdown": {
+      "deliberate": 0,
+      "gradual": 0,
+      "measured": 0,
+      "patient": 0
+    }
+  },
+  "context": {
+    "category": "forward guidance",
+    "shift_id": "SHIFT-2015-01",
+    "significance": "\"Patient\" in 2014-2015 signaled Fed would wait before raising rates.\nRemoval in March 2015 indicated liftoff was imminent (occurred Dec 2015).\n",
+    "priority": "medium"
+  },
+  "evidence": {
+    "previous_occurrences": [
+      {
+        "date": "2020-04-29",
+        "count": 1,
+        "doc_id": "press_transcript_20200429.pdf"
+      },
+      {
+        "date": "2021-06-16",
+        "count": 1,
+        "doc_id": "fomc_minutes_20210616.html"
+      },
+      {
+        "date": "2021-06-16",
+        "count": 1,
+        "doc_id": "fomc_minutes_20210616"
+      },
+      {
+        "date": "2021-07-28",
+        "count": 1,
+        "doc_id": "fomc_minutes_20210728"
+      },
+      {
+        "date": "2021-07-28",
+        "count": 1,
+        "doc_id": "fomc_minutes_20210728.html"
+      }
+    ],
+    "sustained_absence": true,
+    "next_3_docs_count": 0
+  },
+  "confidence": "high",
+  "visualization": "results/visualizations/patient_timeline.png",
+  "synonym_details": {
+    "primary_word": "patient",
+    "synonyms_present": [],
+    "synonym_counts": {
+      "deliberate": 0,
+      "gradual": 0,
+      "measured": 0,
+      "patient": 0
+    },
+    "total_synonyms_tracked": 4
+  }
+}

@@ -1,0 +1,3 @@
+test_case,word,detected_emergence,detected_removal,emergence_correct,removal_correct,emergence_lag_days,removal_lag_days
+Transitory,transitory,True,True,True,True,0.0,0
+Accommodative,accommodative,True,True,False,True,,0

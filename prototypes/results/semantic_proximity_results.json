@@ -1,0 +1,201 @@
+{
+  "timestamp": "2025-11-06T23:31:07.965205",
+  "model_path": "/mnt/c/python/FedSpeak/prototypes/results/fed_word2vec.model",
+  "policy_seeds": [
+    "inflation",
+    "employment",
+    "growth",
+    "policy",
+    "rate",
+    "risk",
+    "economy",
+    "labor",
+    "prices"
+  ],
+  "tracked_keywords": [
+    {
+      "term": "transitory",
+      "proximity_score": {
+        "avg_similarity": 0.12333665788173676,
+        "max_similarity": 0.519887387752533,
+        "closest_policy_term": "prices",
+        "individual_similarities": {
+          "inflation": 0.297394722700119,
+          "employment": 0.08238834142684937,
+          "growth": 0.2292252779006958,
+          "policy": -0.03224904462695122,
+          "rate": -0.05130789801478386,
+          "risk": -0.02221914753317833,
+          "economy": 0.1540239304304123,
+          "labor": -0.06711353361606598,
+          "prices": 0.519887387752533
+        }
+      }
+    },
+    {
+      "term": "accommodative",
+      "proximity_score": {
+        "avg_similarity": -0.04112115502357483,
+        "max_similarity": 0.23531939089298248,
+        "closest_policy_term": "inflation",
+        "individual_similarities": {
+          "inflation": 0.23531939089298248,
+          "employment": -0.26296982169151306,
+          "growth": -0.04508727416396141,
+          "policy": 0.0091535160318017,
+          "rate": 0.14522685110569,
+          "risk": 0.023155327886343002,
+          "economy": -0.06397014111280441,
+          "labor": -0.15964923799037933,
+          "prices": -0.25126901268959045
+        }
+      }
+    },
+    {
+      "term": "patient",
+      "proximity_score": {
+        "avg_similarity": -0.043753042817115784,
+        "max_similarity": 0.20110206305980682,
+        "closest_policy_term": "risk",
+        "individual_similarities": {
+          "inflation": -0.037655193358659744,
+          "employment": -0.12587016820907593,
+          "growth": -0.031192302703857422,
+          "policy": -0.05188914015889168,
+          "rate": 0.03986438736319542,
+          "risk": 0.20110206305980682,
+          "economy": -0.19004011154174805,
+          "labor": -0.025151437148451805,
+          "prices": -0.17294546961784363
+        }
+      }
+    },
+    {
+      "term": "considerable_time",
+      "proximity_score": {
+        "avg_similarity": -0.06089754402637482,
+        "max_similarity": 0.2898391783237457,
+        "closest_policy_term": "rate",
+        "individual_similarities": {
+          "inflation": -0.19769559800624847,
+          "employment": -0.10490726679563522,
+          "growth": 0.004524012096226215,
+          "policy": 0.044728223234415054,
+          "rate": 0.2898391783237457,
+          "risk": 0.07761362940073013,
+          "economy": -0.09585351496934891,
+          "labor": -0.2448151409626007,
+          "prices": -0.3215114176273346
+        }
+      }
+    },
+    {
+      "term": "full_range_of_tools",
+      "proximity_score": {
+        "avg_similarity": 0.005822865292429924,
+        "max_similarity": 0.4311946630477905,
+        "closest_policy_term": "economy",
+        "individual_similarities": {
+          "inflation": -0.15734660625457764,
+          "employment": -0.058044321835041046,
+          "growth": -0.11473774164915085,
+          "policy": 0.13102005422115326,
+          "rate": -0.1919134110212326,
+          "risk": 0.11642934381961823,
+          "economy": 0.4311946630477905,
+          "labor": -0.1450285017490387,
+          "prices": 0.040832292288541794
+        }
+      }
+    }
+  ],
+  "transitory_claim_test": {
+    "term": "transitory",
+    "seed": "inflation",
+    "direct_similarity": 0.297394722700119,
+    "overall_proximity": {
+      "avg_similarity": 0.12333665788173676,
+      "max_similarity": 0.519887387752533,
+      "closest_policy_term": "prices",
+      "individual_similarities": {
+        "inflation": 0.297394722700119,
+        "employment": 0.08238834142684937,
+        "growth": 0.2292252779006958,
+        "policy": -0.03224904462695122,
+        "rate": -0.05130789801478386,
+        "risk": -0.02221914753317833,
+        "economy": 0.1540239304304123,
+        "labor": -0.06711353361606598,
+        "prices": 0.519887387752533
+      }
+    },
+    "claim_validated": false
+  },
+  "correlation_analysis": {
+    "terms_analyzed": [
+      {
+        "term": "transitory",
+        "proximity_score": 0.12333665788173676,
+        "num_shifts": 44,
+        "shift_types": {
+          "removal": 39,
+          "emergence": 5
+        }
+      },
+      {
+        "term": "full_range_of_tools",
+        "proximity_score": 0.005822865292429924,
+        "num_shifts": 9,
+        "shift_types": {
+          "removal": 8,
+          "emergence": 1
+        }
+      },
+      {
+        "term": "accommodative",
+        "proximity_score": -0.04112115502357483,
+        "num_shifts": 31,
+        "shift_types": {
+          "emergence": 9,
+          "removal": 22
+        }
+      },
+      {
+        "term": "patient",
+        "proximity_score": -0.043753042817115784,
+        "num_shifts": 33,
+        "shift_types": {
+          "removal": 29,
+          "emergence": 4
+        }
+      },
+      {
+        "term": "considerable_time",
+        "proximity_score": -0.06089754402637482,
+        "num_shifts": 13,
+        "shift_types": {
+          "removal": 10,
+          "emergence": 3
+        }
+      }
+    ],
+    "correlation_coefficient": 0.5470113066399136,
+    "interpretation": "strong"
+  },
+  "high_vs_low_comparison": {
+    "median_proximity": -0.04112115502357483,
+    "high_proximity_terms": [
+      "transitory",
+      "full_range_of_tools",
+      "accommodative"
+    ],
+    "low_proximity_terms": [
+      "patient",
+      "considerable_time"
+    ],
+    "high_proximity_shifts": 84,
+    "low_proximity_shifts": 46,
+    "avg_shifts_per_term_high": 28.0,
+    "avg_shifts_per_term_low": 23.0
+  }
+}

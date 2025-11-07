@@ -1,0 +1,444 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "generated": "2025-11-06",
+    "description": "FedSpeak ground truth test suite for shift detection algorithms",
+    "corpus_size": 145,
+    "date_range": [
+      "2008-01-30",
+      "2025-09-17"
+    ]
+  },
+  "primary_test": {
+    "name": "transitory_removal_dec2021",
+    "type": "removal",
+    "term": "transitory",
+    "description": "Gold standard test for signal word removal detection",
+    "timeline": {
+      "last_occurrence": "20211103",
+      "first_absence": "20211215",
+      "detection_target": "20211215"
+    },
+    "context": {
+      "last_use": "Inflation is elevated, largely reflecting factors that are expected to be transitory",
+      "replacement": "Supply and demand imbalances related to the pandemic and the reopening of the economy have continued to contribute to elevated levels of inflation"
+    },
+    "statistics": {
+      "total_statements_with_term": 28,
+      "total_occurrences": 29,
+      "sustained_use_period": [
+        "20210428",
+        "20211103"
+      ],
+      "statements_in_sustained_period": 5
+    },
+    "success_criteria": {
+      "must_detect": true,
+      "confidence_threshold": "high",
+      "false_positive_tolerance": "low"
+    }
+  },
+  "secondary_tests": [
+    {
+      "name": "substantial_further_progress_lifecycle",
+      "type": "emergence_and_removal",
+      "term": "substantial further progress",
+      "description": "Full lifecycle test: phrase emergence, sustained use, removal",
+      "timeline": {
+        "pre_period_check": "20201105",
+        "emergence": "20201216",
+        "sustained_use": [
+          "20210127",
+          "20210317",
+          "20210428",
+          "20210616",
+          "20210728",
+          "20210922",
+          "20211103"
+        ],
+        "removal": "20211215"
+      },
+      "statistics": {
+        "total_occurrences": 8,
+        "lifecycle_duration_days": 364
+      }
+    },
+    {
+      "name": "symmetric_emergence_2017",
+      "type": "emergence",
+      "term": "symmetric",
+      "description": "Test emergence detection of policy framework change",
+      "timeline": {
+        "pre_period_check": "20170201",
+        "emergence": "20170315",
+        "sustained_use_start": "20170503"
+      },
+      "statistics": {
+        "total_statements_with_term": 28,
+        "total_occurrences": 47
+      },
+      "semantic_context": "inflation goal framework"
+    }
+  ],
+  "validation_tests": [
+    {
+      "name": "patient_complex_pattern",
+      "type": "multiple_cycles",
+      "term": "patient",
+      "description": "Complex on/off pattern for robustness testing",
+      "statistics": {
+        "total_emergences": 4,
+        "total_removals": 29,
+        "total_shifts": 33
+      },
+      "challenge": "Distinguish true policy shifts from linguistic variation"
+    },
+    {
+      "name": "accommodative_long_term",
+      "type": "multiple_cycles",
+      "term": "accommodative",
+      "description": "Long-term pattern spanning multiple policy regimes",
+      "statistics": {
+        "total_emergences": 9,
+        "total_removals": 22,
+        "total_shifts": 31,
+        "span_years": 13
+      },
+      "challenge": "Track term across different policy contexts"
+    }
+  ],
+  "ground_truth_all_shifts": {
+    "total": 130,
+    "by_term": {
+      "considerable_time": {
+        "emergences": 3,
+        "removals": 10,
+        "dates": [
+          "20090128",
+          "20110921",
+          "20111102",
+          "20120913",
+          "20130619",
+          "20130918",
+          "20150128",
+          "20150318",
+          "20170726",
+          "20200303",
+          "20200315",
+          "20200729",
+          "20200916"
+        ]
+      },
+      "transitory": {
+        "emergences": 5,
+        "removals": 39,
+        "dates": [
+          "20090128",
+          "20091216",
+          "20100316",
+          "20100428",
+          "20110126",
+          "20110921",
+          "20111213",
+          "20121212",
+          "20130619",
+          "20130918",
+          "20140129",
+          "20141217",
+          "20161214",
+          "20170201",
+          "20170614",
+          "20170726",
+          "20170920",
+          "20180321",
+          "20180502",
+          "20180613",
+          "20180801",
+          "20180926",
+          "20181108",
+          "20181219",
+          "20190130",
+          "20190320",
+          "20190731",
+          "20190918",
+          "20191211",
+          "20200129",
+          "20200303",
+          "20200315",
+          "20200429",
+          "20200610",
+          "20200729",
+          "20200916",
+          "20201105",
+          "20201216",
+          "20210127",
+          "20210317",
+          "20211215",
+          "20220126",
+          "20220316",
+          "20230322"
+        ]
+      },
+      "full_range_of_tools": {
+        "emergences": 1,
+        "removals": 8,
+        "dates": [
+          "20090923",
+          "20091104",
+          "20170726",
+          "20170920",
+          "20190320",
+          "20200315",
+          "20200429",
+          "20220126",
+          "20220316"
+        ]
+      },
+      "accommodative": {
+        "emergences": 9,
+        "removals": 22,
+        "dates": [
+          "20091216",
+          "20100810",
+          "20100921",
+          "20101214",
+          "20110126",
+          "20110315",
+          "20110921",
+          "20130619",
+          "20130918",
+          "20161214",
+          "20170201",
+          "20170614",
+          "20170920",
+          "20171213",
+          "20180926",
+          "20181108",
+          "20181219",
+          "20190130",
+          "20190320",
+          "20190619",
+          "20190731",
+          "20190918",
+          "20191211",
+          "20200129",
+          "20200303",
+          "20200318",
+          "20200429",
+          "20200610",
+          "20200729",
+          "20220316",
+          "20220504"
+        ]
+      },
+      "patient": {
+        "emergences": 4,
+        "removals": 29,
+        "dates": [
+          "20110809",
+          "20110921",
+          "20130619",
+          "20131218",
+          "20141029",
+          "20150318",
+          "20150429",
+          "20151216",
+          "20190619",
+          "20190731",
+          "20190918",
+          "20191211",
+          "20200129",
+          "20200303",
+          "20200315",
+          "20200429",
+          "20200429",
+          "20200610",
+          "20200729",
+          "20200916",
+          "20201105",
+          "20201216",
+          "20210127",
+          "20210317",
+          "20210428",
+          "20210616",
+          "20210728",
+          "20210922",
+          "20211103",
+          "20211215",
+          "20220126",
+          "20220316",
+          "20230322"
+        ]
+      }
+    },
+    "description": "Complete set of 130 known shifts for comprehensive evaluation",
+    "terms_tracked": [
+      "considerable_time",
+      "transitory",
+      "full_range_of_tools",
+      "accommodative",
+      "patient"
+    ]
+  },
+  "baseline_statistics": {
+    "corpus": {
+      "total_documents": 145,
+      "total_words": 67671,
+      "unique_words": 1572,
+      "avg_doc_length": 466.7,
+      "median_doc_length": 448
+    },
+    "normalization_values": {
+      "avg_doc_length": 466.7,
+      "median_doc_length": 448,
+      "total_vocab": 1572,
+      "statements_per_year": 8,
+      "avg_days_between_statements": 45
+    },
+    "frequency_thresholds": {
+      "min_occurrences_suggested": 3,
+      "min_statements_suggested": 2,
+      "lookback_window_suggested": 12
+    }
+  },
+  "top_terms": [
+    {
+      "term": "committee",
+      "count": 1309
+    },
+    {
+      "term": "inflation",
+      "count": 1222
+    },
+    {
+      "term": "its",
+      "count": 842
+    },
+    {
+      "term": "economic",
+      "count": 767
+    },
+    {
+      "term": "federal",
+      "count": 723
+    },
+    {
+      "term": "rate",
+      "count": 636
+    },
+    {
+      "term": "policy",
+      "count": 591
+    },
+    {
+      "term": "market",
+      "count": 570
+    },
+    {
+      "term": "percent",
+      "count": 569
+    },
+    {
+      "term": "conditions",
+      "count": 473
+    },
+    {
+      "term": "securities",
+      "count": 469
+    },
+    {
+      "term": "range",
+      "count": 430
+    },
+    {
+      "term": "labor",
+      "count": 428
+    },
+    {
+      "term": "funds",
+      "count": 397
+    },
+    {
+      "term": "monetary",
+      "count": 378
+    },
+    {
+      "term": "employment",
+      "count": 351
+    },
+    {
+      "term": "target",
+      "count": 319
+    },
+    {
+      "term": "financial",
+      "count": 318
+    },
+    {
+      "term": "agency",
+      "count": 314
+    },
+    {
+      "term": "information",
+      "count": 306
+    },
+    {
+      "term": "over",
+      "count": 286
+    },
+    {
+      "term": "maximum",
+      "count": 284
+    },
+    {
+      "term": "committees",
+      "count": 277
+    },
+    {
+      "term": "outlook",
+      "count": 268
+    },
+    {
+      "term": "appropriate",
+      "count": 259
+    },
+    {
+      "term": "expectations",
+      "count": 251
+    },
+    {
+      "term": "continue",
+      "count": 240
+    },
+    {
+      "term": "fomc",
+      "count": 234
+    },
+    {
+      "term": "activity",
+      "count": 234
+    },
+    {
+      "term": "pace",
+      "count": 234
+    }
+  ],
+  "evaluation_metrics": {
+    "required_detections": [
+      "transitory removal at 20211215",
+      "substantial further progress removal at 20211215"
+    ],
+    "minimum_performance": {
+      "primary_test_detection": "required",
+      "overall_f1_score": 0.7,
+      "precision_target": 0.75,
+      "recall_target": 0.65
+    },
+    "comparison_dimensions": [
+      "detection_accuracy",
+      "computational_cost",
+      "interpretability",
+      "false_positive_rate"
+    ]
+  }
+}

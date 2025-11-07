@@ -1,0 +1,744 @@
+{
+  "timestamp": "2025-11-06T23:31:07.928536",
+  "model_path": "/mnt/c/python/FedSpeak/prototypes/results/fed_word2vec.model",
+  "vocabulary_size": 1218,
+  "test_a_known_synonyms": {
+    "results": [
+      {
+        "keyword": "transitory",
+        "known_synonyms": [
+          "transient",
+          "temporary",
+          "short-lived"
+        ],
+        "found_synonyms": [],
+        "missed_synonyms": [
+          "transient",
+          "temporary",
+          "short-lived"
+        ],
+        "top_10_similar": [
+          [
+            "effects",
+            0.6555357575416565
+          ],
+          [
+            "declines",
+            0.6437824368476868
+          ],
+          [
+            "largely",
+            0.6282057166099548
+          ],
+          [
+            "influences",
+            0.623045802116394
+          ],
+          [
+            "improves",
+            0.6121417880058289
+          ],
+          [
+            "factors",
+            0.5760086178779602
+          ],
+          [
+            "import",
+            0.5740166306495667
+          ],
+          [
+            "energy",
+            0.5694897174835205
+          ],
+          [
+            "commodity",
+            0.5658146142959595
+          ],
+          [
+            "leveling-out",
+            0.5239769220352173
+          ]
+        ],
+        "synonym_similarities": {
+          "transient": {
+            "error": "'transient' not in vocabulary"
+          },
+          "temporary": {
+            "similarity": 0.2502499520778656,
+            "in_top_10": false,
+            "rank": null
+          },
+          "short-lived": {
+            "error": "'short-lived' not in vocabulary"
+          }
+        },
+        "discovery_rate": 0.0
+      },
+      {
+        "keyword": "accommodative",
+        "known_synonyms": [
+          "supportive",
+          "accommodating",
+          "easy"
+        ],
+        "found_synonyms": [],
+        "missed_synonyms": [
+          "supportive",
+          "accommodating",
+          "easy"
+        ],
+        "top_10_similar": [
+          [
+            "transmission",
+            0.5325002670288086
+          ],
+          [
+            "effective",
+            0.45644569396972656
+          ],
+          [
+            "fostering",
+            0.4547742009162903
+          ],
+          [
+            "attain",
+            0.4192368984222412
+          ],
+          [
+            "monetary_policy",
+            0.414954274892807
+          ],
+          [
+            "supporting",
+            0.3997253477573395
+          ],
+          [
+            "sufficiently",
+            0.39473867416381836
+          ],
+          [
+            "appropriate",
+            0.3818407952785492
+          ],
+          [
+            "thereby",
+            0.3747327923774719
+          ],
+          [
+            "highly",
+            0.3735663890838623
+          ]
+        ],
+        "synonym_similarities": {
+          "supportive": {
+            "similarity": 0.13118474185466766,
+            "in_top_10": false,
+            "rank": null
+          },
+          "accommodating": {
+            "error": "'accommodating' not in vocabulary"
+          },
+          "easy": {
+            "error": "'easy' not in vocabulary"
+          }
+        },
+        "discovery_rate": 0.0
+      },
+      {
+        "keyword": "patient",
+        "known_synonyms": [
+          "gradual",
+          "measured",
+          "deliberate"
+        ],
+        "found_synonyms": [],
+        "missed_synonyms": [
+          "gradual",
+          "measured",
+          "deliberate"
+        ],
+        "top_10_similar": [
+          [
+            "determines",
+            0.7778099179267883
+          ],
+          [
+            "what",
+            0.5532669425010681
+          ],
+          [
+            "normalize",
+            0.5315312147140503
+          ],
+          [
+            "future",
+            0.5270851850509644
+          ],
+          [
+            "evaluate",
+            0.4688217043876648
+          ],
+          [
+            "regularly",
+            0.464653879404068
+          ],
+          [
+            "adjustments",
+            0.45059171319007874
+          ],
+          [
+            "review",
+            0.45020440220832825
+          ],
+          [
+            "steps",
+            0.4323941469192505
+          ],
+          [
+            "increase",
+            0.42974627017974854
+          ]
+        ],
+        "synonym_similarities": {
+          "gradual": {
+            "similarity": 0.3117271959781647,
+            "in_top_10": false,
+            "rank": null
+          },
+          "measured": {
+            "similarity": 0.40515318512916565,
+            "in_top_10": false,
+            "rank": null
+          },
+          "deliberate": {
+            "error": "'deliberate' not in vocabulary"
+          }
+        },
+        "discovery_rate": 0.0
+      },
+      {
+        "keyword": "considerable time",
+        "error": "not_in_vocabulary",
+        "known_synonyms": [
+          "extended period",
+          "substantial period",
+          "significant time"
+        ],
+        "found_synonyms": [],
+        "similarities": {}
+      },
+      {
+        "keyword": "full range of tools",
+        "error": "not_in_vocabulary",
+        "known_synonyms": [
+          "all available tools",
+          "complete toolkit",
+          "entire toolkit"
+        ],
+        "found_synonyms": [],
+        "similarities": {}
+      }
+    ],
+    "total_known_synonyms": 15,
+    "total_found_in_top_10": 0,
+    "overall_discovery_rate": 0.0
+  },
+  "test_b_new_candidates": {
+    "expansion_terms": [
+      "symmetric",
+      "substantial further progress",
+      "substantial_further_progress"
+    ],
+    "results": [
+      {
+        "term": "symmetric",
+        "term_token": "symmetric",
+        "top_15_similar": [
+          [
+            "relative",
+            0.6414854526519775
+          ],
+          [
+            "returning",
+            0.6100392937660217
+          ],
+          [
+            "objective",
+            0.6041887402534485
+          ],
+          [
+            "longer-run",
+            0.5542374849319458
+          ],
+          [
+            "objectives",
+            0.5312196612358093
+          ],
+          [
+            "assessment",
+            0.5277170538902283
+          ],
+          [
+            "near",
+            0.4649599492549896
+          ],
+          [
+            "term",
+            0.4447297155857086
+          ],
+          [
+            "assessing",
+            0.4412980377674103
+          ],
+          [
+            "committed",
+            0.4327305257320404
+          ],
+          [
+            "and",
+            0.4251385033130646
+          ],
+          [
+            "back",
+            0.42335283756256104
+          ],
+          [
+            "goal",
+            0.4210788309574127
+          ],
+          [
+            "expected",
+            0.4204404652118683
+          ],
+          [
+            "move",
+            0.4190200865268707
+          ]
+        ],
+        "high_similarity_candidates": [
+          [
+            "relative",
+            0.6414854526519775
+          ],
+          [
+            "returning",
+            0.6100392937660217
+          ],
+          [
+            "objective",
+            0.6041887402534485
+          ]
+        ],
+        "num_candidates": 3
+      },
+      {
+        "term": "substantial further progress",
+        "term_token": "substantial_further_progress",
+        "top_15_similar": [
+          [
+            "made",
+            0.8508689403533936
+          ],
+          [
+            "gained",
+            0.6667817234992981
+          ],
+          [
+            "confidence",
+            0.6606387495994568
+          ],
+          [
+            "disappointingly",
+            0.6457352042198181
+          ],
+          [
+            "greater",
+            0.6408228278160095
+          ],
+          [
+            "confident",
+            0.5233632326126099
+          ],
+          [
+            "there",
+            0.5089007019996643
+          ],
+          [
+            "modestly",
+            0.4770377576351166
+          ],
+          [
+            "conversely",
+            0.45917418599128723
+          ],
+          [
+            "slowly",
+            0.456539124250412
+          ],
+          [
+            "anticipated",
+            0.4540802836418152
+          ],
+          [
+            "progress",
+            0.45345860719680786
+          ],
+          [
+            "proves",
+            0.4385654926300049
+          ],
+          [
+            "moving",
+            0.43492838740348816
+          ],
+          [
+            "been",
+            0.4327992796897888
+          ]
+        ],
+        "high_similarity_candidates": [
+          [
+            "made",
+            0.8508689403533936
+          ],
+          [
+            "gained",
+            0.6667817234992981
+          ],
+          [
+            "confidence",
+            0.6606387495994568
+          ],
+          [
+            "disappointingly",
+            0.6457352042198181
+          ],
+          [
+            "greater",
+            0.6408228278160095
+          ]
+        ],
+        "num_candidates": 5
+      },
+      {
+        "term": "substantial_further_progress",
+        "term_token": "substantial_further_progress",
+        "top_15_similar": [
+          [
+            "made",
+            0.8508689403533936
+          ],
+          [
+            "gained",
+            0.6667817234992981
+          ],
+          [
+            "confidence",
+            0.6606387495994568
+          ],
+          [
+            "disappointingly",
+            0.6457352042198181
+          ],
+          [
+            "greater",
+            0.6408228278160095
+          ],
+          [
+            "confident",
+            0.5233632326126099
+          ],
+          [
+            "there",
+            0.5089007019996643
+          ],
+          [
+            "modestly",
+            0.4770377576351166
+          ],
+          [
+            "conversely",
+            0.45917418599128723
+          ],
+          [
+            "slowly",
+            0.456539124250412
+          ],
+          [
+            "anticipated",
+            0.4540802836418152
+          ],
+          [
+            "progress",
+            0.45345860719680786
+          ],
+          [
+            "proves",
+            0.4385654926300049
+          ],
+          [
+            "moving",
+            0.43492838740348816
+          ],
+          [
+            "been",
+            0.4327992796897888
+          ]
+        ],
+        "high_similarity_candidates": [
+          [
+            "made",
+            0.8508689403533936
+          ],
+          [
+            "gained",
+            0.6667817234992981
+          ],
+          [
+            "confidence",
+            0.6606387495994568
+          ],
+          [
+            "disappointingly",
+            0.6457352042198181
+          ],
+          [
+            "greater",
+            0.6408228278160095
+          ]
+        ],
+        "num_candidates": 5
+      }
+    ]
+  },
+  "corpus_verification": [
+    {
+      "word": "adjustments",
+      "original_phrase": "adjustments",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "appropriate",
+      "original_phrase": "appropriate",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "attain",
+      "original_phrase": "attain",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "commodity",
+      "original_phrase": "commodity",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "confidence",
+      "original_phrase": "confidence",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "declines",
+      "original_phrase": "declines",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "determines",
+      "original_phrase": "determines",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "disappointingly",
+      "original_phrase": "disappointingly",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "effective",
+      "original_phrase": "effective",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "effects",
+      "original_phrase": "effects",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "energy",
+      "original_phrase": "energy",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "evaluate",
+      "original_phrase": "evaluate",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "factors",
+      "original_phrase": "factors",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "fostering",
+      "original_phrase": "fostering",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "future",
+      "original_phrase": "future",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "gained",
+      "original_phrase": "gained",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "greater",
+      "original_phrase": "greater",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "highly",
+      "original_phrase": "highly",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "import",
+      "original_phrase": "import",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "improves",
+      "original_phrase": "improves",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "increase",
+      "original_phrase": "increase",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "influences",
+      "original_phrase": "influences",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "largely",
+      "original_phrase": "largely",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "leveling-out",
+      "original_phrase": "leveling-out",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "made",
+      "original_phrase": "made",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "monetary_policy",
+      "original_phrase": "monetary policy",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "normalize",
+      "original_phrase": "normalize",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "objective",
+      "original_phrase": "objective",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "regularly",
+      "original_phrase": "regularly",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "relative",
+      "original_phrase": "relative",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "returning",
+      "original_phrase": "returning",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "review",
+      "original_phrase": "review",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "steps",
+      "original_phrase": "steps",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "sufficiently",
+      "original_phrase": "sufficiently",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "supporting",
+      "original_phrase": "supporting",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "thereby",
+      "original_phrase": "thereby",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "transmission",
+      "original_phrase": "transmission",
+      "found": true,
+      "found_as": "phrase"
+    },
+    {
+      "word": "what",
+      "original_phrase": "what",
+      "found": true,
+      "found_as": "phrase"
+    }
+  ]
+}

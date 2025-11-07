@@ -1,0 +1,10 @@
+{
+  "timestamp": "2025-11-06T23:31:08.889516",
+  "corpus_statistics": {
+    "num_documents": 179,
+    "total_tokens": 85309,
+    "total_words": 71894,
+    "unique_words": 1282,
+    "mean_doc_length": 476.58659217877096,
+    "median_doc_length": 451.0,
+    "min_doc_length": 

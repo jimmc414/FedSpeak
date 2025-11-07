@@ -1,0 +1,22 @@
+{
+  "timestamp": "2025-11-06T23:31:07.473657",
+  "corpus_statistics": {
+    "num_documents": 179,
+    "total_tokens": 67874,
+    "unique_tokens": 1450,
+    "vocabulary_size": 1218
+  },
+  "training_parameters": {
+    "vector_size": 100,
+    "window": 5,
+    "min_count": 2,
+    "epochs": 50,
+    "algorithm": "CBOW"
+  },
+  "model_path": "/mnt/c/python/FedSpeak/prototypes/results/fed_word2vec.model",
+  "vocabulary_stats": {
+    "vocabulary_size": 1218,
+    "most_frequent_words": [
+      [
+        "the",
+        

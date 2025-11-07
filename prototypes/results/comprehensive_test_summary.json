@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-11-06T23:31:05.173796",
+  "tests_run": [
+    {
+      "test_name": "Word2Vec Training",
+      "file": "word2vec_training.py",
+      "success": false,
+      "timestamp": "2025-11-06T23:31:07.488110"
+    },
+    {
+      "test_name": "Synonym Discovery",
+      "file": "synonym_discovery.py",
+      "success": true,
+      "timestamp": "2025-11-06T23:31:07.932784"
+    },
+    {
+      "test_name": "Semantic Proximity",
+      "file": "semantic_proximity_test.py",
+      "success": true,
+      "timestamp": "2025-11-06T23:31:07.968025"
+    },
+    {
+      "test_name": "Positional Analysis",
+      "file": "positional_analysis.py",
+      "success": true,
+      "timestamp": "2025-11-06T23:31:08.413195"
+    },
+    {
+      "test_name": "BERT Feasibility",
+      "file": "bert_feasibility.py",
+      "success": false,
+      "timestamp": "2025-11-06T23:31:08.896284"
+    }
+  ],
+  "summary": {
+    "total_tests": 5,
+    "successful": 3,
+    "failed": 2,
+    "success_rate": 0.6
+  }
+}

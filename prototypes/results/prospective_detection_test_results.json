@@ -1,0 +1,1319 @@
+{
+  "test_config": {
+    "train_cutoff": "20201216",
+    "train_docs": 107,
+    "test_docs": 8,
+    "test_dates": [
+      "20210127",
+      "20210317",
+      "20210428",
+      "20210616",
+      "20210728",
+      "20210922",
+      "20211103",
+      "20211215"
+    ]
+  },
+  "methods": {
+    "improved_hybrid": [
+      {
+        "test_date": "20210127",
+        "detections": [
+          {
+            "term": "accommodative",
+            "shift_type": "increase",
+            "confidence": "medium",
+            "test_count": 3,
+            "baseline_avg": 1.0,
+            "baseline_docs": 8
+          }
+        ]
+      },
+      {
+        "test_date": "20210317",
+        "detections": [
+          {
+            "term": "accommodative",
+            "shift_type": "increase",
+            "confidence": "medium",
+            "test_count": 3,
+            "baseline_avg": 1.38,
+            "baseline_docs": 8
+          }
+        ]
+      },
+      {
+        "test_date": "20210428",
+        "detections": [
+          {
+            "term": "transitory",
+            "shift_type": "emergence",
+            "confidence": "medium",
+            "test_count": 1,
+            "baseline_avg": 0.0,
+            "baseline_docs": 8
+          }
+        ]
+      },
+      {
+        "test_date": "20210616",
+        "detections": []
+      },
+      {
+        "test_date": "20210728",
+        "detections": []
+      },
+      {
+        "test_date": "20210922",
+        "detections": []
+      },
+      {
+        "test_date": "20211103",
+        "detections": []
+      },
+      {
+        "test_date": "20211215",
+        "detections": [
+          {
+            "term": "transitory",
+            "shift_type": "removal",
+            "confidence": "high",
+            "test_count": 0,
+            "baseline_avg": 0.62,
+            "baseline_docs": 8
+          }
+        ]
+      }
+    ],
+    "kleinberg_burst": [
+      {
+        "test_date": "20210127",
+        "detections": []
+      },
+      {
+        "test_date": "20210317",
+        "detections": []
+      },
+      {
+        "test_date": "20210428",
+        "detections": []
+      },
+      {
+        "test_date": "20210616",
+        "detections": []
+      },
+      {
+        "test_date": "20210728",
+        "detections": []
+      },
+      {
+        "test_date": "20210922",
+        "detections": []
+      },
+      {
+        "test_date": "20211103",
+        "detections": []
+      },
+      {
+        "test_date": "20211215",
+        "detections": [
+          {
+            "term": "transitory",
+            "type": "removal",
+            "prev_count": 1,
+            "curr_count": 0,
+            "burst_weight": 3.0
+          }
+        ]
+      }
+    ],
+    "novel_term_scanner": [
+      {
+        "test_date": "20210127",
+        "novel_terms": {
+          "top_20": [
+            {
+              "term": "least billion per",
+              "novelty_score": 101.566,
+              "test_count": 2,
+              "train_freq": 0.0187
+            },
+            {
+              "term": "month until",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "until substantial",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "substantial further",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "further progress",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "progress has",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "s maximum",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "goals these",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "these asset",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "purchases help",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "foster smooth",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "and accommodative",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "bostic michelle",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "pace of the",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "of the recovery",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "recovery in economic",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "and inflation and",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "continue to increase",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "month and of",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "and of agency",
+              "novelty_score": 96.658,
+              "test_count": 1,
+              "train_freq": 0.0093
+            }
+          ],
+          "transitory_rank": null,
+          "total_scored": 880
+        }
+      },
+      {
+        "test_date": "20210317",
+        "novel_terms": {
+          "top_20": [
+            {
+              "term": "world following",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "following a",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "the sectors",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "sectors most",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "most adversely",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "adversely affected",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "affected by",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "the pandemic",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "virus including",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "including progress",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "progress on",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "on vaccinations",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "vaccinations the",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "crisis continues",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "chair thomas",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "daly charles",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "evans randal",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "and christopher",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "christopher j",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            },
+            {
+              "term": "j waller",
+              "novelty_score": 97.473,
+              "test_count": 1,
+              "train_freq": 0.0093
+            }
+          ],
+          "transitory_rank": null,
+          "total_scored": 864
+        }
+      },
+      {
+        "test_date": "20210428",
+        "novel_terms": {
+          "top_20": [
+            {
+              "term": "progress on",
+              "novelty_score": 103.367,
+              "test_count": 2,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "on vaccinations",
+              "novelty_score": 103.367,
+              "test_count": 2,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "progress on vaccinations",
+              "novelty_score": 103.367,
+              "test_count": 2,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "pandemic remain",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "improvement inflation",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "indicators of economic",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "the pandemic remain",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "pandemic remain weak",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "improvement inflation has",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "reflecting transitory factors",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "outlook remain the",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "the sectors",
+              "novelty_score": 51.683,
+              "test_count": 1,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "sectors most",
+              "novelty_score": 51.683,
+              "test_count": 1,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "most adversely",
+              "novelty_score": 51.683,
+              "test_count": 1,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "adversely affected",
+              "novelty_score": 51.683,
+              "test_count": 1,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "affected by",
+              "novelty_score": 51.683,
+              "test_count": 1,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "the pandemic",
+              "novelty_score": 51.683,
+              "test_count": 1,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "but have",
+              "novelty_score": 51.683,
+              "test_count": 1,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "transitory factors",
+              "novelty_score": 51.683,
+              "test_count": 1,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "virus including",
+              "novelty_score": 51.683,
+              "test_count": 1,
+              "train_freq": 0.0183
+            }
+          ],
+          "transitory_rank": 617,
+          "total_scored": 859
+        }
+      },
+      {
+        "test_date": "20210616",
+        "novel_terms": {
+          "top_20": [
+            {
+              "term": "and strong",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "strong policy",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "policy support",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "support indicators",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "have strengthened",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "strengthened the",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "weak but",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "shown improvement",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "risen largely",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "factors overall",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "to reduce",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "and strong policy",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "strong policy support",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "policy support indicators",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "support indicators of",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "employment have strengthened",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "have strengthened the",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "strengthened the sectors",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "remain weak but",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            },
+            {
+              "term": "weak but have",
+              "novelty_score": 99.099,
+              "test_count": 1,
+              "train_freq": 0.0091
+            }
+          ],
+          "transitory_rank": 615,
+          "total_scored": 855
+        }
+      },
+      {
+        "test_date": "20210728",
+        "novel_terms": {
+          "top_20": [
+            {
+              "term": "vaccinations and",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "have not",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "virus progress",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "vaccinations will",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "likely continue",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "the public",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "crisis on",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "economy but",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "but risks",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "inflation having",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "having run",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "run persistently",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "december the",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "on vaccinations and",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "vaccinations and strong",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "but have not",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "the virus progress",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "virus progress on",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "on vaccinations will",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            },
+            {
+              "term": "vaccinations will likely",
+              "novelty_score": 99.91,
+              "test_count": 1,
+              "train_freq": 0.009
+            }
+          ],
+          "transitory_rank": 637,
+          "total_scored": 877
+        }
+      },
+      {
+        "test_date": "20210922",
+        "novel_terms": {
+          "top_20": [
+            {
+              "term": "goals with",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "with progress",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "strengthen the",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "pandemic have",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "the rise",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "rise in",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "to depend",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "time last",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "last december",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "committee indicated",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "indicated that",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "it would",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "would continue",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "goals since",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "since then",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "then the",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "has made",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "made progress",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "toward these",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            },
+            {
+              "term": "a moderation",
+              "novelty_score": 100.719,
+              "test_count": 1,
+              "train_freq": 0.0089
+            }
+          ],
+          "transitory_rank": 672,
+          "total_scored": 920
+        }
+      },
+      {
+        "test_date": "20211103",
+        "novel_terms": {
+          "top_20": [
+            {
+              "term": "committee will increase",
+              "novelty_score": 203.055,
+              "test_count": 2,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "december the committee",
+              "novelty_score": 106.957,
+              "test_count": 2,
+              "train_freq": 0.0177
+            },
+            {
+              "term": "in covid",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "covid cases",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "cases has",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "slowed their",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "their recovery",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "recovery inflation",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "elevated largely",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "in some",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "gains in",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "reducing the",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "and billion",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "of purchases",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "securities will",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "pandemic have improved",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "rise in covid",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "in covid cases",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "covid cases has",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "cases has slowed",
+              "novelty_score": 101.527,
+              "test_count": 1,
+              "train_freq": 0.0088
+            }
+          ],
+          "transitory_rank": 791,
+          "total_scored": 1038
+        }
+      },
+      {
+        "test_date": "20211215",
+        "novel_terms": {
+          "top_20": [
+            {
+              "term": "net asset",
+              "novelty_score": 107.852,
+              "test_count": 2,
+              "train_freq": 0.0175
+            },
+            {
+              "term": "billion for",
+              "novelty_score": 107.852,
+              "test_count": 2,
+              "train_freq": 0.0175
+            },
+            {
+              "term": "net asset purchases",
+              "novelty_score": 107.852,
+              "test_count": 2,
+              "train_freq": 0.0175
+            },
+            {
+              "term": "declined substantially",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "supply and",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "and demand",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "demand imbalances",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "imbalances related",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "pandemic and",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "the reopening",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "reopening of",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "economy have",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "of supply",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "supply constraints",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "constraints are",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "continued gains",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "employment as",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "a reduction",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "in inflation",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            },
+            {
+              "term": "inflation risks",
+              "novelty_score": 102.334,
+              "test_count": 1,
+              "train_freq": 0.0088
+            }
+          ],
+          "transitory_rank": null,
+          "total_scored": 928
+        }
+      }
+    ],
+    "semantic_proximity": []
+  },
+  "critical_tests": {
+    "april_2021_transitory_emergence": {
+      "test_date": "20210428",
+      "expected": "emergence of transitory",
+      "methods": {
+        "improved_hybrid": {
+          "detected": true,
+          "detections": [
+            {
+              "term": "transitory",
+              "shift_type": "emergence",
+              "confidence": "medium",
+              "test_count": 1,
+              "baseline_avg": 0.0,
+              "baseline_docs": 8
+            }
+          ]
+        },
+        "kleinberg_burst": {
+          "detected": false,
+          "detections": []
+        },
+        "novel_term_scanner": {
+          "detected_top10": false,
+          "detected_top20": false,
+          "rank": 617,
+          "top_terms": [
+            {
+              "term": "progress on",
+              "novelty_score": 103.367,
+              "test_count": 2,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "on vaccinations",
+              "novelty_score": 103.367,
+              "test_count": 2,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "progress on vaccinations",
+              "novelty_score": 103.367,
+              "test_count": 2,
+              "train_freq": 0.0183
+            },
+            {
+              "term": "pandemic remain",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "improvement inflation",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "indicators of economic",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "the pandemic remain",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "pandemic remain weak",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "improvement inflation has",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            },
+            {
+              "term": "reflecting transitory factors",
+              "novelty_score": 98.287,
+              "test_count": 1,
+              "train_freq": 0.0092
+            }
+          ]
+        }
+      }
+    },
+    "december_2021_transitory_removal": {
+      "test_date": "20211215",
+      "expected": "removal of transitory",
+      "methods": {
+        "improved_hybrid": {
+          "detected": true,
+          "detections": [
+            {
+              "term": "transitory",
+              "shift_type": "removal",
+              "confidence": "high",
+              "test_count": 0,
+              "baseline_avg": 0.62,
+              "baseline_docs": 8
+            }
+          ]
+        },
+        "kleinberg_burst": {
+          "detected": true,
+          "detections": [
+            {
+              "term": "transitory",
+              "type": "removal",
+              "prev_count": 1,
+              "curr_count": 0,
+              "burst_weight": 3.0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "summary": {
+    "april_2021_emergence": {
+      "improved_hybrid": {
+        "detected": true
+      },
+      "kleinberg_burst": {
+        "detected": false
+      },
+      "novel_term_scanner": {
+        "detected": false,
+        "rank": 617
+      }
+    },
+    "december_2021_removal": {
+      "improved_hybrid": {
+        "detected": true
+      },
+      "kleinberg_burst": {
+        "detected": true
+      }
+    },
+    "all_2021_detections": {},
+    "verdict": {
+      "can_prospective_detection_work": true,
+      "april_emergence_detected": true,
+      "december_removal_detected": true,
+      "best_method_april": "improved_hybrid",
+      "best_method_december": "improved_hybrid"
+    }
+  }
+}

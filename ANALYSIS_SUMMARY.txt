@@ -1,0 +1,202 @@
+================================================================================
+FEDSPEAK CORPUS BASELINE ANALYSIS - QUICK REFERENCE
+================================================================================
+Analysis Date: 2025-11-06
+Purpose: Establish ground truth for testing shift detection algorithms
+
+================================================================================
+CORPUS OVERVIEW
+================================================================================
+Documents:      145 policy statements (2008-01-30 to 2025-09-17)
+Total Words:    67,671
+Unique Words:   1,572
+Avg Length:     467 words per statement
+Known Shifts:   130 detected (across 5 tracked terms)
+
+================================================================================
+GOLD STANDARD TEST: "TRANSITORY" REMOVAL (DEC 2021)
+================================================================================
+This is THE critical test case for any shift detection algorithm.
+
+TIMELINE:
+  2021-04-28:  "Inflation has risen, largely reflecting transitory factors"
+  2021-06-16:  Same phrasing (sustained use)
+  2021-07-28:  Same phrasing
+  2021-09-22:  "Inflation is elevated, largely reflecting transitory factors"
+  2021-11-03:  "factors that are expected to be transitory" [LAST USE]
+  2021-12-15:  Term completely ABSENT [TARGET DETECTION DATE]
+
+VERIFICATION:
+  ✓ Last occurrence:  2021-11-03
+  ✓ First absence:    2021-12-15  
+  ✓ Sustained period: 5 consecutive statements (Apr-Nov 2021)
+  ✓ Total uses:       29 times across 28 statements (2011-2021)
+
+ALGORITHM MUST:
+  1. Detect the removal at 2021-12-15
+  2. Assign high confidence (term was in 5 consecutive recent statements)
+  3. Distinguish from earlier intermittent usage (2011-2017)
+
+================================================================================
+SECONDARY TEST CASES
+================================================================================
+
+1. "SUBSTANTIAL FURTHER PROGRESS" (Emergence + Removal)
+   First:   2020-12-16 (phrase introduced)
+   Pattern: Appeared in 7 consecutive statements
+   Last:    2021-11-03
+   Removed: 2021-12-15
+   Note:    Tests both emergence and removal detection
+
+2. "SYMMETRIC" (Emergence, 2017)
+   Before:  Absent pre-2017-03-15
+   First:   2017-03-15 ("symmetric inflation goal")
+   After:   Sustained use (28 statements, 47 occurrences)
+   Note:    Tests emergence detection + framework shifts
+
+================================================================================
+GROUND TRUTH: ALL 130 KNOWN SHIFTS
+================================================================================
+Term                    Emergences  Removals  Total
+-------------------------------------------------
+transitory                    5        39       44
+patient                       4        29       33
+accommodative                 9        22       31
+considerable_time             3        10       13
+full_range_of_tools           1         8        9
+-------------------------------------------------
+TOTAL                        22       108      130
+
+================================================================================
+TOP 20 TERMS (for baseline comparison)
+================================================================================
+ 1. committee       1,309  (1.93%)    11. securities      469  (0.69%)
+ 2. inflation       1,222  (1.81%)    12. range           430  (0.64%)
+ 3. its               842  (1.24%)    13. labor           428  (0.63%)
+ 4. economic          767  (1.13%)    14. funds           397  (0.59%)
+ 5. federal           723  (1.07%)    15. monetary        378  (0.56%)
+ 6. rate              636  (0.94%)    16. employment      351  (0.52%)
+ 7. policy            591  (0.87%)    17. target          319  (0.47%)
+ 8. market            570  (0.84%)    18. financial       318  (0.47%)
+ 9. percent           569  (0.84%)    19. agency          314  (0.46%)
+10. conditions        473  (0.70%)    20. information     306  (0.45%)
+
+================================================================================
+RECOMMENDED PARAMETERS FOR ALGORITHM TUNING
+================================================================================
+Document Normalization:
+  - Avg doc length:        466.7 words
+  - Median doc length:     448 words
+  
+Frequency Thresholds:
+  - Min occurrences:       3 (term must appear 3+ times to track)
+  - Min statements:        2 (must appear in 2+ different statements)
+  - Lookback window:       12 statements (~1.5 years)
+  
+Temporal Baseline:
+  - Statements per year:   8 (consistent)
+  - Days between:          ~45 days average
+  - Detection granularity: Statement-level (not intra-meeting)
+
+Statistical Considerations:
+  - Small N:               Only 145 documents
+  - Sparse vocabulary:     Most terms appear <5 times
+  - Long tail:             Many one-off terms
+  - Implication:           Need robust small-sample methods
+
+================================================================================
+SUCCESS CRITERIA
+================================================================================
+MINIMUM VIABLE:
+  ✓ Detect 'transitory' removal (2021-12-15)         [REQUIRED]
+  ✓ Detect 'substantial further progress' lifecycle   [REQUIRED]
+  ✓ Overall F1 > 0.70 on 130 known shifts             [DESIRED]
+
+EVALUATION METRICS:
+  - Precision:  % of detected shifts in ground truth
+  - Recall:     % of ground truth shifts detected  
+  - F1 Score:   Harmonic mean
+  - FP Rate:    False positives per statement
+
+COMPARISON DIMENSIONS:
+  1. Detection accuracy (F1 score)
+  2. Computational cost (runtime, memory)
+  3. Interpretability (can we explain why it flagged?)
+  4. False positive rate (noise vs. signal)
+
+================================================================================
+DATA FILES
+================================================================================
+Source Corpus:
+  /mnt/c/python/FedSpeak/data/processed/policy_statement_*.txt
+  (145 files)
+
+Ground Truth:
+  /mnt/c/python/FedSpeak/results/alerts/ALERT-*.json
+  (130 files, one per detected shift)
+
+Analysis Outputs:
+  /mnt/c/python/FedSpeak/BASELINE_ANALYSIS.md     (full report)
+  /mnt/c/python/FedSpeak/TEST_SUITE.json          (structured tests)
+  /mnt/c/python/FedSpeak/GROUND_TRUTH_SHIFTS.csv  (all 130 shifts)
+  /tmp/corpus_baseline_analysis.json              (raw data)
+
+================================================================================
+KEY INSIGHTS FOR ALGORITHM DESIGN
+================================================================================
+
+1. STATISTICAL CHALLENGES:
+   - Small corpus (145 docs) limits statistical power
+   - Sparse data (many terms <5 occurrences)
+   - Need robust methods for low-frequency events
+   
+2. SHIFT PATTERNS:
+   - Most shifts are removals (108 vs 22 emergences)
+   - Terms often cycle on/off (not permanent changes)
+   - Major shifts cluster around policy regime changes
+   
+3. CONTEXT MATTERS:
+   - Same word has different meanings over time
+   - "Transitory" in 2015 ≠ "transitory" in 2021
+   - Need to distinguish intermittent use from sustained signals
+   
+4. MULTI-WORD PHRASES:
+   - Key signals often multi-word ("substantial further progress")
+   - Single-word tracking may miss important shifts
+   - Need n-gram or phrase detection capability
+
+5. TEMPORAL AUTOCORRELATION:
+   - Policy language is highly autocorrelated
+   - Statements intentionally repeat previous language
+   - True shifts are deviations from this repetition
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+RECOMMENDED WORKFLOW:
+  1. Implement baseline statistical method (TF-IDF, chi-square)
+  2. Test on 'transitory' removal (2021-12-15)
+  3. Evaluate against all 130 ground truth shifts
+  4. Implement semantic method (Word2Vec embeddings)
+  5. Test and compare
+  6. Implement LLM method if needed
+  7. Final comparison and selection
+
+QUESTIONS TO ANSWER:
+  - Can pure statistics detect 'transitory' removal? (Yes/No)
+  - Do embeddings improve multi-word phrase detection?
+  - What is the false positive rate on each method?
+  - Which method offers best accuracy/cost tradeoff?
+
+================================================================================
+CONTACT / UPDATES
+================================================================================
+Full documentation:  /mnt/c/python/FedSpeak/BASELINE_ANALYSIS.md
+Test suite:         /mnt/c/python/FedSpeak/TEST_SUITE.json
+Ground truth CSV:   /mnt/c/python/FedSpeak/GROUND_TRUTH_SHIFTS.csv
+
+Generated: 2025-11-06
+Analysis: Comprehensive corpus baseline for algorithm testing
+Version: 1.0
+================================================================================

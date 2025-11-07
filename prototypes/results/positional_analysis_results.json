@@ -1,0 +1,970 @@
+{
+  "timestamp": "2025-11-06T23:31:08.408102",
+  "total_shifts_analyzed": 130,
+  "positions_found": 16,
+  "positions_not_found": 114,
+  "all_shift_positions": [
+    {
+      "date": "20090128",
+      "term": "considerable_time",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20090128",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20090923",
+      "term": "full_range_of_tools",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20091104",
+      "term": "full_range_of_tools",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20091216",
+      "term": "accommodative",
+      "type": "emergence",
+      "position": null
+    },
+    {
+      "date": "20091216",
+      "term": "transitory",
+      "type": "emergence",
+      "position": null
+    },
+    {
+      "date": "20100316",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20100428",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20100810",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20100921",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20101214",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20110126",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20110126",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20110315",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20110809",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20110921",
+      "term": "accommodative",
+      "type": "emergence",
+      "position": {
+        "char_position": 2271,
+        "total_chars": 4052,
+        "relative_position": 0.5604639684106614,
+        "paragraph_number": 1,
+        "word_position": 339,
+        "total_words": 604,
+        "relative_word_position": 0.5612582781456954
+      }
+    },
+    {
+      "date": "20110921",
+      "term": "considerable_time",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20110921",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20110921",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20111102",
+      "term": "considerable_time",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20111213",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20120913",
+      "term": "considerable_time",
+      "type": "emergence",
+      "position": {
+        "char_position": 2937,
+        "total_chars": 3861,
+        "relative_position": 0.7606837606837606,
+        "paragraph_number": 1,
+        "word_position": 431,
+        "total_words": 573,
+        "relative_word_position": 0.7521815008726004
+      }
+    },
+    {
+      "date": "20121212",
+      "term": "transitory",
+      "type": "emergence",
+      "position": null
+    },
+    {
+      "date": "20130619",
+      "term": "accommodative",
+      "type": "emergence",
+      "position": {
+        "char_position": 2033,
+        "total_chars": 4781,
+        "relative_position": 0.4252248483580841,
+        "paragraph_number": 1,
+        "word_position": 294,
+        "total_words": 709,
+        "relative_word_position": 0.4146685472496474
+      }
+    },
+    {
+      "date": "20130619",
+      "term": "considerable_time",
+      "type": "emergence",
+      "position": {
+        "char_position": 3007,
+        "total_chars": 4781,
+        "relative_position": 0.6289479188454298,
+        "paragraph_number": 1,
+        "word_position": 439,
+        "total_words": 709,
+        "relative_word_position": 0.6191819464033851
+      }
+    },
+    {
+      "date": "20130619",
+      "term": "patient",
+      "type": "emergence",
+      "position": null
+    },
+    {
+      "date": "20130619",
+      "term": "transitory",
+      "type": "emergence",
+      "position": {
+        "char_position": 528,
+        "total_chars": 4781,
+        "relative_position": 0.11043714704036812,
+        "paragraph_number": 1,
+        "word_position": 75,
+        "total_words": 709,
+        "relative_word_position": 0.10578279266572638
+      }
+    },
+    {
+      "date": "20130918",
+      "term": "accommodative",
+      "type": "emergence",
+      "position": {
+        "char_position": 2633,
+        "total_chars": 5469,
+        "relative_position": 0.481440848418358,
+        "paragraph_number": 1,
+        "word_position": 383,
+        "total_words": 810,
+        "relative_word_position": 0.4728395061728395
+      }
+    },
+    {
+      "date": "20130918",
+      "term": "considerable_time",
+      "type": "emergence",
+      "position": {
+        "char_position": 3886,
+        "total_chars": 5469,
+        "relative_position": 0.7105503748400073,
+        "paragraph_number": 1,
+        "word_position": 570,
+        "total_words": 810,
+        "relative_word_position": 0.7037037037037037
+      }
+    },
+    {
+      "date": "20130918",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20131218",
+      "term": "patient",
+      "type": "emergence",
+      "position": null
+    },
+    {
+      "date": "20140129",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20141029",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20141217",
+      "term": "transitory",
+      "type": "emergence",
+      "position": {
+        "char_position": 1410,
+        "total_chars": 5124,
+        "relative_position": 0.275175644028103,
+        "paragraph_number": 1,
+        "word_position": 200,
+        "total_words": 744,
+        "relative_word_position": 0.26881720430107525
+      }
+    },
+    {
+      "date": "20150128",
+      "term": "considerable_time",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20150318",
+      "term": "considerable_time",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20150318",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20150429",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20151216",
+      "term": "patient",
+      "type": "emergence",
+      "position": null
+    },
+    {
+      "date": "20161214",
+      "term": "accommodative",
+      "type": "emergence",
+      "position": {
+        "char_position": 1779,
+        "total_chars": 3719,
+        "relative_position": 0.478354396343103,
+        "paragraph_number": 1,
+        "word_position": 266,
+        "total_words": 556,
+        "relative_word_position": 0.4784172661870504
+      }
+    },
+    {
+      "date": "20161214",
+      "term": "transitory",
+      "type": "emergence",
+      "position": {
+        "char_position": 1278,
+        "total_chars": 3719,
+        "relative_position": 0.34364076364614143,
+        "paragraph_number": 1,
+        "word_position": 191,
+        "total_words": 556,
+        "relative_word_position": 0.3435251798561151
+      }
+    },
+    {
+      "date": "20170201",
+      "term": "accommodative",
+      "type": "emergence",
+      "position": {
+        "char_position": 1562,
+        "total_chars": 3500,
+        "relative_position": 0.4462857142857143,
+        "paragraph_number": 1,
+        "word_position": 230,
+        "total_words": 520,
+        "relative_word_position": 0.4423076923076923
+      }
+    },
+    {
+      "date": "20170201",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20170614",
+      "term": "accommodative",
+      "type": "emergence",
+      "position": {
+        "char_position": 1659,
+        "total_chars": 3837,
+        "relative_position": 0.4323690383111806,
+        "paragraph_number": 1,
+        "word_position": 254,
+        "total_words": 572,
+        "relative_word_position": 0.44405594405594406
+      }
+    },
+    {
+      "date": "20170614",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20170726",
+      "term": "considerable_time",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20170726",
+      "term": "full_range_of_tools",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20170726",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20170920",
+      "term": "accommodative",
+      "type": "emergence",
+      "position": {
+        "char_position": 2135,
+        "total_chars": 3696,
+        "relative_position": 0.5776515151515151,
+        "paragraph_number": 1,
+        "word_position": 323,
+        "total_words": 555,
+        "relative_word_position": 0.581981981981982
+      }
+    },
+    {
+      "date": "20170920",
+      "term": "full_range_of_tools",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20170920",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20171213",
+      "term": "accommodative",
+      "type": "emergence",
+      "position": {
+        "char_position": 1872,
+        "total_chars": 3362,
+        "relative_position": 0.5568114217727543,
+        "paragraph_number": 1,
+        "word_position": 279,
+        "total_words": 506,
+        "relative_word_position": 0.5513833992094862
+      }
+    },
+    {
+      "date": "20180321",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20180502",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20180613",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20180801",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20180926",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20180926",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20181108",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20181108",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20181219",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20181219",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190130",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190130",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190320",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190320",
+      "term": "full_range_of_tools",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190320",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190619",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190619",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190731",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190731",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190731",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190918",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190918",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20190918",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20191211",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20191211",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20191211",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200129",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200129",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200129",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200303",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200303",
+      "term": "considerable_time",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200303",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200303",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200315",
+      "term": "full_range_of_tools",
+      "type": "emergence",
+      "position": {
+        "char_position": 2627,
+        "total_chars": 4690,
+        "relative_position": 0.5601279317697229,
+        "paragraph_number": 1,
+        "word_position": 393,
+        "total_words": 709,
+        "relative_word_position": 0.5543018335684062
+      }
+    },
+    {
+      "date": "20200315",
+      "term": "considerable_time",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200315",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200315",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200318",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200429",
+      "term": "patient",
+      "type": "emergence",
+      "position": null
+    },
+    {
+      "date": "20200429",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200429",
+      "term": "full_range_of_tools",
+      "type": "removal",
+      "position": {
+        "char_position": 134,
+        "total_chars": 2947,
+        "relative_position": 0.045469969460468274,
+        "paragraph_number": 1,
+        "word_position": 23,
+        "total_words": 443,
+        "relative_word_position": 0.05191873589164785
+      }
+    },
+    {
+      "date": "20200429",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200429",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200610",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200610",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200610",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200729",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200729",
+      "term": "considerable_time",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200729",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200729",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200916",
+      "term": "considerable_time",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200916",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20200916",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20201105",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20201105",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20201216",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20201216",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20210127",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20210127",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20210317",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20210317",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20210428",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20210616",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20210728",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20210922",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20211103",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20211215",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20211215",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20220126",
+      "term": "full_range_of_tools",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20220126",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20220126",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20220316",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20220316",
+      "term": "full_range_of_tools",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20220316",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20220316",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20220504",
+      "term": "accommodative",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20230322",
+      "term": "patient",
+      "type": "removal",
+      "position": null
+    },
+    {
+      "date": "20230322",
+      "term": "transitory",
+      "type": "removal",
+      "position": null
+    }
+  ],
+  "first_quarter_analysis": {
+    "quartile_distribution": {
+      "first_quarter": 2,
+      "second_quarter": 7,
+      "third_quarter": 6,
+      "fourth_quarter": 1
+    },
+    "first_quarter_percentage": 0.125,
+    "claim_validated": false,
+    "mean_position": 0.46210220383533573,
+    "median_position": 0.4798976223807305,
+    "total_positions": 16
+  },
+  "weighting_analysis": null,
+  "by_shift_type": {
+    "emergence": {
+      "count": 15,
+      "mean_position": 0.48987768612699356,
+      "median_position": 0.481440848418358,
+      "first_quarter_percentage": 0.06666666666666667
+    },
+    "removal": {
+      "count": 1,
+      "mean_position": 0.045469969460468274,
+      "median_position": 0.045469969460468274,
+      "first_quarter_percentage": 1.0
+    }
+  },
+  "by_term": {
+    "accommodative": {
+      "count": 8,
+      "mean_position": 0.4948252188814213,
+      "median_position": 0.4798976223807305,
+      "first_quarter_percentage": 0.0
+    },
+    "considerable_time": {
+      "count": 3,
+      "mean_position": 0.7000606847897325,
+      "median_position": 0.7105503748400073,
+      "first_quarter_percentage": 0.0
+    },
+    "transitory": {
+      "count": 3,
+      "mean_position": 0.2430845182382042,
+      "median_position": 0.275175644028103,
+      "first_quarter_percentage": 0.3333333333333333
+    },
+    "full_range_of_tools": {
+      "count": 2,
+      "mean_position": 0.30279895061509554,
+      "median_position": 0.30279895061509554,
+      "first_quarter_percentage": 0.5
+    }
+  }
+}

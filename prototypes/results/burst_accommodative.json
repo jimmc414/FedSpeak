@@ -1,0 +1,49 @@
+{
+  "term": "accommodative",
+  "analysis_date": "2025-11-06T23:15:53.254334",
+  "corpus_stats": {
+    "total_documents": 145,
+    "date_range": [
+      "20080130",
+      "20250917"
+    ],
+    "total_occurrences": 128,
+    "documents_with_term": 66
+  },
+  "bursts": [
+    {
+      "date": "20111102",
+      "type": "removal",
+      "state_change": "3 -> 3",
+      "burst_weight": 3.0,
+      "count": 0,
+      "prev_count": 1,
+      "normalized_rate": 0.0,
+      "baseline_rate": 0.001826
+    },
+    {
+      "date": "20180926",
+      "type": "removal",
+      "state_change": "3 -> 3",
+      "burst_weight": 3.0,
+      "count": 0,
+      "prev_count": 1,
+      "normalized_rate": 0.0,
+      "baseline_rate": 0.001826
+    },
+    {
+      "date": "20220316",
+      "type": "removal",
+      "state_change": "3 -> 3",
+      "burst_weight": 3.0,
+      "count": 0,
+      "prev_count": 2,
+      "normalized_rate": 0.0,
+      "baseline_rate": 0.001826
+    }
+  ],
+  "detection_params": {
+    "s": 2.0,
+    "gamma": 1.0
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "term": "patient",
+  "analysis_date": "2025-11-06T23:15:52.810019",
+  "corpus_stats": {
+    "total_documents": 145,
+    "date_range": [
+      "20080130",
+      "20250917"
+    ],
+    "total_occurrences": 6,
+    "documents_with_term": 5
+  },
+  "bursts": [
+    {
+      "date": "20150318",
+      "type": "removal",
+      "state_change": "3 -> 3",
+      "burst_weight": 3.0,
+      "count": 0,
+      "prev_count": 1,
+      "normalized_rate": 0.0,
+      "baseline_rate": 8.6e-05
+    },
+    {
+      "date": "20190619",
+      "type": "removal",
+      "state_change": "3 -> 3",
+      "burst_weight": 3.0,
+      "count": 0,
+      "prev_count": 1,
+      "normalized_rate": 0.0,
+      "baseline_rate": 8.6e-05
+    }
+  ],
+  "detection_params": {
+    "s": 2.0,
+    "gamma": 1.0
+  }
+}

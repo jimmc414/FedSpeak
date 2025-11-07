@@ -1,0 +1,190 @@
+{
+  "method": "improved_hybrid",
+  "metrics": {
+    "true_positives": 21,
+    "false_positives": 17,
+    "false_negatives": 109,
+    "precision": 0.553,
+    "recall": 0.162,
+    "f1_score": 0.25
+  },
+  "transitory_test": {
+    "detected": true,
+    "details": {
+      "date": "20211215",
+      "term": "transitory",
+      "shift_type": "removal",
+      "confidence": "high",
+      "curr_count": 0,
+      "prev_avg": 1.0,
+      "relative_change": 1.0,
+      "p_value": 0.3
+    }
+  },
+  "sample_true_positives": [
+    {
+      "ground_truth": {
+        "date": "20110921",
+        "type": "emergence",
+        "term": "accommodative"
+      },
+      "detection": {
+        "date": "20110921",
+        "term": "accommodative",
+        "shift_type": "emergence",
+        "confidence": "medium",
+        "curr_count": 1,
+        "prev_avg": 0.0,
+        "relative_change": 1.0,
+        "p_value": 0.3
+      }
+    },
+    {
+      "ground_truth": {
+        "date": "20110921",
+        "type": "removal",
+        "term": "transitory"
+      },
+      "detection": {
+        "date": "20110921",
+        "term": "transitory",
+        "shift_type": "removal",
+        "confidence": "high",
+        "curr_count": 0,
+        "prev_avg": 0.33,
+        "relative_change": 1.0,
+        "p_value": 1.0
+      }
+    },
+    {
+      "ground_truth": {
+        "date": "20130918",
+        "type": "removal",
+        "term": "transitory"
+      },
+      "detection": {
+        "date": "20130918",
+        "term": "transitory",
+        "shift_type": "removal",
+        "confidence": "high",
+        "curr_count": 0,
+        "prev_avg": 0.67,
+        "relative_change": 1.0,
+        "p_value": 0.3
+      }
+    },
+    {
+      "ground_truth": {
+        "date": "20141217",
+        "type": "emergence",
+        "term": "transitory"
+      },
+      "detection": {
+        "date": "20141217",
+        "term": "transitory",
+        "shift_type": "emergence",
+        "confidence": "medium",
+        "curr_count": 1,
+        "prev_avg": 0.0,
+        "relative_change": 1.0,
+        "p_value": 0.3
+      }
+    },
+    {
+      "ground_truth": {
+        "date": "20150318",
+        "type": "removal",
+        "term": "patient"
+      },
+      "detection": {
+        "date": "20150318",
+        "term": "patient",
+        "shift_type": "removal",
+        "confidence": "high",
+        "curr_count": 0,
+        "prev_avg": 1.0,
+        "relative_change": 1.0,
+        "p_value": 0.3
+      }
+    }
+  ],
+  "sample_false_positives": [
+    {
+      "date": "20141217",
+      "term": "patient",
+      "shift_type": "emergence",
+      "confidence": "high",
+      "curr_count": 2,
+      "prev_avg": 0.0,
+      "relative_change": 1.0,
+      "p_value": 0.1
+    },
+    {
+      "date": "20150617",
+      "term": "patient",
+      "shift_type": "removal",
+      "confidence": "high",
+      "curr_count": 0,
+      "prev_avg": 0.33,
+      "relative_change": 1.0,
+      "p_value": 1.0
+    },
+    {
+      "date": "20190130",
+      "term": "patient",
+      "shift_type": "emergence",
+      "confidence": "medium",
+      "curr_count": 1,
+      "prev_avg": 0.0,
+      "relative_change": 1.0,
+      "p_value": 0.3
+    },
+    {
+      "date": "20110315",
+      "term": "transitory",
+      "shift_type": "emergence",
+      "confidence": "medium",
+      "curr_count": 1,
+      "prev_avg": 0.0,
+      "relative_change": 1.0,
+      "p_value": 0.3
+    },
+    {
+      "date": "20110622",
+      "term": "transitory",
+      "shift_type": "removal",
+      "confidence": "high",
+      "curr_count": 0,
+      "prev_avg": 0.67,
+      "relative_change": 1.0,
+      "p_value": 1.0
+    }
+  ],
+  "sample_false_negatives": [
+    {
+      "date": "20090128",
+      "type": "removal",
+      "term": "considerable_time"
+    },
+    {
+      "date": "20090128",
+      "type": "removal",
+      "term": "transitory"
+    },
+    {
+      "date": "20090923",
+      "type": "removal",
+      "term": "full_range_of_tools"
+    },
+    {
+      "date": "20091104",
+      "type": "removal",
+      "term": "full_range_of_tools"
+    },
+    {
+      "date": "20091216",
+      "type": "emergence",
+      "term": "accommodative"
+    }
+  ]
+}

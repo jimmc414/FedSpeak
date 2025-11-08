@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FedSpeak Alert: {{ alert.shift_type }} - {{ alert.term }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #1f3b73 0%, #2d5aa0 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .header .subtitle {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .alert-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 15px;
+        }
+        .badge-high {
+            background-color: #d32f2f;
+            color: white;
+        }
+        .badge-medium {
+            background-color: #f57c00;
+            color: white;
+        }
+        .badge-low {
+            background-color: #fbc02d;
+            color: #333;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .alert-box {
+            background-color: #ffebee;
+            border-left: 4px solid #d32f2f;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .alert-box h2 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+            color: #d32f2f;
+        }
+        .alert-box .shift-term {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #666;
+        }
+        .detail-value {
+            color: #333;
+        }
+        .change-highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        .change-highlight .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Courier New', monospace;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+        .footer a {
+            color: #2d5aa0;
+            text-decoration: none;
+        }
+        .timestamp {
+            font-size: 11px;
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>FedSpeak Language Shift Alert</h1>
+            <p class="subtitle">Federal Reserve Policy Statement Monitoring</p>
+            <span class="alert-badge badge-{{ alert.confidence }}">
+                {{ alert.confidence }} CONFIDENCE
+            </span>
+        </div>
+
+        <div class="content">
+            <div class="alert-box">
+                <h2>{{ alert.shift_type|upper }} Detected</h2>
+                <div class="shift-term">"{{ alert.term }}"</div>
+            </div>
+
+            <div class="change-highlight">
+                <div style="margin-bottom: 5px; font-size: 14px; color: #666;">Term Frequency Change:</div>
+                <div class="value">{{ alert.change.change_description }}</div>
+            </div>
+
+            <div class="detail-grid">
+                <div class="detail-label">Document Date:</div>
+                <div class="detail-value">{{ alert.document.date }}</div>
+
+                <div class="detail-label">Document Type:</div>
+                <div class="detail-value">{{ alert.document.doc_type|title }}</div>
+
+                <div class="detail-label">Shift Type:</div>
+                <div class="detail-value">{{ alert.shift_type|title }}</div>
+
+                <div class="detail-label">Confidence Level:</div>
+                <div class="detail-value">{{ alert.confidence|upper }}</div>
+
+                <div class="detail-label">Previous Avg:</div>
+                <div class="detail-value">{{ "%.1f"|format(alert.change.previous_avg) }} occurrences</div>
+
+                <div class="detail-label">Current Count:</div>
+                <div class="detail-value">{{ alert.change.current_count }} occurrences</div>
+            </div>
+
+            {% if alert.detection_metadata %}
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <h3 style="margin: 0 0 15px 0; font-size: 16px; color: #666;">Detection Details</h3>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 12px;">
+                    <div><strong>Alert ID:</strong> {{ alert.alert_id }}</div>
+                    <div style="margin-top: 5px;"><strong>Generated:</strong> {{ alert.timestamp }}</div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="footer">
+            <p style="margin: 0 0 10px 0;">
+                <strong>FedSpeak Monitoring System</strong>
+            </p>
+            <p style="margin: 0;" class="timestamp">
+                This alert was automatically generated on {{ alert.timestamp }}
+            </p>
+            <p style="margin: 10px 0 0 0;">
+                For questions or to adjust alert settings, contact your system administrator.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

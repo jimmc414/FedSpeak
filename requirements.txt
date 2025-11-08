@@ -8,6 +8,10 @@ requests==2.31.0
 pyyaml==6.0.1
 tqdm==4.66.1  # Progress bars for downloads
 
+# Phase 4: Real-time monitoring dependencies
+feedparser==6.0.11  # RSS feed parsing
+flask==3.0.0  # Web dashboard
+
 # Development dependencies
 pytest==7.4.3
 pytest-cov==4.1.0

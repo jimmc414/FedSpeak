@@ -163,3 +163,28 @@ logging:
   log_dir: "logs/"
   log_to_console: true
   log_to_file: true
+
+# Phase 4: Real-time monitoring configuration
+monitoring:
+  rss_feed_url: "https://www.federalreserve.gov/feeds/press_monetary.xml"
+  check_interval_seconds: 300  # Check every 5 minutes
+  statement_pattern: "(?i)fomc.*statement"  # Regex to filter RSS entries
+
+# Phase 4: Alert distribution configuration
+distribution:
+  email:
+    enabled: false  # Set to true after testing
+    smtp_server: "localhost"
+    smtp_port: 1025
+    smtp_from: "fedspeak@localhost"
+    smtp_tls: false  # Set true for production SMTP
+    recipients:
+      - "analyst@example.com"  # Replace with actual recipients
+
+  dashboard:
+    enabled: true
+    host: "localhost"
+    port: 5000
+    debug: true  # Set false for production
+    alerts_per_page: 50
+    max_age_days: 90  # Show alerts from last 90 days

@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}FedSpeak Dashboard - Recent Alerts{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-6 mb-3">
+            <i class="bi bi-bell"></i>
+            Recent Language Shift Alerts
+        </h1>
+        <p class="lead text-muted">
+            Monitoring Federal Reserve FOMC policy statement language changes
+        </p>
+    </div>
+</div>
+
+<!-- Filter Form -->
+<div class="filter-form">
+    <form method="GET" action="/" class="row g-3">
+        <div class="col-md-2">
+            <label for="confidence" class="form-label">Confidence</label>
+            <select class="form-select" name="confidence" id="confidence">
+                <option value="">All</option>
+                <option value="high" {% if filters.confidence == 'high' %}selected{% endif %}>High</option>
+                <option value="medium" {% if filters.confidence == 'medium' %}selected{% endif %}>Medium</option>
+                <option value="low" {% if filters.confidence == 'low' %}selected{% endif %}>Low</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="shift_type" class="form-label">Shift Type</label>
+            <select class="form-select" name="shift_type" id="shift_type">
+                <option value="">All</option>
+                <option value="emergence" {% if filters.shift_type == 'emergence' %}selected{% endif %}>Emergence</option>
+                <option value="removal" {% if filters.shift_type == 'removal' %}selected{% endif %}>Removal</option>
+                <option value="increase" {% if filters.shift_type == 'increase' %}selected{% endif %}>Increase</option>
+                <option value="decrease" {% if filters.shift_type == 'decrease' %}selected{% endif %}>Decrease</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="term" class="form-label">Term</label>
+            <input type="text" class="form-control" name="term" id="term"
+                   placeholder="e.g., transitory" value="{{ filters.term or '' }}">
+        </div>
+        <div class="col-md-2">
+            <label for="start_date" class="form-label">Start Date</label>
+            <input type="date" class="form-control" name="start_date" id="start_date"
+                   value="{{ filters.start_date or '' }}">
+        </div>
+        <div class="col-md-2">
+            <label for="end_date" class="form-label">End Date</label>
+            <input type="date" class="form-control" name="end_date" id="end_date"
+                   value="{{ filters.end_date or '' }}">
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-funnel"></i> Filter
+            </button>
+        </div>
+    </form>
+
+    {% if filters.confidence or filters.shift_type or filters.term or filters.start_date or filters.end_date %}
+    <div class="mt-3">
+        <a href="/" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-x-circle"></i> Clear Filters
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Results Summary -->
+<div class="row mb-3">
+    <div class="col-12">
+        <p class="text-muted">
+            Showing <strong>{{ alerts|length }}</strong> of <strong>{{ total_alerts }}</strong> alerts
+            {% if total_pages > 1 %}
+            (Page {{ page }} of {{ total_pages }})
+            {% endif %}
+        </p>
+    </div>
+</div>
+
+<!-- Alerts List -->
+{% if alerts %}
+<div class="row">
+    {% for alert in alerts %}
+    <div class="col-12 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h5 class="card-title mb-2">
+                            <span class="badge badge-{{ alert.confidence }} me-2">
+                                {{ alert.confidence|upper }}
+                            </span>
+                            {{ alert.shift_type|title }}: "{{ alert.term }}"
+                        </h5>
+                        <p class="card-text text-muted mb-2">
+                            <i class="bi bi-calendar3"></i>
+                            <strong>Document Date:</strong> {{ alert.document.date }}
+                            <span class="mx-2">|</span>
+                            <i class="bi bi-clock"></i>
+                            <strong>Detected:</strong> {{ alert.timestamp[:19] }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Change:</strong>
+                            <code>{{ alert.change.change_description }}</code>
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <a href="/alert/{{ alert.alert_id }}" class="btn btn-outline-primary">
+                            <i class="bi bi-eye"></i> View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+{% if total_pages > 1 %}
+<nav aria-label="Alert pagination">
+    <ul class="pagination justify-content-center">
+        {% if page > 1 %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page - 1 }}&{{ request.query_string.decode('utf-8')|replace('page=' ~ page, '') }}">
+                Previous
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+        {% endif %}
+
+        {% for p in range(1, total_pages + 1) %}
+            {% if p == page %}
+            <li class="page-item active">
+                <span class="page-link">{{ p }}</span>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ p }}&{{ request.query_string.decode('utf-8')|replace('page=' ~ page, '') }}">
+                    {{ p }}
+                </a>
+            </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page < total_pages %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page + 1 }}&{{ request.query_string.decode('utf-8')|replace('page=' ~ page, '') }}">
+                Next
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Next</span>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+{% else %}
+<!-- No Results -->
+<div class="alert alert-info" role="alert">
+    <i class="bi bi-info-circle"></i>
+    <strong>No alerts found</strong> matching your criteria.
+    {% if filters.confidence or filters.shift_type or filters.term or filters.start_date or filters.end_date %}
+    Try adjusting your filters.
+    {% else %}
+    Check if the monitoring system is running and has processed any statements.
+    {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}

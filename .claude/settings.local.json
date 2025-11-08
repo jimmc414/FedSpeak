@@ -11,7 +11,10 @@
       "Bash(else echo \"Virtual environment NOT FOUND\")",
       "Bash(fi)",
       "Bash(venv_fedspeak_prod/bin/python:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(venv_fedspeak_prod/bin/pytest tests/ -q)",
+      "WebSearch",
+      "WebFetch(domain:www.federalreserve.gov)"
     ],
     "deny": [],
     "ask": []

@@ -5,7 +5,11 @@
       "Bash(find:*)",
       "Bash(python3 -m pytest:*)",
       "Bash(python:*)",
-      "Bash(pytest:*)"
+      "Bash(pytest:*)",
+      "Bash(if [ -d /mnt/c/python/FedSpeak/venv_fedspeak_prod ])",
+      "Bash(then echo \"Virtual environment EXISTS\")",
+      "Bash(else echo \"Virtual environment NOT FOUND\")",
+      "Bash(fi)"
     ],
     "deny": [],
     "ask": []

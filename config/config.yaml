@@ -91,6 +91,31 @@ detection:
   # Primary document type for detection
   focus_document_type: "policy_statement"  # minutes lag 3 weeks
 
+  # Improved Hybrid Detector parameters (Phase 0 validated)
+  hybrid_detector:
+    # Lookback window: number of previous documents for context
+    lookback: 3
+
+    # Increase detection: term count increased by this factor
+    increase_threshold: 2.0
+
+    # Decrease detection: term count decreased by this factor
+    decrease_threshold: 0.5
+
+    # Statistical significance threshold (Fisher's exact test p-value)
+    p_value_threshold: 0.05
+
+    # Confidence levels to include in results (filter low-confidence detections)
+    confidence_filter:
+      - "medium"
+      - "high"
+
+    # Minimum term count for increase detection
+    min_count_increase: 2
+
+    # Minimum average count for decrease detection
+    min_avg_decrease: 1.0
+
 # Text extraction validation thresholds
 validation:
   min_word_count_statement: 100

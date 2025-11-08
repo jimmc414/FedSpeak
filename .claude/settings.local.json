@@ -9,7 +9,9 @@
       "Bash(if [ -d /mnt/c/python/FedSpeak/venv_fedspeak_prod ])",
       "Bash(then echo \"Virtual environment EXISTS\")",
       "Bash(else echo \"Virtual environment NOT FOUND\")",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(venv_fedspeak_prod/bin/python:*)",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []

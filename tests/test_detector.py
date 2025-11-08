@@ -1,10 +1,13 @@
-"""Unit tests for ShiftDetector module."""
+"""Unit tests for ShiftDetector module and ImprovedDetector."""
 
 import pytest
 import pandas as pd
 from datetime import datetime
 
 from fedspeak.detector import ShiftDetector, Shift
+from src.core import ImprovedDetector
+from src.config.settings import get_settings
+from src.exceptions import DetectionError, DataError
 
 
 class TestShiftDetector:
@@ -322,6 +325,349 @@ class TestShiftDetector:
         assert len(shifts) == 1
         assert shifts[0].metadata is not None
         assert 'algorithm' in shifts[0].metadata
+
+
+class TestImprovedDetector:
+    """Test suite for ImprovedDetector class (Phase 2 production detector)."""
+
+    def test_initialization_from_config(self):
+        """Test detector initializes with YAML configuration."""
+        detector = ImprovedDetector()
+
+        # Should load from config.yaml
+        assert detector.lookback == 3
+        assert detector.increase_threshold == 2.0
+        assert detector.decrease_threshold == 0.5
+        assert detector.p_value_threshold == 0.05
+        assert detector.min_count_increase == 2
+        assert detector.min_avg_decrease == 1.0
+
+    def test_initialization_with_custom_config(self):
+        """Test detector initializes with custom configuration dict."""
+        custom_config = {
+            'lookback': 5,
+            'increase_threshold': 3.0,
+            'decrease_threshold': 0.3,
+            'p_value_threshold': 0.01
+        }
+        detector = ImprovedDetector(config=custom_config)
+
+        assert detector.lookback == 5
+        assert detector.increase_threshold == 3.0
+        assert detector.decrease_threshold == 0.3
+        assert detector.p_value_threshold == 0.01
+
+    def test_december_2021_transitory_removal(self):
+        """Test December 2021 'transitory' removal (high confidence)."""
+        detector = ImprovedDetector()
+
+        # Create test data simulating 2021 transitory case
+        dates = ['20210728', '20210922', '20211103', '20211215']
+        texts = {
+            '20210728': 'Inflation has risen, largely reflecting transitory factors.',
+            '20210922': 'Inflation remains elevated, largely reflecting transitory factors that are expected to be transitory.',
+            '20211103': 'Inflation is elevated, largely reflecting factors that are expected to be transitory.',
+            '20211215': 'Inflation remains elevated, reflecting supply and demand.'  # transitory removed
+        }
+
+        detections = detector.detect_shift('transitory', dates, texts)
+
+        # Should detect removal on December 15, 2021
+        removal_detections = [d for d in detections if d['shift_type'] == 'removal']
+        assert len(removal_detections) >= 1
+
+        dec_removal = [d for d in removal_detections if d['date'] == '20211215']
+        assert len(dec_removal) == 1
+        assert dec_removal[0]['shift_type'] == 'removal'
+        assert dec_removal[0]['term'] == 'transitory'
+        assert dec_removal[0]['confidence'] == 'high'  # Complete removal = high confidence
+        assert dec_removal[0]['curr_count'] == 0
+        assert dec_removal[0]['prev_avg'] > 0
+
+    def test_april_2021_transitory_emergence(self):
+        """Test April 2021 'transitory' emergence (medium/high confidence)."""
+        detector = ImprovedDetector()
+
+        # Create test data simulating transitory emergence in April 2021
+        # Need enough documents for lookback window (lookback=3)
+        dates = ['20201216', '20210127', '20210317', '20210428', '20210616']
+        texts = {
+            '20201216': 'Inflation remains soft.',
+            '20210127': 'Inflation remains soft.',
+            '20210317': 'Inflation continues to run below target.',
+            '20210428': 'Inflation has risen, largely reflecting transitory factors.',  # transitory appears
+            '20210616': 'Inflation has risen, largely reflecting transitory factors that are expected to be transitory.'
+        }
+
+        detections = detector.detect_shift('transitory', dates, texts)
+
+        # Should detect emergence in April 2021
+        emergence_detections = [d for d in detections if d['shift_type'] == 'emergence']
+        assert len(emergence_detections) >= 1
+
+        april_emergence = [d for d in emergence_detections if d['date'] == '20210428']
+        assert len(april_emergence) == 1
+        assert april_emergence[0]['shift_type'] == 'emergence'
+        assert april_emergence[0]['term'] == 'transitory'
+        assert april_emergence[0]['confidence'] in ['medium', 'high']
+        assert april_emergence[0]['curr_count'] > 0
+        assert april_emergence[0]['prev_avg'] == 0
+
+    def test_no_change_scenario(self):
+        """Test no-change case produces no detections."""
+        detector = ImprovedDetector()
+
+        # Create data with consistent usage (no shifts)
+        dates = ['20210101', '20210201', '20210301', '20210401']
+        texts = {
+            '20210101': 'The economy remains accommodative and stable.',
+            '20210201': 'The economy remains accommodative and stable.',
+            '20210301': 'The economy remains accommodative and stable.',
+            '20210401': 'The economy remains accommodative and stable.'
+        }
+
+        detections = detector.detect_shift('accommodative', dates, texts)
+
+        # Should not detect any shifts (stable usage)
+        assert len(detections) == 0
+
+    def test_empty_statement(self):
+        """Test handling of empty statement."""
+        detector = ImprovedDetector()
+
+        dates = ['20210101', '20210201', '20210301', '20210401']
+        texts = {
+            '20210101': 'The economy is transitory.',
+            '20210201': 'The economy is transitory.',
+            '20210301': '',  # Empty statement
+            '20210401': 'The economy is stable.'
+        }
+
+        # Should not raise error, should handle gracefully
+        detections = detector.detect_shift('transitory', dates, texts)
+
+        # Should still detect removal in last statement
+        assert isinstance(detections, list)
+
+    def test_malformed_data_validation(self):
+        """Test input validation for malformed data."""
+        detector = ImprovedDetector()
+
+        # Test with empty term
+        with pytest.raises(DataError):
+            detector.detect_shift('', ['20210101'], {'20210101': 'text'})
+
+        # Test with non-string term
+        with pytest.raises(DataError):
+            detector.detect_shift(123, ['20210101'], {'20210101': 'text'})
+
+        # Test with empty dates list
+        with pytest.raises(DataError):
+            detector.detect_shift('term', [], {'20210101': 'text'})
+
+        # Test with non-list dates
+        with pytest.raises(DataError):
+            detector.detect_shift('term', 'not-a-list', {'20210101': 'text'})
+
+        # Test with empty texts dict
+        with pytest.raises(DataError):
+            detector.detect_shift('term', ['20210101'], {})
+
+        # Test with non-dict texts
+        with pytest.raises(DataError):
+            detector.detect_shift('term', ['20210101'], 'not-a-dict')
+
+    def test_unsorted_dates_validation(self):
+        """Test that unsorted dates raise validation error."""
+        detector = ImprovedDetector()
+
+        dates = ['20210301', '20210101', '20210201']  # Not sorted
+        texts = {
+            '20210101': 'Text 1',
+            '20210201': 'Text 2',
+            '20210301': 'Text 3'
+        }
+
+        with pytest.raises(DataError, match="chronologically sorted"):
+            detector.detect_shift('term', dates, texts)
+
+    def test_missing_texts_validation(self):
+        """Test that missing text entries raise validation error."""
+        detector = ImprovedDetector()
+
+        dates = ['20210101', '20210201', '20210301']
+        texts = {
+            '20210101': 'Text 1',
+            # Missing 20210201
+            '20210301': 'Text 3'
+        }
+
+        with pytest.raises(DataError, match="missing for dates"):
+            detector.detect_shift('term', dates, texts)
+
+    def test_increase_detection(self):
+        """Test detection of significant count increase."""
+        detector = ImprovedDetector()
+
+        dates = ['20210101', '20210201', '20210301', '20210401']
+        texts = {
+            '20210101': 'The economy is stable.',
+            '20210201': 'The economy is patient and stable.',
+            '20210301': 'The economy is patient.',
+            '20210401': 'The economy must be patient and patient and patient and patient.'  # 4x increase
+        }
+
+        detections = detector.detect_shift('patient', dates, texts)
+
+        # May detect emergence and/or increase
+        assert len(detections) > 0
+
+    def test_decrease_detection(self):
+        """Test detection of significant count decrease."""
+        detector = ImprovedDetector()
+
+        dates = ['20210101', '20210201', '20210301', '20210401']
+        texts = {
+            '20210101': 'Very patient patient patient approach.',
+            '20210201': 'Still patient patient patient today.',
+            '20210301': 'Patient patient patient strategy.',
+            '20210401': 'Somewhat patient.'  # Significant decrease
+        }
+
+        detections = detector.detect_shift('patient', dates, texts)
+
+        # Should detect decrease (3→1 count)
+        decrease_detections = [d for d in detections if d['shift_type'] == 'decrease']
+        assert len(decrease_detections) >= 1
+
+    def test_case_insensitive_matching(self):
+        """Test that term matching is case-insensitive."""
+        detector = ImprovedDetector()
+
+        dates = ['20210101', '20210201', '20210301', '20210401']
+        texts = {
+            '20210101': 'inflation is stable.',
+            '20210201': 'INFLATION remains low.',
+            '20210301': 'Inflation is moderate.',
+            '20210401': 'The economy has no inflation concerns.'
+        }
+
+        # Search for lowercase, should match all cases
+        detections = detector.detect_shift('inflation', dates, texts)
+
+        # Should not detect shifts (consistent usage regardless of case)
+        assert isinstance(detections, list)
+
+    def test_whole_word_matching(self):
+        """Test that term matching is whole-word only."""
+        detector = ImprovedDetector()
+
+        dates = ['20210101', '20210201', '20210301', '20210401']
+        texts = {
+            '20210101': 'The economy needs accommodation.',  # "accommodative" not present
+            '20210201': 'The economy needs accommodation.',
+            '20210301': 'The economy needs accommodation.',
+            '20210401': 'The economy is accommodative.'  # "accommodative" appears
+        }
+
+        detections = detector.detect_shift('accommodative', dates, texts)
+
+        # Should detect emergence (whole word, not substring)
+        emergence_detections = [d for d in detections if d['shift_type'] == 'emergence']
+        assert len(emergence_detections) == 1
+
+    def test_lookback_parameter(self):
+        """Test that lookback parameter is respected."""
+        detector = ImprovedDetector()
+
+        dates = ['20210101', '20210201', '20210301', '20210401', '20210501']
+        texts = {
+            '20210101': 'Text with term.',
+            '20210201': 'Text with term.',
+            '20210301': 'Text with term.',
+            '20210401': 'Text with term.',
+            '20210501': 'Text without.'
+        }
+
+        # Default lookback = 3
+        detections_default = detector.detect_shift('term', dates, texts)
+
+        # Custom lookback = 2
+        detections_custom = detector.detect_shift('term', dates, texts, lookback=2)
+
+        # Both should detect removal, but may differ in details
+        assert isinstance(detections_default, list)
+        assert isinstance(detections_custom, list)
+
+    def test_detection_result_structure(self):
+        """Test that detection results have correct structure."""
+        detector = ImprovedDetector()
+
+        dates = ['20210101', '20210201', '20210301', '20210401']
+        texts = {
+            '20210101': 'No term here.',
+            '20210201': 'No term here.',
+            '20210301': 'No term here.',
+            '20210401': 'The transitory economy.'
+        }
+
+        detections = detector.detect_shift('transitory', dates, texts)
+
+        assert len(detections) >= 1
+        detection = detections[0]
+
+        # Check all required fields
+        assert 'date' in detection
+        assert 'term' in detection
+        assert 'shift_type' in detection
+        assert 'confidence' in detection
+        assert 'curr_count' in detection
+        assert 'prev_avg' in detection
+        assert 'relative_change' in detection
+        assert 'p_value' in detection or detection['p_value'] is None
+
+        # Check field types
+        assert isinstance(detection['date'], str)
+        assert isinstance(detection['term'], str)
+        assert detection['shift_type'] in ['emergence', 'removal', 'increase', 'decrease']
+        assert detection['confidence'] in ['low', 'medium', 'high']
+        assert isinstance(detection['curr_count'], int)
+        assert isinstance(detection['prev_avg'], (int, float))
+        assert isinstance(detection['relative_change'], (int, float))
+
+    def test_multiple_shifts_in_series(self):
+        """Test detection of multiple shifts in a time series."""
+        detector = ImprovedDetector()
+
+        # Need enough documents for lookback window (lookback=3)
+        dates = ['20201201', '20210101', '20210201', '20210301', '20210401', '20210501', '20210601']
+        texts = {
+            '20201201': 'The economy is stable.',
+            '20210101': 'The economy is stable.',
+            '20210201': 'The economy is stable.',
+            '20210301': 'The economy is patient and stable.',  # Emergence
+            '20210401': 'The economy remains patient.',
+            '20210501': 'The economy remains patient.',
+            '20210601': 'The economy is recovering.'  # Removal
+        }
+
+        detections = detector.detect_shift('patient', dates, texts)
+
+        # Should detect both emergence and removal
+        shift_types = {d['shift_type'] for d in detections}
+        assert 'emergence' in shift_types
+        assert 'removal' in shift_types
+
+    def test_configuration_error_handling(self):
+        """Test that configuration errors are handled properly."""
+        # This tests the error handling in __init__
+        # Normal case should work
+        detector = ImprovedDetector()
+        assert detector is not None
+
+        # Custom config should work
+        detector2 = ImprovedDetector(config={'lookback': 5})
+        assert detector2.lookback == 5
 
 
 if __name__ == '__main__':

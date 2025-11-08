@@ -15,6 +15,7 @@ from datetime import datetime
 from src.monitoring import RSSMonitor
 from src.core import ImprovedDetector
 from src.distribution import AlertDeduplicator, EmailSender
+from src.validation import MarketValidator
 from src.config import setup_logging
 from src.config.settings import get_settings
 from src.exceptions import DataError, DetectionError
@@ -42,6 +43,16 @@ class FOMCMonitor:
         self.deduplicator = AlertDeduplicator()
         self.email_sender = EmailSender()
 
+        # Phase 5: Market validation component
+        try:
+            self.market_validator = MarketValidator()
+            market_validation_enabled = self.market_validator.enabled
+        except Exception as e:
+            logger.warning(f"Market validation initialization failed: {e}")
+            logger.warning("Continuing without market validation")
+            self.market_validator = None
+            market_validation_enabled = False
+
         # Load configured terms to monitor
         self.monitored_terms = self._load_monitored_terms()
 
@@ -51,6 +62,7 @@ class FOMCMonitor:
 
         logger.info(f"FOMCMonitor initialized. Monitoring {len(self.monitored_terms)} terms")
         logger.info(f"Email distribution: {'enabled' if self.email_sender.enabled else 'disabled'}")
+        logger.info(f"Market validation: {'enabled' if market_validation_enabled else 'disabled'}")
 
     def _load_monitored_terms(self) -> List[str]:
         """Load list of terms to monitor from config.
@@ -193,6 +205,42 @@ Alert ID: {alert['alert_id']}
                                 'confidence': detection['confidence'],
                                 'detection_metadata': detection
                             }
+
+                            # Phase 5: Market validation
+                            if self.market_validator and self.market_validator.enabled:
+                                try:
+                                    market_validation = self.market_validator.validate_shift(
+                                        date=detection['date'],
+                                        term=term,
+                                        shift_type=detection['shift_type']
+                                    )
+                                    tier_num, tier_name = self.market_validator.determine_tier(
+                                        detection['confidence'],
+                                        market_validation['validated']
+                                    )
+
+                                    # Add market validation fields to alert
+                                    alert['market_validation'] = market_validation
+                                    alert['tier'] = tier_num
+                                    alert['tier_name'] = tier_name
+                                    alert['confidence_original'] = detection['confidence']
+                                    alert['confidence_adjusted'] = tier_name
+
+                                    logger.info(
+                                        f"Market validation: {market_validation['validated']} "
+                                        f"(score: {market_validation['market_score']:.2f}, tier: {tier_num})"
+                                    )
+                                except Exception as e:
+                                    logger.warning(f"Market validation failed for {alert['alert_id']}: {e}")
+                                    # Continue without market validation
+                                    alert['market_validation'] = None
+                                    alert['tier'] = 2  # Default to Tier 2 (statistical only)
+                                    alert['tier_name'] = 'tier_2'
+                            else:
+                                # Market validation disabled
+                                alert['market_validation'] = None
+                                alert['tier'] = 2  # Default to Tier 2
+                                alert['tier_name'] = 'tier_2'
 
                             # Check for duplicate
                             if not self.deduplicator.should_distribute(alert):

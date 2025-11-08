@@ -14,7 +14,8 @@
       "Bash(test:*)",
       "Bash(venv_fedspeak_prod/bin/pytest tests/ -q)",
       "WebSearch",
-      "WebFetch(domain:www.federalreserve.gov)"
+      "WebFetch(domain:www.federalreserve.gov)",
+      "Bash(venv_fedspeak_prod/bin/pip:*)"
     ],
     "deny": [],
     "ask": []

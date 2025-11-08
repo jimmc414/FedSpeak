@@ -65,7 +65,8 @@ def filter_alerts(alerts: List[Dict],
                   shift_type: Optional[str] = None,
                   term: Optional[str] = None,
                   start_date: Optional[str] = None,
-                  end_date: Optional[str] = None) -> List[Dict]:
+                  end_date: Optional[str] = None,
+                  tier: Optional[int] = None) -> List[Dict]:
     """Filter alerts by various criteria.
 
     Args:
@@ -75,6 +76,7 @@ def filter_alerts(alerts: List[Dict],
         term: Filter by term (partial match, case-insensitive)
         start_date: Filter alerts on or after this date (YYYY-MM-DD)
         end_date: Filter alerts on or before this date (YYYY-MM-DD)
+        tier: Filter by tier (1, 2, or 3) - Phase 5 market validation
 
     Returns:
         Filtered list of alerts
@@ -99,6 +101,10 @@ def filter_alerts(alerts: List[Dict],
         filtered = [a for a in filtered
                    if a.get('document', {}).get('date', '') <= end_date.replace('-', '')]
 
+    # Phase 5: Filter by tier
+    if tier is not None:
+        filtered = [a for a in filtered if a.get('tier', 2) == tier]
+
     return filtered
 
 
@@ -118,6 +124,10 @@ def index():
     term_filter = request.args.get('term')
     start_date_filter = request.args.get('start_date')
     end_date_filter = request.args.get('end_date')
+    tier_filter = request.args.get('tier')  # Phase 5: Tier filtering
+
+    # Convert tier to int if provided
+    tier_filter_int = int(tier_filter) if tier_filter and tier_filter.isdigit() else None
 
     # Apply filters
     filtered_alerts = filter_alerts(
@@ -126,7 +136,8 @@ def index():
         shift_type=shift_type_filter,
         term=term_filter,
         start_date=start_date_filter,
-        end_date=end_date_filter
+        end_date=end_date_filter,
+        tier=tier_filter_int  # Phase 5
     )
 
     # Pagination
@@ -150,7 +161,8 @@ def index():
             'shift_type': shift_type_filter,
             'term': term_filter,
             'start_date': start_date_filter,
-            'end_date': end_date_filter
+            'end_date': end_date_filter,
+            'tier': tier_filter  # Phase 5
         }
     )
 

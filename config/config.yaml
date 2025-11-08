@@ -188,3 +188,94 @@ distribution:
     debug: true  # Set false for production
     alerts_per_page: 50
     max_age_days: 90  # Show alerts from last 90 days
+
+# Phase 5: Market Data Validation Configuration
+market_validation:
+  enabled: true
+
+  # API Configuration
+  apis:
+    fred:
+      enabled: true
+      api_key: "${FRED_API_KEY}"  # Set FRED_API_KEY environment variable
+      base_url: "https://api.stlouisfed.org/fred"
+      rate_limit: 120  # requests per minute
+
+    alpha_vantage:
+      enabled: false  # Fallback if needed
+      api_key: "${ALPHAVANTAGE_API_KEY}"
+      base_url: "https://www.alphavantage.co/query"
+      rate_limit: 5  # free tier: 5 per minute, 500 per day
+
+    yahoo_finance:
+      enabled: true  # Free, no API key needed
+      rate_limit: 2000  # per hour
+
+  # Indicators and Thresholds
+  indicators:
+    treasury_2yr:
+      enabled: true
+      fred_series: "DGS2"
+      threshold_bps: 5  # basis points
+      weight: 0.20
+
+    treasury_10yr:
+      enabled: true
+      fred_series: "DGS10"
+      threshold_bps: 5  # basis points
+      weight: 0.20
+
+    vix:
+      enabled: true
+      symbol: "^VIX"
+      threshold_pct: 10  # percent change
+      weight: 0.30
+
+    sp500:
+      enabled: true
+      symbol: "SPY"  # S&P 500 ETF
+      threshold_pct: 0.5  # percent change
+      weight: 0.30
+
+  # Time Windows
+  time_windows:
+    baseline:
+      hours_before: 3  # 11 AM - 2 PM baseline
+      end_minutes_before: 15
+
+    impact_primary:
+      minutes_after: 30  # Main validation window (2:00-2:30 PM ET)
+
+    impact_extended:
+      minutes_after: 60  # Extended validation (2:00-3:00 PM ET)
+
+  # Validation Criteria
+  validation:
+    min_score: 0.6  # Need 60% of weighted indicators
+    min_indicators: 2  # At least 2 indicators must trigger
+
+  # Alert Tier Rules
+  tiers:
+    tier_1:  # Statistical + Market validated (best quality)
+      statistical_confidence: ["high", "medium"]
+      market_validated: true
+
+    tier_2:  # Statistical only (not market validated)
+      statistical_confidence: ["high", "medium"]
+      market_validated: false
+
+    tier_3:  # Low confidence, informational
+      statistical_confidence: ["low"]
+
+  # Storage
+  storage:
+    cache_dir: "data/market_cache/"
+    retention_days: 90
+    format: "csv"  # csv for simplicity, can upgrade to parquet
+
+  # Backtesting
+  backtest:
+    enabled: true
+    start_date: "2009-01-01"
+    end_date: "2024-12-31"
+    output_dir: "results/market_validation/"

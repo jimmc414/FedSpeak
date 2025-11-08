@@ -53,6 +53,15 @@
             <input type="date" class="form-control" name="end_date" id="end_date"
                    value="{{ filters.end_date or '' }}">
         </div>
+        <div class="col-md-2">
+            <label for="tier" class="form-label">Alert Tier</label>
+            <select class="form-select" name="tier" id="tier">
+                <option value="">All Tiers</option>
+                <option value="1" {% if filters.tier == '1' %}selected{% endif %}>Tier 1 (Market + Stat)</option>
+                <option value="2" {% if filters.tier == '2' %}selected{% endif %}>Tier 2 (Statistical)</option>
+                <option value="3" {% if filters.tier == '3' %}selected{% endif %}>Tier 3 (Low Conf)</option>
+            </select>
+        </div>
         <div class="col-md-2 d-flex align-items-end">
             <button type="submit" class="btn btn-primary w-100">
                 <i class="bi bi-funnel"></i> Filter
@@ -60,7 +69,7 @@
         </div>
     </form>
 
-    {% if filters.confidence or filters.shift_type or filters.term or filters.start_date or filters.end_date %}
+    {% if filters.confidence or filters.shift_type or filters.term or filters.start_date or filters.end_date or filters.tier %}
     <div class="mt-3">
         <a href="/" class="btn btn-sm btn-outline-secondary">
             <i class="bi bi-x-circle"></i> Clear Filters
@@ -94,6 +103,19 @@
                             <span class="badge badge-{{ alert.confidence }} me-2">
                                 {{ alert.confidence|upper }}
                             </span>
+                            {% if alert.tier == 1 %}
+                            <span class="badge bg-success me-2" title="Market + Statistical evidence">
+                                TIER 1
+                            </span>
+                            {% elif alert.tier == 2 %}
+                            <span class="badge bg-warning me-2" title="Statistical evidence only">
+                                TIER 2
+                            </span>
+                            {% elif alert.tier == 3 %}
+                            <span class="badge bg-secondary me-2" title="Low confidence">
+                                TIER 3
+                            </span>
+                            {% endif %}
                             {{ alert.shift_type|title }}: "{{ alert.term }}"
                         </h5>
                         <p class="card-text text-muted mb-2">
@@ -170,7 +192,7 @@
 <div class="alert alert-info" role="alert">
     <i class="bi bi-info-circle"></i>
     <strong>No alerts found</strong> matching your criteria.
-    {% if filters.confidence or filters.shift_type or filters.term or filters.start_date or filters.end_date %}
+    {% if filters.confidence or filters.shift_type or filters.term or filters.start_date or filters.end_date or filters.tier %}
     Try adjusting your filters.
     {% else %}
     Check if the monitoring system is running and has processed any statements.

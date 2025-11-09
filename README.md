@@ -20,6 +20,33 @@ FedSpeak is an automated system that reads Federal Reserve press releases and id
 
 ---
 
+## About This Project & Claude Code
+
+FedSpeak is designed to work seamlessly with Claude Code, Anthropic's official CLI AI assistant, in two distinct ways:
+
+### 1. Claude Code as Autonomous Operator
+Claude Code (the AI assistant) can autonomously drive and operate the entire FedSpeak system on your behalf. It can:
+- Set up and configure the environment
+- Run monitoring and detection workflows
+- Analyze results and generate reports
+- Troubleshoot issues and perform maintenance
+- Execute complex multi-step operations without manual intervention
+
+See [AGENT_GUIDE.md](AGENT_GUIDE.md) for autonomous operation protocols and decision trees.
+
+### 2. Claude Code as Inference Provider
+When you set the API key to the "all 9s" pattern (`sk-ant-999999999999`), Claude Code Max provides the AI inference for MILA stance analysis instead of calling Anthropic's cloud API. This:
+- Eliminates API costs during development and testing
+- Enables offline/air-gapped operation
+- Provides the same quality hawkish/dovish analysis
+- Routes transparently without code changes
+
+See [MILA API Configuration](#mila-api-configuration) for setup details.
+
+**These roles are independent:** Claude Code can operate FedSpeak regardless of which inference mode you're using. You can have Claude Code run the system while using Anthropic's cloud API, or you can manually operate FedSpeak while using Claude Code for inference, or both, or neither.
+
+---
+
 ## Key Features
 
 ### **Intelligent Detection**
@@ -127,9 +154,37 @@ pip install -r requirements.txt
 
 ### Configuration
 
+#### For Claude Code Users
+
+If Claude Code is operating FedSpeak on your behalf:
+
+**Option A: Use Claude Code Max for AI Analysis** (Recommended for Development)
+```bash
+# Set all-9s API key to route MILA inference to Claude Code Max
+export ANTHROPIC_API_KEY="sk-ant-999999999999"
+```
+- **Cost**: Free (uses your Claude Code Max subscription)
+- **Perfect for**: Development and testing
+- **Benefit**: No cloud API costs
+
+**Option B: Use Anthropic Cloud API** (Production)
+```bash
+# Get API key from https://console.anthropic.com
+export ANTHROPIC_API_KEY="sk-ant-api03-YOUR_ACTUAL_KEY"
+```
+- **Cost**: ~$0.003 per statement (<$5/year ongoing)
+- **Best for**: Production deployments
+- **Benefit**: Guaranteed uptime and SLA
+
+#### For Manual Setup
+
 1. **Set API Key** (optional, for MILA AI explanations):
 ```bash
-export ANTHROPIC_API_KEY="sk-ant-..."
+# Cloud API (production):
+export ANTHROPIC_API_KEY="sk-ant-api03-YOUR_KEY"
+
+# OR local routing (development):
+export ANTHROPIC_API_KEY="sk-ant-999999999999"
 ```
 
 2. **Configure Settings** (optional):
@@ -140,6 +195,10 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 # - Media validation parameters
 # - Email notifications
 ```
+
+**Verification**: After starting services, check logs for:
+- Cloud mode: `"via Anthropic API (cloud)"`
+- Local mode: `"via Claude Code (local inference)"`
 
 ### Start Services
 
@@ -353,6 +412,9 @@ FedSpeak includes comprehensive documentation for all audiences:
 ### For Developers
 - **[API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md)** (450 lines): All endpoints (dashboard, Word2Vec, MILA), request/response formats, examples (Python/curl/JavaScript)
 
+### For Claude Code Autonomous Operation
+- **[AGENT_GUIDE.md](AGENT_GUIDE.md)** (950 lines): Protocols for autonomous execution by Claude Code AI assistant, including state checks, decision trees, error handling, and API routing configuration
+
 ### For Stakeholders
 - **[PROJECT_RETROSPECTIVE.md](docs/PROJECT_RETROSPECTIVE.md)** (1,000 lines): Full project summary, ROI analysis, metrics, skills demonstrated, suitable for portfolio/resume
 
@@ -372,7 +434,13 @@ export FEDSPEAK_CONFIG="/path/to/config.yaml"
 
 ### MILA API Configuration
 
-FedSpeak's MILA stance analysis supports two routing modes for the Anthropic API:
+**Claude Code's Role as Inference Provider:**
+
+FedSpeak's MILA stance analysis framework can use Claude Code (Anthropic's AI assistant) as the inference engine that analyzes FOMC statements and classifies them as hawkish/dovish/neutral. This is completely separate from Claude Code's ability to operate FedSpeak autonomously (see [About This Project & Claude Code](#about-this-project--claude-code)).
+
+When you configure the "all 9s" API key pattern, Claude Code Max becomes the AI model that performs the stance analysis instead of calling Anthropic's cloud API. Both modes provide the same quality analysis.
+
+FedSpeak's MILA stance analysis supports two routing modes:
 
 #### Option 1: Anthropic Cloud API (Production)
 
@@ -396,9 +464,19 @@ For development/testing with Claude Code Max subscription:
 export ANTHROPIC_API_KEY="sk-ant-999999999999"
 ```
 
-**How it works**: The system detects the "all 9s" pattern and automatically routes inference to Claude Code Max instead of making cloud API calls.
+**How it works**:
+- The system detects the "all 9s" pattern (12+ consecutive 9s after final hyphen)
+- Routes MILA inference calls to Claude Code Max instead of Anthropic's cloud API
+- Claude Code Max performs the same hawkish/dovish/neutral analysis locally
+- Results are cached and logged as "via Claude Code (local inference)"
 
 **Cost**: Free (uses your Claude Code Max subscription)
+
+**Best for:**
+- Development and testing workflows
+- Avoiding API costs during experimentation
+- Air-gapped or restricted network environments
+- Learning how FedSpeak's MILA framework works
 
 **Verification**: Check logs for `"via Claude Code (local inference)"`
 

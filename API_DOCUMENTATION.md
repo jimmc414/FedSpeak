@@ -47,6 +47,26 @@ Content-Type: application/json
 Accept: application/json
 ```
 
+### Claude Code Integration
+
+**Dual Integration Points:**
+
+FedSpeak integrates with Claude Code (Anthropic's official AI assistant) in two distinct ways:
+
+**1. Claude Code as System Operator**
+- Claude Code can autonomously operate FedSpeak via API calls
+- All endpoints documented below are accessible to Claude Code for autonomous execution
+- See AGENT_GUIDE.md for autonomous execution protocols and decision trees
+- Example: Claude Code can query `/api/alerts`, analyze results, and generate reports
+
+**2. Claude Code as MILA Inference Provider**
+- When configured with "all 9s" API key (`sk-ant-999999999999`)
+- Claude Code Max provides inference for `/api/explainability/stance/*` endpoints
+- Transparent routing - API behavior is identical regardless of routing mode
+- See [MILA Explainability API](#mila-explainability-api) for details
+
+**These integrations are independent**: Claude Code can call APIs while MILA uses cloud inference, or vice versa. The system supports all combinations: Claude Code operating + cloud inference, manual operation + Claude Code inference, both, or neither.
+
 ---
 
 ## Authentication
@@ -426,7 +446,33 @@ GET /api/explore/search?q=inf&limit=5
 
 ## MILA Explainability API
 
-**API Routing**: MILA supports cloud API (Anthropic) or local routing (Claude Code Max) based on API key pattern. Routing is automatic and transparent - all endpoints work identically regardless of mode. See Configuration section in USER_GUIDE.md for setup details.
+### About Claude Code Inference Routing
+
+The MILA Explainability API can route inference in two ways:
+
+**Cloud API Mode (Anthropic)**:
+- Standard Anthropic API key (`sk-ant-api03-...`)
+- Inference runs on Anthropic's cloud infrastructure
+- Cost: ~$0.003 per statement
+- Production-ready with guaranteed uptime
+
+**Local Routing Mode (Claude Code Max)**:
+- Special "all 9s" API key (`sk-ant-999999999999`)
+- Inference runs via Claude Code Max locally
+- Cost: Free (uses Claude Code Max subscription)
+- Perfect for development/testing
+
+**Key Point for API Users**: Regardless of routing mode, all endpoints have identical behavior and response formats. The routing is completely transparent to API consumers.
+
+**Configuration**: Set `ANTHROPIC_API_KEY` environment variable:
+- Cloud: `export ANTHROPIC_API_KEY="sk-ant-api03-YOUR_KEY"`
+- Local: `export ANTHROPIC_API_KEY="sk-ant-999999999999"`
+
+**Verification**: Check application logs for:
+- Cloud: `"via Anthropic API (cloud)"`
+- Local: `"via Claude Code (local inference)"`
+
+See USER_GUIDE.md MILA Configuration section for detailed setup.
 
 ### GET `/api/explainability/stance/<date>`
 

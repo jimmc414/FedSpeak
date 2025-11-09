@@ -28,6 +28,8 @@
 
 FedSpeak is an automated system for detecting and analyzing language shifts in Federal Reserve FOMC policy statements. It monitors the Federal Reserve RSS feed, runs statistical shift detection on new statements, and enriches alerts with multi-signal validation (market data + media coverage + LLM stance analysis).
 
+**Note for AI Agents**: This runbook is designed to be executed by AI assistants like Claude Code. All protocols include explicit state checks, success criteria, and decision logic for autonomous operation. Human operators can also use these procedures.
+
 ### Key Components
 
 1. **Core Detector** (`src/core/detector.py`)
@@ -525,6 +527,23 @@ docker run -e ANTHROPIC_API_KEY="..." fedspeak:latest
 Environment="ANTHROPIC_API_KEY=..."
 ```
 
+**Understanding Claude Code's Dual Role**:
+
+Before configuring MILA, understand that Claude Code has two distinct relationships with FedSpeak:
+
+**Role 1: Autonomous Operator**
+- Claude Code (the AI assistant) can operate FedSpeak on behalf of a human user
+- Handles setup, monitoring, troubleshooting, maintenance
+- Executes all runbook procedures autonomously
+- Documented in AGENT_GUIDE.md with execution protocols
+
+**Role 2: Inference Provider**
+- When API key matches "all 9s" pattern, Claude Code Max provides MILA inference
+- Replaces Anthropic cloud API calls with local Claude Code Max processing
+- Documented below in routing configuration
+
+**These roles are independent**: Claude Code can operate FedSpeak while using cloud API for inference, or a human can operate FedSpeak while using Claude Code for inference, or both, or neither.
+
 **MILA API Routing Modes**:
 
 FedSpeak supports two routing modes for the Anthropic API:
@@ -543,8 +562,14 @@ export ANTHROPIC_API_KEY="sk-ant-api03-YOUR_ACTUAL_KEY"
 # Set placeholder API key (all 9s pattern signals local routing)
 export ANTHROPIC_API_KEY="sk-ant-999999999999"
 
-# How it works: System detects all-9s pattern and routes to Claude Code Max
+# How it works:
+# - System detects "all 9s" pattern (12+ consecutive 9s after final hyphen)
+# - Routes MILA inference calls to Claude Code Max instead of cloud API
+# - Claude Code Max performs hawkish/dovish analysis locally
+# - Results cached and logged as "via Claude Code (local inference)"
+
 # Cost: Free (uses Claude Code Max subscription)
+# Best for: Development, testing, avoiding API costs, air-gapped environments
 # Verification: Check logs for "via Claude Code (local inference)"
 ```
 

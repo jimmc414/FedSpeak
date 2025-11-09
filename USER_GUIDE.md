@@ -64,6 +64,30 @@ FedSpeak is an automated system that detects and analyzes language shifts in Fed
 - Historical analysis and visualization
 - API access for programmatic queries
 
+### Working with Claude Code
+
+**Claude Code as Your Assistant:**
+
+Claude Code (Anthropic's official CLI AI assistant) can help you use FedSpeak in two distinct and independent ways:
+
+**1. As an Autonomous Operator**
+Claude Code can set up, run, monitor, and maintain FedSpeak on your behalf. Simply ask Claude Code to operate the system and it will handle all technical details:
+- Environment setup and dependency installation
+- Configuration and API key setup
+- Starting and monitoring services
+- Troubleshooting issues
+- Analyzing results and generating reports
+
+**2. As the AI Inference Provider**
+When configured with the "all 9s" API key pattern (`sk-ant-999999999999`), Claude Code Max provides the AI analysis for MILA stance classification instead of calling Anthropic's cloud API. This:
+- Eliminates API costs during development
+- Enables offline operation
+- Provides the same quality hawkish/dovish analysis
+
+**These roles are independent**: Claude Code can operate FedSpeak regardless of whether it's also providing the AI inference. You can use either role, both, or neither depending on your needs.
+
+For detailed autonomous operation protocols, see [AGENT_GUIDE.md](../AGENT_GUIDE.md).
+
 ---
 
 ## Getting Started
@@ -558,6 +582,20 @@ Steps:
 
 ## MILA Stance Analysis
 
+### About Claude Code's Inference Role
+
+When MILA is configured to use "Claude Code Max Local Routing," Claude Code Max (the AI assistant you may already be talking to) becomes the inference engine that analyzes FOMC statements. This is completely separate from Claude Code's ability to operate FedSpeak on your behalf.
+
+**Two Independent Relationships:**
+- **Claude Code as operator**: Can set up and run FedSpeak autonomously (see [Working with Claude Code](#working-with-claude-code))
+- **Claude Code as inference provider**: Performs MILA stance analysis when configured with "all 9s" API key
+
+Both, either, or neither can be active depending on your configuration. For example:
+- Claude Code can operate FedSpeak while MILA uses Anthropic's cloud API
+- You can manually operate FedSpeak while Claude Code provides MILA inference
+- Claude Code can do both (operate the system AND provide inference)
+- Neither (you operate manually and use cloud API)
+
 ### MILA Configuration
 
 MILA requires an Anthropic API key. FedSpeak supports two routing modes:
@@ -879,6 +917,28 @@ A: Negative = dovish, Positive = hawkish. Score ranges from -1.0 (very dovish) t
 
 **Q: Can I use the API programmatically?**
 A: Yes, see [API Documentation](API_DOCUMENTATION.md) for full endpoint reference.
+
+**Q: What is Claude Code and how does it relate to FedSpeak?**
+A: Claude Code is Anthropic's official CLI AI assistant. It has two relationships with FedSpeak:
+   1. **As autonomous operator**: Claude Code can set up, run, and maintain FedSpeak on your behalf
+   2. **As inference provider**: When API key is set to "sk-ant-999999999999", Claude Code Max provides the AI analysis for MILA
+   These roles are independent - you can use either, both, or neither.
+
+**Q: Can Claude Code run FedSpeak for me automatically?**
+A: Yes! Claude Code can autonomously operate the entire FedSpeak system. Just ask Claude Code to set up and monitor FedSpeak, and it will handle environment setup, configuration, monitoring, and analysis. See AGENT_GUIDE.md for technical details.
+
+**Q: What's the difference between Claude Code operating FedSpeak vs. providing inference?**
+A:
+   - **Operating**: Claude Code acts as the human user, running commands and managing the system
+   - **Inference**: Claude Code acts as the AI model that analyzes FOMC statements (when configured with "all 9s" API key)
+   They're separate roles that can be used independently or together.
+
+**Q: If I'm using Claude Code to operate FedSpeak, should I use local routing?**
+A: It's recommended for development. Set `ANTHROPIC_API_KEY="sk-ant-999999999999"` to:
+   - Avoid API costs during development/testing
+   - Use your existing Claude Code Max subscription
+   - Keep everything local (no cloud API calls)
+   For production, you may want cloud API routing for guaranteed availability.
 
 ---
 

@@ -88,7 +88,9 @@ class MILAAnalyzer:
         if not self.api_key:
             logger.warning(
                 "ANTHROPIC_API_KEY not found in environment or config. "
-                "MILA will be disabled. Set ANTHROPIC_API_KEY to enable."
+                "MILA will be disabled. Set ANTHROPIC_API_KEY to enable stance analysis.\n"
+                "  For cloud API: Use your Anthropic API key (sk-ant-api03-...)\n"
+                "  For local routing: Use 'sk-ant-999999999999' (Claude Code Max)"
             )
             MILAAnalyzer._client = None
             return
@@ -107,10 +109,29 @@ class MILAAnalyzer:
             default=self.DEFAULT_TEMPERATURE
         )
 
-        # Initialize Anthropic client
+        # Initialize Anthropic client with intelligent routing
         try:
-            MILAAnalyzer._client = anthropic.Anthropic(api_key=self.api_key)
-            logger.info(f"MILA initialized with model: {self.model}")
+            from src.explainability.api_router import APIRouter
+
+            # Create client with automatic routing detection
+            MILAAnalyzer._client = APIRouter.create_client(api_key=self.api_key)
+
+            # Get routing information for logging
+            routing_info = APIRouter.get_routing_info(MILAAnalyzer._client)
+            self.routing_mode = routing_info['routing_mode']
+            self.is_local_routing = routing_info['is_local']
+
+            logger.info(
+                f"MILA initialized with model: {self.model} "
+                f"via {routing_info['description']}"
+            )
+
+            if self.is_local_routing:
+                logger.info(
+                    "Local routing active: Using Claude Code Max for inference. "
+                    "API calls will be processed locally (no cloud API costs)."
+                )
+
         except Exception as e:
             logger.error(f"Failed to initialize Anthropic client: {e}")
             MILAAnalyzer._client = None

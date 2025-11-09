@@ -22,7 +22,9 @@
       "Bash(venv_fedspeak_prod/bin/pytest tests/exploration/test_word2vec_service.py -v --tb=no)",
       "Bash(xargs cat:*)",
       "Bash(xargs:*)",
-      "Bash(venv_fedspeak_prod/bin/pytest tests/ -q --ignore=tests/validation/test_market_validator.py --ignore=tests/validation/test_media_validator.py)"
+      "Bash(venv_fedspeak_prod/bin/pytest tests/ -q --ignore=tests/validation/test_market_validator.py --ignore=tests/validation/test_media_validator.py)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ],
     "deny": [],
     "ask": []

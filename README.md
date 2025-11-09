@@ -366,12 +366,45 @@ FedSpeak includes comprehensive documentation for all audiences:
 ### Environment Variables
 
 ```bash
-# Required for MILA AI explanations (optional)
-export ANTHROPIC_API_KEY="sk-ant-..."
-
 # Optional: Override config file location
 export FEDSPEAK_CONFIG="/path/to/config.yaml"
 ```
+
+### MILA API Configuration
+
+FedSpeak's MILA stance analysis supports two routing modes for the Anthropic API:
+
+#### Option 1: Anthropic Cloud API (Production)
+
+For production deployments using Anthropic's cloud infrastructure:
+
+```bash
+# Get API key from https://console.anthropic.com
+export ANTHROPIC_API_KEY="sk-ant-api03-YOUR_ACTUAL_KEY"
+```
+
+**Cost**: ~$0.003 per statement (~$0.60 for 200 historical statements, <$5/year ongoing)
+
+**Verification**: Check logs for `"via Anthropic API (cloud)"`
+
+#### Option 2: Claude Code Max Local Routing (Development)
+
+For development/testing with Claude Code Max subscription:
+
+```bash
+# Set placeholder API key (all 9s pattern signals local routing)
+export ANTHROPIC_API_KEY="sk-ant-999999999999"
+```
+
+**How it works**: The system detects the "all 9s" pattern and automatically routes inference to Claude Code Max instead of making cloud API calls.
+
+**Cost**: Free (uses your Claude Code Max subscription)
+
+**Verification**: Check logs for `"via Claude Code (local inference)"`
+
+#### No API Key
+
+If no API key is set, MILA stance analysis is disabled but all other features (shift detection, market validation, media validation, dashboards) continue working normally.
 
 ### config.yaml
 

@@ -2,23 +2,31 @@
 
 **Operational guide optimized for AI agents (Claude Code, autonomous systems)**
 
-This guide is structured for programmatic execution with explicit state checks, success criteria, and decision logic.
+This guide provides structured protocols for autonomous execution of the FedSpeak system with explicit state checks, success criteria, and decision logic.
 
 ---
 
 ## Quick Context
 
 **What is FedSpeak:**
-- Detects Federal Reserve language shifts in FOMC communications
-- Tracks 5 keywords + synonyms (transitory, accommodative, patient, considerable time, full range of tools)
-- Uses 4-stage pipeline: Download → Extract → Analyze → Detect
-- Outputs: JSON alerts, text alerts, timeline visualizations
+- Automated Federal Reserve policy shift detection system
+- Uses Word2Vec semantic analysis + multi-signal validation + AI explainability
+- Detects when Fed changes messaging about economy (e.g., "transitory" removal Dec 2021)
+- Achieves 70-75% precision for Tier 1 (triple-validated) alerts
 
-**Key capabilities:**
-- 0-day detection lag (detects shifts same day they occur)
-- 100% validated accuracy on test cases
-- Synonym group tracking (e.g., "transitory" + "transient" + "temporary")
-- Auto-resume downloads, real FOMC calendar, progress bars
+**System Architecture:**
+- **Core Detection**: Word2Vec embeddings (cosine similarity, 1,218 term vocabulary)
+- **Market Validation**: FRED API (Treasury yields) + Yahoo Finance (VIX, S&P 500)
+- **Media Validation**: GDELT Project (100K+ sources) + FinBERT sentiment
+- **AI Explainability**: Claude 3.5 Sonnet (MILA framework, hawkish/dovish classification)
+- **Dashboards**: Flask web interface (alerts, Word2Vec explorer, MILA stance viewer)
+
+**Key Capabilities:**
+- Real-time monitoring (RSS feed polling every 5 minutes)
+- Three-tier alert classification (Gold/Silver/Bronze by signal confidence)
+- Interactive semantic similarity search
+- Cost-effective AI stance analysis (~$0.003/statement)
+- Production-ready (175 tests passing, 83% coverage, Pylint 10.0/10)
 
 ---
 
@@ -27,26 +35,34 @@ This guide is structured for programmatic execution with explicit state checks, 
 **Before starting, verify environment state:**
 
 ```bash
-# 1. Check Python version (must be 3.8+)
+# 1. Check Python version (must be 3.11+)
 python --version
-# Expected: Python 3.8.x or higher
+# Expected: Python 3.11.x or higher
 
 # 2. Check if in project root
 pwd
-ls -la | grep -E "fedspeak|config|requirements.txt"
-# Expected: See fedspeak/, config/, requirements.txt
+ls -la | grep -E "src|config|requirements.txt|README.md"
+# Expected: See src/, config/, requirements.txt, README.md
 
-# 3. Check if dependencies installed
-python -c "import pandas, beautifulsoup4, matplotlib, tqdm" 2>/dev/null && echo "DEPENDENCIES OK" || echo "NEED INSTALL"
+# 3. Check virtual environment (recommended)
+which python | grep venv_fedspeak_prod && echo "VENV ACTIVE" || echo "VENV NOT ACTIVE"
+# Expected: "VENV ACTIVE"
+
+# 4. Check if core dependencies installed
+python -c "import pandas, anthropic, gensim, flask, transformers" 2>/dev/null && echo "DEPENDENCIES OK" || echo "NEED INSTALL"
 # Expected: "DEPENDENCIES OK"
 
-# 4. Check directory structure
-ls -d data/raw data/processed data/metadata results/alerts results/visualizations 2>/dev/null && echo "DIRS OK" || echo "NEED CREATE"
-# Expected: "DIRS OK" or directories listed
+# 5. Check directory structure
+ls -d src/core src/validation src/dashboard data/ logs/ 2>/dev/null && echo "DIRS OK" || echo "NEED CREATE"
+# Expected: "DIRS OK"
 
-# 5. Check configuration
+# 6. Check configuration
 test -f config/config.yaml && echo "CONFIG OK" || echo "CONFIG MISSING"
 # Expected: "CONFIG OK"
+
+# 7. Check Word2Vec model exists
+test -f prototypes/results/fed_word2vec.model && echo "MODEL OK" || echo "MODEL MISSING"
+# Expected: "MODEL OK"
 ```
 
 **If checks fail, run setup first (see Setup Protocol below).**
@@ -61,728 +77,735 @@ test -f config/config.yaml && echo "CONFIG OK" || echo "CONFIG MISSING"
 # Step 1: Verify in project root
 test -f requirements.txt || { echo "ERROR: Not in FedSpeak root"; exit 1; }
 
-# Step 2: Install dependencies
+# Step 2: Create virtual environment (if not exists)
+if [ ! -d "venv_fedspeak_prod" ]; then
+    python3.11 -m venv venv_fedspeak_prod
+    echo "Created virtual environment"
+fi
+
+# Step 3: Activate virtual environment
+source venv_fedspeak_prod/bin/activate  # Linux/Mac
+# Or: venv_fedspeak_prod\Scripts\activate  # Windows
+
+# Step 4: Install dependencies
 pip install -r requirements.txt
-# Validation: python -c "import tqdm" should succeed
+# Expected: ~3.8GB download (PyTorch, transformers, etc.)
+# Duration: 3-5 minutes
 
-# Step 3: Create directory structure
-mkdir -p data/raw data/processed data/metadata results/alerts results/visualizations
-# Validation: ls -d data/raw should succeed
+# Step 5: Create directory structure (if missing)
+mkdir -p data/processed data/alerts data/market_cache data/media_cache data/mila_cache
+mkdir -p logs
 
-# Step 4: Verify module imports
-python -c "from fedspeak import cli, fetcher, extractor, analyzer, detector, alerter"
+# Step 6: Verify module imports
+python -c "from src.core.shift_detector import ShiftDetector; from src.validation.market_validator import MarketValidator"
 # Expected: No output (success)
 
-# Step 5: Check configuration
-python -c "import yaml; yaml.safe_load(open('config/config.yaml'))"
-# Expected: No output (success)
+# Step 7: Check configuration
+python -c "import yaml; config = yaml.safe_load(open('config/config.yaml')); print('Config loaded:', len(config), 'sections')"
+# Expected: "Config loaded: X sections"
 
 echo "SETUP COMPLETE"
 ```
 
 ---
 
-## State Detection Protocol
+## API Configuration
 
-**Before executing any command, determine current state:**
+**FedSpeak MILA (AI stance analysis) supports two routing modes:**
+
+### Option 1: Anthropic Cloud API (Production)
+
+**When to use:**
+- Production deployments
+- Want to use Anthropic's cloud infrastructure
+- Need guaranteed API availability
+
+**Setup:**
+```bash
+# Get API key from https://console.anthropic.com
+export ANTHROPIC_API_KEY="sk-ant-api03-YOUR_ACTUAL_KEY"
+
+# Or add to config/config.yaml:
+# explainability:
+#   mila:
+#     api_key: "sk-ant-api03-YOUR_ACTUAL_KEY"
+```
+
+**Cost:** ~$0.003 per statement (~$0.60 for 200 historical statements, <$5/year ongoing)
+
+**Verification:**
+```bash
+# Start system and check logs for:
+# "MILA initialized with model: claude-3-5-sonnet-20241022 via Anthropic API (cloud)"
+```
+
+### Option 2: Claude Code Max Local Routing (Development)
+
+**When to use:**
+- Development/testing
+- Have Claude Code Max subscription
+- Want to avoid API costs
+- Working offline or in restricted network
+
+**Setup:**
+```bash
+# Set placeholder API key (all 9s pattern signals local routing)
+export ANTHROPIC_API_KEY="sk-ant-999999999999"
+
+# System automatically detects pattern and routes to Claude Code Max
+```
+
+**Cost:** Free (uses your Claude Code Max subscription)
+
+**Verification:**
+```bash
+# Start system and check logs for:
+# "MILA initialized with model: claude-3-5-sonnet-20241022 via Claude Code (local inference)"
+# "Local routing active: Using Claude Code Max for inference. API calls will be processed locally (no cloud API costs)."
+```
+
+**How it works:**
+- API router detects "all 9s" pattern in API key (last segment after final hyphen)
+- Routes to local Claude Code Max instead of Anthropic cloud API
+- Behavior is identical from user perspective (same inputs/outputs)
+- Logged as "Claude Code (local)" vs "Anthropic API (cloud)"
+
+---
+
+## Quick Start
+
+**Get system running in 5 minutes:**
 
 ```bash
-# Check what data already exists
+# Terminal 1: Start dashboard
+source venv_fedspeak_prod/bin/activate
+python src/dashboard/app.py
+
+# Expected output:
+#  * Running on http://127.0.0.1:5000
+#  * Restarting with stat
+#  * Debugger is active!
+
+# Visit: http://localhost:5000
+# Should see: FedSpeak dashboard with navigation (Alerts, Explore, Explainability)
+
+
+# Terminal 2: Start monitor (in separate terminal)
+source venv_fedspeak_prod/bin/activate
+python src/monitor.py --continuous --interval 300
+
+# Expected output:
+# INFO - Starting FedSpeak monitor in continuous mode (check interval: 300 seconds)
+# INFO - Checking for new FOMC statements...
+# INFO - No new statements found (last check: ...)
+# INFO - Sleeping 300 seconds until next check
+
+
+# Verify services:
+curl http://localhost:5000/api/stats
+# Expected: {"total_alerts": X, "tier_1_alerts": Y, ...}
+```
+
+**Minimal one-time check (no continuous monitoring):**
+
+```bash
+# Run detector once on existing corpus
+python src/monitor.py
+
+# Expected: Checks RSS feed once, processes any new statements, exits
+```
+
+---
+
+## State Detection Protocol
+
+**Before executing operations, determine current state:**
+
+```bash
 echo "=== CURRENT STATE ==="
 
-# Downloaded documents
-RAW_COUNT=$(find data/raw -name "*.html" 2>/dev/null | wc -l)
-echo "Downloaded documents: $RAW_COUNT"
-
-# Extracted text files
+# Check FOMC statement corpus
 PROCESSED_COUNT=$(find data/processed -name "*.txt" 2>/dev/null | wc -l)
-echo "Extracted texts: $PROCESSED_COUNT"
+echo "FOMC statements processed: $PROCESSED_COUNT"
 
-# Metrics file
-if [ -f data/metadata/keyword_metrics.csv ]; then
-    METRICS_ROWS=$(wc -l < data/metadata/keyword_metrics.csv)
-    echo "Metrics rows: $METRICS_ROWS"
-else
-    echo "Metrics: NOT CREATED"
+# Check alerts generated
+ALERT_COUNT=$(find data/alerts -name "ALERT-*.json" 2>/dev/null | wc -l)
+echo "Alerts generated: $ALERT_COUNT"
+
+# Check tier distribution
+if [ -f data/alerts/*.json 2>/dev/null ]; then
+    echo "Alert tiers:"
+    grep -h '"tier":' data/alerts/*.json 2>/dev/null | sort | uniq -c || echo "  No alerts"
 fi
 
-# Alert files
-ALERT_COUNT=$(find results/alerts -name "*.txt" 2>/dev/null | wc -l)
-echo "Alerts: $ALERT_COUNT"
+# Check market validation cache
+MARKET_CACHE_SIZE=$(du -sh data/market_cache 2>/dev/null | cut -f1)
+echo "Market data cache: ${MARKET_CACHE_SIZE:-0}"
+
+# Check media validation cache
+MEDIA_CACHE_SIZE=$(du -sh data/media_cache 2>/dev/null | cut -f1)
+echo "Media data cache: ${MEDIA_CACHE_SIZE:-0}"
+
+# Check MILA cache
+MILA_CACHE_COUNT=$(find data/mila_cache -name "*.json" 2>/dev/null | wc -l)
+echo "MILA analyses cached: $MILA_CACHE_COUNT"
+
+# Check if services running
+curl -s http://localhost:5000/api/stats >/dev/null && echo "Dashboard: RUNNING" || echo "Dashboard: STOPPED"
 
 echo "===================="
 ```
 
 **Decision logic based on state:**
 
-| State | Next Action |
-|-------|-------------|
-| No documents (RAW_COUNT=0) | Execute Download Protocol |
-| Documents but no text (PROCESSED_COUNT=0) | Execute Extract Protocol |
-| Text but no metrics | Execute Analyze Protocol |
-| Metrics but no alerts | Execute Detect Protocol |
-| All exist | Execute Update Protocol (download recent) |
+| State | Recommended Action |
+|-------|-------------------|
+| PROCESSED_COUNT = 0 | No corpus data - system will download on first run |
+| PROCESSED_COUNT > 0, ALERT_COUNT = 0 | Have corpus, no shifts detected (may be valid) |
+| Dashboard: STOPPED | Start dashboard: `python src/dashboard/app.py` |
+| MILA_CACHE_COUNT = 0 | MILA not yet used or API key not set |
 
 ---
 
-## Protocol 1: Download Documents
+## Protocol 1: Running the Dashboard
 
-**Purpose:** Fetch FOMC documents from federalreserve.gov
+**Purpose:** Access web interface for alerts, exploration, and analysis
 
 **Prerequisites:**
-- Internet connection
-- `data/raw/` directory exists
-
-**Decision: Date Range Selection**
-
-| Goal | Start Date | End Date | Flag |
-|------|-----------|----------|------|
-| Test with known shift | 2021-01-01 | 2021-12-31 | --statements-only |
-| Recent monitoring | (90 days ago) | (today) | --statements-only |
-| Full historical | 2008-01-01 | (today) | --statements-only |
-| Complete corpus | 2008-01-01 | (today) | (none - include minutes) |
+- Virtual environment activated
+- Port 5000 available
 
 **Execution:**
 
 ```bash
-# Example: Test case (2021)
-START_DATE="2021-01-01"
-END_DATE="2021-12-31"
+# Start Flask dashboard
+python src/dashboard/app.py
 
-python -m fedspeak.cli download \
-  --start-date "$START_DATE" \
-  --end-date "$END_DATE" \
-  --statements-only
+# Expected output:
+#  * Serving Flask app 'app'
+#  * Debug mode: off
+# WARNING: This is a development server. Do not use it in a production deployment.
+#  * Running on http://127.0.0.1:5000
+# Press CTRL+C to quit
+```
+
+**Success Criteria:**
+
+```bash
+# Dashboard should be accessible
+curl -s http://localhost:5000/ | grep -q "FedSpeak" && echo "DASHBOARD OK" || echo "DASHBOARD FAILED"
+
+# API endpoints should respond
+curl -s http://localhost:5000/api/stats | grep -q "total_alerts" && echo "API OK" || echo "API FAILED"
+
+# Expected: Both checks return "OK"
+```
+
+**Available Routes:**
+
+| Route | Purpose |
+|-------|---------|
+| `/` | Main dashboard (recent alerts, filtering, CSV export) |
+| `/explore` | Word2Vec Explorer (semantic similarity, policy proximity) |
+| `/explainability` | MILA stance viewer (hawkish/dovish analysis) |
+| `/api/alerts` | JSON API for alerts (with filtering) |
+| `/api/explore/similar` | Semantic similarity search |
+| `/api/explainability/stance/<date>` | Get stance analysis for statement |
+
+**Common Issues:**
+
+- `Address already in use` → Port 5000 busy, kill process: `lsof -ti:5000 | xargs kill`
+- `ModuleNotFoundError: No module named 'flask'` → Install dependencies: `pip install -r requirements.txt`
+- Dashboard loads but shows "No alerts" → Normal if no shifts detected in corpus period
+
+---
+
+## Protocol 2: Running the Monitor
+
+**Purpose:** Poll Fed RSS feed and detect new policy shifts
+
+**Prerequisites:**
+- Virtual environment activated
+- Dashboard running (optional, for viewing alerts)
+
+**Execution:**
+
+```bash
+# One-time check
+python src/monitor.py
+
+# Continuous monitoring (checks every 5 minutes)
+python src/monitor.py --continuous --interval 300
 
 # Capture exit code
-DOWNLOAD_EXIT=$?
+MONITOR_EXIT=$?
 ```
 
 **Success Criteria:**
 
 ```bash
 # Exit code should be 0
-test $DOWNLOAD_EXIT -eq 0 || { echo "DOWNLOAD FAILED"; exit 1; }
+test $MONITOR_EXIT -eq 0 || { echo "MONITOR FAILED"; exit 1; }
 
-# At least 1 file should be downloaded
-NEW_COUNT=$(find data/raw -name "*.html" -newer /tmp/download_marker 2>/dev/null | wc -l)
-test $NEW_COUNT -gt 0 || echo "WARNING: No new files downloaded"
-
-# Check for expected file pattern
-ls data/raw/policy_statement_*.html 2>/dev/null | head -1 || echo "ERROR: No policy statements found"
+# Check logs for successful execution
+tail -20 logs/fedspeak.log | grep -q "Checking for new FOMC statements" && echo "MONITOR OK" || echo "CHECK LOGS"
 ```
 
 **Expected Output Patterns:**
+
 ```
-Downloading policy_statement: 100%|████████| 8/8 [00:15<00:00]
-  success: 8, failed: 0
-[SUCCESS] Download complete!
+INFO - Starting FedSpeak monitor
+INFO - Checking for new FOMC statements...
+INFO - Found 1 new statement: policy_statement_20231213a
+INFO - Processing statement from 2023-12-13
+INFO - Running Word2Vec detection...
+INFO - Checking market validation...
+INFO - Checking media validation...
+INFO - Shift detected: 'patient' removal (Tier 1 - triple validated)
+INFO - Alert generated: ALERT-20231213-removal-patient
+INFO - Monitor run complete (0 new shifts)
 ```
 
-**Resume capability:** Automatically skips existing files. Safe to re-run.
+**Continuous Mode Behavior:**
 
-**Common issues:**
-- `404 Not Found` for dates <2008 → Use 2008-01-01 as minimum
-- `0/X successful` → Check internet connection
-- No progress bar → tqdm not installed (still works)
+- Polls RSS feed every N seconds (default: 300 = 5 minutes)
+- Downloads new statements automatically
+- Runs full detection pipeline (Word2Vec + market + media + MILA)
+- Generates alerts for detected shifts
+- Logs all activity to `logs/fedspeak.log`
+- Runs indefinitely until stopped (Ctrl+C)
+
+**Common Issues:**
+
+- `404 Not Found` from RSS feed → Fed website issue, retry later
+- `FRED API rate limit exceeded` → Market validation skipped, alert may be Tier 2/3 instead of Tier 1
+- `ANTHROPIC_API_KEY not found` → MILA disabled, system continues working (just no stance analysis)
 
 ---
 
-## Protocol 2: Extract Text
+## Protocol 3: Testing & Validation
 
-**Purpose:** Extract clean text from HTML documents
+**Purpose:** Verify system is working correctly
 
-**Prerequisites:**
-- Documents exist in `data/raw/`
-- `data/processed/` directory exists
-
-**Pre-flight check:**
+**Run Full Test Suite:**
 
 ```bash
-# Verify documents exist
-RAW_COUNT=$(find data/raw -name "*.html" | wc -l)
-test $RAW_COUNT -gt 0 || { echo "ERROR: No documents to extract"; exit 1; }
+# Activate venv
+source venv_fedspeak_prod/bin/activate
 
-# Check if extraction already done
-PROCESSED_COUNT=$(find data/processed -name "*.txt" | wc -l)
-if [ $PROCESSED_COUNT -eq $RAW_COUNT ]; then
-    echo "INFO: Extraction already complete ($PROCESSED_COUNT files)"
-    read -p "Re-extract? [y/N] " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        echo "SKIPPING EXTRACTION"
-        exit 0
-    fi
-fi
-```
+# Run all tests
+pytest tests/ -v
 
-**Execution:**
-
-```bash
-python -m fedspeak.cli extract
-
-# Capture exit code
-EXTRACT_EXIT=$?
+# Expected: 175 tests passed (100%)
+# Duration: ~75 seconds
 ```
 
 **Success Criteria:**
 
 ```bash
-# Exit code should be 0
-test $EXTRACT_EXIT -eq 0 || { echo "EXTRACTION FAILED"; exit 1; }
+# All tests should pass
+pytest tests/ -q 2>&1 | tail -1 | grep -q "175 passed" && echo "TESTS OK" || echo "TESTS FAILED"
 
-# Output files should exist
-PROCESSED_COUNT=$(find data/processed -name "*.txt" | wc -l)
-test $PROCESSED_COUNT -gt 0 || { echo "ERROR: No text files created"; exit 1; }
-
-# Verify non-empty files
-EMPTY_COUNT=$(find data/processed -name "*.txt" -empty | wc -l)
-test $EMPTY_COUNT -eq 0 || echo "WARNING: $EMPTY_COUNT empty text files"
-
-# Check sample file has reasonable word count
-SAMPLE_FILE=$(find data/processed -name "*.txt" | head -1)
-WORD_COUNT=$(wc -w < "$SAMPLE_FILE")
-test $WORD_COUNT -gt 50 || echo "WARNING: Sample file has only $WORD_COUNT words"
+# Coverage should be >80%
+pytest tests/ --cov=src --cov-report=term | grep "TOTAL" | awk '{print $NF}' | sed 's/%//' > /tmp/cov
+COV=$(cat /tmp/cov)
+test $COV -gt 80 && echo "COVERAGE OK ($COV%)" || echo "COVERAGE LOW ($COV%)"
 ```
 
-**Expected Output Patterns:**
-```
-[EXTRACT] Processing 8 documents...
-✓ Extracted 320 words from policy_statement_20210127a.html
-...
-[SUCCESS] Extraction complete!
-  Processed: 8/8 documents
-  Success rate: 100%
-```
+**Test Categories:**
 
-**Common issues:**
-- `Insufficient text (X < 100 words)` → Document is very short or extraction failed
-- `Could not find main content` → HTML structure not recognized (rare, should auto-fallback)
+- Core Detector (17 tests): Word2Vec shift detection logic
+- Integration (8 tests): Full detection workflows
+- Regression (3 tests): Ground truth validation (130 historical shifts)
+- Market Validation (10 tests): FRED/Yahoo integration
+- Media Validation (13 tests): GDELT/FinBERT integration
+- Word2Vec Explorer (28 tests): Semantic similarity
+- MILA Framework (15 tests): Claude API integration
+- Config/Logging (15 tests): Configuration management
+- **NEW: API Router (20+ tests): Routing logic for cloud/local**
+
+**Validate with Known Test Case (December 2021):**
+
+```bash
+# The December 2021 "transitory" removal is a known ground truth shift
+# Verify it's detected correctly
+
+# Check if alert exists
+ALERT_FILE="data/alerts/ALERT-20211215-removal-transitory.json"
+
+if [ -f "$ALERT_FILE" ]; then
+    echo "Known shift detected: December 2021 transitory removal"
+
+    # Extract tier
+    TIER=$(grep '"tier":' "$ALERT_FILE" | awk '{print $2}' | tr -d ',')
+    echo "  Tier: $TIER"
+
+    # Extract confidence
+    CONF=$(grep '"confidence":' "$ALERT_FILE" | awk '{print $2}' | tr -d '",')
+    echo "  Confidence: $CONF"
+
+    # Verify expected values
+    test $TIER -eq 1 && echo "  Tier 1 VERIFIED" || echo "  WARNING: Expected Tier 1, got $TIER"
+    test "$CONF" = "high" && echo "  High confidence VERIFIED" || echo "  WARNING: Expected high, got $CONF"
+else
+    echo "WARNING: December 2021 shift not detected"
+    echo "This is expected if you haven't processed 2021 statements yet"
+fi
+```
 
 ---
 
-## Protocol 3: Analyze Keywords
+## Protocol 4: Viewing Results
 
-**Purpose:** Count keyword frequencies and calculate baselines
+**Purpose:** Extract and analyze detection results
 
-**Prerequisites:**
-- Extracted texts exist in `data/processed/`
-- `data/metadata/` directory exists
-
-**Pre-flight check:**
+**View All Alerts:**
 
 ```bash
-# Verify texts exist
-PROCESSED_COUNT=$(find data/processed -name "*.txt" | wc -l)
-test $PROCESSED_COUNT -gt 0 || { echo "ERROR: No texts to analyze"; exit 1; }
+# List all alerts
+find data/alerts -name "ALERT-*.json" | sort
 
-# Check if analysis already done
-if [ -f data/metadata/keyword_metrics.csv ]; then
-    METRICS_ROWS=$(wc -l < data/metadata/keyword_metrics.csv)
-    echo "INFO: Metrics already exist ($METRICS_ROWS rows)"
-    read -p "Re-analyze? [y/N] " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        echo "SKIPPING ANALYSIS"
-        exit 0
-    fi
-fi
+# Count by tier
+echo "Tier distribution:"
+grep -h '"tier":' data/alerts/*.json 2>/dev/null | awk '{print $2}' | tr -d ',' | sort | uniq -c
+
+# Expected output:
+#   15 1
+#   23 2
+#   42 3
+# (15 Tier 1 alerts, 23 Tier 2, 42 Tier 3)
 ```
 
-**Execution:**
-
-```bash
-python -m fedspeak.cli analyze
-
-# Capture exit code
-ANALYZE_EXIT=$?
-```
-
-**Success Criteria:**
-
-```bash
-# Exit code should be 0
-test $ANALYZE_EXIT -eq 0 || { echo "ANALYSIS FAILED"; exit 1; }
-
-# Metrics file should exist
-test -f data/metadata/keyword_metrics.csv || { echo "ERROR: Metrics file not created"; exit 1; }
-
-# Metrics should have header + data rows
-METRICS_ROWS=$(wc -l < data/metadata/keyword_metrics.csv)
-test $METRICS_ROWS -gt 1 || { echo "ERROR: Metrics file is empty"; exit 1; }
-
-# Verify expected columns
-head -1 data/metadata/keyword_metrics.csv | grep -q "date,doc_id,doc_type,word,count,is_group,primary_word,baseline" || echo "WARNING: Unexpected columns"
-
-# Check for keyword diversity (should have multiple unique words)
-UNIQUE_WORDS=$(cut -d, -f4 data/metadata/keyword_metrics.csv | sort -u | wc -l)
-test $UNIQUE_WORDS -gt 5 || echo "WARNING: Only $UNIQUE_WORDS unique words tracked"
-```
-
-**Expected Output Patterns:**
-```
-[ANALYZE] Analyzing 8 documents for 5 keywords...
-✓ Analyzed policy_statement_20210127a.txt: {...}
-...
-[SUCCESS] Analysis complete!
-  Documents: 8
-  Observations: 120 (8 docs × 15 tracked words)
-  Time-series saved: data/metadata/keyword_metrics.csv
-```
-
-**Observation count calculation:**
-- 5 primary keywords
-- Each has ~2-3 synonyms
-- Plus 5 GROUP totals
-- Total: ~15-20 rows per document
-
-**Common issues:**
-- Low observation count → Check if synonyms are configured in config.yaml
-- All counts are 0 → Keywords may not appear in this corpus period
-
----
-
-## Protocol 4: Detect Shifts
-
-**Purpose:** Identify language shift events (emergence/removal)
-
-**Prerequisites:**
-- Metrics file exists at `data/metadata/keyword_metrics.csv`
-- `results/alerts/` and `results/visualizations/` directories exist
-
-**Pre-flight check:**
-
-```bash
-# Verify metrics exist
-test -f data/metadata/keyword_metrics.csv || { echo "ERROR: Metrics file missing"; exit 1; }
-
-# Check metrics have sufficient data
-METRICS_ROWS=$(wc -l < data/metadata/keyword_metrics.csv)
-test $METRICS_ROWS -gt 10 || echo "WARNING: Only $METRICS_ROWS rows (need more for baselines)"
-
-# Check if detection already done
-EXISTING_ALERTS=$(find results/alerts -name "*.txt" 2>/dev/null | wc -l)
-if [ $EXISTING_ALERTS -gt 0 ]; then
-    echo "INFO: $EXISTING_ALERTS alerts already exist"
-    echo "Re-running will regenerate alerts"
-fi
-```
-
-**Execution:**
-
-```bash
-python -m fedspeak.cli detect
-
-# Capture exit code
-DETECT_EXIT=$?
-```
-
-**Success Criteria:**
-
-```bash
-# Exit code should be 0
-test $DETECT_EXIT -eq 0 || { echo "DETECTION FAILED"; exit 1; }
-
-# Check for alerts (may be 0 if no shifts in period)
-ALERT_COUNT=$(find results/alerts -name "*.txt" 2>/dev/null | wc -l)
-echo "INFO: Generated $ALERT_COUNT alerts"
-
-# If known test case (2021), verify transitory removal detected
-if ls results/alerts/*20211215*transitory* 2>/dev/null; then
-    echo "SUCCESS: Transitory removal detected (expected for 2021 corpus)"
-fi
-
-# Verify alert file structure
-if [ $ALERT_COUNT -gt 0 ]; then
-    SAMPLE_ALERT=$(find results/alerts -name "*.txt" | head -1)
-    grep -q "FEDSPEAK LANGUAGE SHIFT DETECTED" "$SAMPLE_ALERT" || echo "WARNING: Alert format unexpected"
-
-    # Check JSON counterpart exists
-    JSON_FILE="${SAMPLE_ALERT%.txt}.json"
-    test -f "$JSON_FILE" || echo "WARNING: JSON alert missing"
-fi
-
-# Check for visualizations
-VIZ_COUNT=$(find results/visualizations -name "*.png" 2>/dev/null | wc -l)
-echo "INFO: Generated $VIZ_COUNT visualizations"
-```
-
-**Expected Output Patterns:**
-```
-[DETECT] Loading metrics from data/metadata/keyword_metrics.csv...
-✓ REMOVAL: 'transitory' on 2021-12-15
-  Baseline: 2.3 → Current: 0
-  Confidence: HIGH
-[SUCCESS] Detection complete!
-  Shifts detected: 1
-  Alerts generated: 2 files (JSON + text)
-  Visualizations: 1 chart
-```
-
-**Zero shifts is valid:** If no shifts occurred in the date range, 0 alerts is correct behavior.
-
-**Common issues:**
-- `Insufficient baseline data` warnings → Need more historical documents (3+ docs before detection)
-- No shifts detected → May be correct if no shifts in period
-
----
-
-## Protocol 5: Validate Results
-
-**Purpose:** Verify pipeline produced expected outputs
-
-**Execution:**
-
-```bash
-echo "=== VALIDATION REPORT ==="
-
-# 1. Check all stages completed
-RAW_COUNT=$(find data/raw -name "*.html" 2>/dev/null | wc -l)
-PROCESSED_COUNT=$(find data/processed -name "*.txt" 2>/dev/null | wc -l)
-METRICS_EXISTS=$(test -f data/metadata/keyword_metrics.csv && echo "YES" || echo "NO")
-ALERT_COUNT=$(find results/alerts -name "*.txt" 2>/dev/null | wc -l)
-VIZ_COUNT=$(find results/visualizations -name "*.png" 2>/dev/null | wc -l)
-
-echo "Pipeline Stage Status:"
-echo "  Downloaded: $RAW_COUNT documents"
-echo "  Extracted: $PROCESSED_COUNT texts"
-echo "  Metrics: $METRICS_EXISTS"
-echo "  Alerts: $ALERT_COUNT"
-echo "  Visualizations: $VIZ_COUNT"
-
-# 2. Verify extraction success rate
-if [ $RAW_COUNT -gt 0 ]; then
-    EXTRACT_RATE=$(awk "BEGIN {printf \"%.0f\", ($PROCESSED_COUNT/$RAW_COUNT)*100}")
-    echo "  Extraction rate: $EXTRACT_RATE%"
-    test $EXTRACT_RATE -ge 90 || echo "  WARNING: Low extraction rate"
-fi
-
-# 3. Check metrics data quality
-if [ "$METRICS_EXISTS" = "YES" ]; then
-    METRICS_ROWS=$(wc -l < data/metadata/keyword_metrics.csv)
-    echo "  Metrics rows: $METRICS_ROWS"
-
-    # Check for actual keyword usage
-    NONZERO_COUNTS=$(awk -F, '$5 > 0 {count++} END {print count}' data/metadata/keyword_metrics.csv)
-    echo "  Non-zero counts: $NONZERO_COUNTS"
-    test $NONZERO_COUNTS -gt 0 || echo "  WARNING: No keywords found in corpus"
-fi
-
-# 4. List detected shifts
-if [ $ALERT_COUNT -gt 0 ]; then
-    echo ""
-    echo "Detected Shifts:"
-    for alert in results/alerts/*.txt; do
-        # Extract key info from alert
-        SHIFT_TYPE=$(grep "Shift Type:" "$alert" | awk '{print $3}')
-        WORD=$(grep "Word:" "$alert" | cut -d'"' -f2)
-        DATE=$(grep "Document:" "$alert" | awk -F' - ' '{print $2}')
-        echo "  - $SHIFT_TYPE of '$WORD' on $DATE"
-    done
-fi
-
-echo "======================="
-```
-
-**Success criteria:**
-- ✅ Extraction rate ≥ 90%
-- ✅ Metrics file exists with >10 rows
-- ✅ Non-zero keyword counts present
-- ✅ At least 1 alert if testing known shift period (2021)
-
----
-
-## Protocol 6: View Specific Results
-
-**Purpose:** Extract and display specific alert details
-
-**View alert by date:**
+**View Specific Alert:**
 
 ```bash
 # Find alerts by date
 SEARCH_DATE="20211215"
-find results/alerts -name "*${SEARCH_DATE}*" -type f
+ALERT_FILE=$(find data/alerts -name "*${SEARCH_DATE}*" -type f | head -1)
 
-# Display text alert
-cat results/alerts/ALERT-${SEARCH_DATE}-*.txt 2>/dev/null || echo "No alert found for date $SEARCH_DATE"
-```
-
-**View alert by keyword:**
-
-```bash
-# Find alerts for specific keyword
-KEYWORD="transitory"
-find results/alerts -name "*${KEYWORD}*" -type f | while read file; do
-    echo "=== $file ==="
-    cat "$file"
-    echo ""
-done
-```
-
-**Extract JSON alert data:**
-
-```bash
-# Parse JSON alert programmatically
-ALERT_FILE="results/alerts/ALERT-20211215-removal-transitory.json"
-
-if [ -f "$ALERT_FILE" ]; then
+if [ -n "$ALERT_FILE" ]; then
+    echo "=== Alert for $SEARCH_DATE ==="
     python -c "
 import json
 with open('$ALERT_FILE') as f:
     alert = json.load(f)
 
 print('Alert ID:', alert['alert_id'])
-print('Shift Type:', alert['shift_type'])
-print('Word:', alert['word'])
-print('Date:', alert['document']['date'])
-print('Change:', alert['change']['change_description'])
+print('Term:', alert['term'])
+print('Tier:', alert['tier'])
 print('Confidence:', alert['confidence'])
+print('Market Validated:', alert.get('market_validation', {}).get('validated', False))
+print('Media Validated:', alert.get('media_validation', {}).get('validated', False))
 
-if 'synonym_details' in alert:
-    print('Synonyms tracked:', len(alert['synonym_details']['synonym_counts']))
-    print('Synonym usage:', alert['synonym_details']['synonym_counts'])
+if 'mila_analysis' in alert:
+    print('\\nMILA Stance:', alert['mila_analysis'].get('stance', 'N/A'))
+    print('MILA Confidence:', alert['mila_analysis'].get('confidence', 'N/A'))
 "
 else
-    echo "Alert file not found: $ALERT_FILE"
+    echo "No alert found for date $SEARCH_DATE"
 fi
 ```
 
-**View timeline visualization:**
+**View Alert via Dashboard API:**
 
 ```bash
-# List all visualizations
-ls -lh results/visualizations/
+# Get alert by ID via API
+ALERT_ID="ALERT-20211215-removal-transitory"
+curl -s "http://localhost:5000/api/alerts/${ALERT_ID}" | python -m json.tool
 
-# Open visualization (platform-specific)
-# Linux: xdg-open results/visualizations/transitory_timeline.png
-# Mac: open results/visualizations/transitory_timeline.png
-# Windows: start results/visualizations/transitory_timeline.png
+# Get all Tier 1 alerts
+curl -s "http://localhost:5000/api/alerts?tier=1" | python -m json.tool
+
+# Get alerts for specific term
+curl -s "http://localhost:5000/api/alerts?term=transitory" | python -m json.tool
+```
+
+**Export Alerts to CSV:**
+
+```bash
+# Download CSV export
+curl -s "http://localhost:5000/api/alerts.csv" > alerts_export.csv
+
+# Verify export
+wc -l alerts_export.csv
+head -5 alerts_export.csv
+
+# Expected: Header + alert rows
 ```
 
 ---
 
-## Protocol 7: Update Detection (Incremental)
+## Protocol 5: Using Word2Vec Explorer
 
-**Purpose:** Check for new Fed communications and detect shifts
+**Purpose:** Explore semantic relationships in Fed language
 
-**Use case:** Run periodically to monitor ongoing Fed communications
+**Via Web Interface:**
 
-**Execution:**
+1. Visit: http://localhost:5000/explore
+2. Enter term (e.g., "inflation")
+3. View similar terms and policy proximity score
+
+**Via API:**
 
 ```bash
-# Calculate date range (last 90 days)
-START_DATE=$(date -d '90 days ago' +%Y-%m-%d 2>/dev/null || date -v-90d +%Y-%m-%d)
-END_DATE=$(date +%Y-%m-%d)
+# Find similar terms
+curl -s "http://localhost:5000/api/explore/similar?word=inflation&topn=10" | python -m json.tool
 
-echo "Updating corpus: $START_DATE to $END_DATE"
+# Expected output:
+# [
+#   {"term": "prices", "similarity": 0.87},
+#   {"term": "wage", "similarity": 0.82},
+#   ...
+# ]
 
-# Download (auto-skips existing)
-python -m fedspeak.cli download --start-date "$START_DATE" --end-date "$END_DATE" --statements-only
+# Calculate policy proximity
+curl -s "http://localhost:5000/api/explore/proximity?word=transitory" | python -m json.tool
 
-# Check if new files were downloaded
-NEW_FILES=$(find data/raw -name "*.html" -mtime -1 | wc -l)
+# Expected: {"word": "transitory", "proximity_score": 0.65, ...}
 
-if [ $NEW_FILES -gt 0 ]; then
-    echo "Found $NEW_FILES new documents, processing..."
+# Word-to-word similarity
+curl -s "http://localhost:5000/api/explore/similarity?word1=inflation&word2=employment" | python -m json.tool
 
-    # Extract new files
-    python -m fedspeak.cli extract
+# Expected: {"word1": "inflation", "word2": "employment", "similarity": 0.48}
+```
 
-    # Re-analyze (updates metrics)
-    python -m fedspeak.cli analyze --force
+**Vocabulary Search (Autocomplete):**
 
-    # Re-detect (regenerates alerts)
-    python -m fedspeak.cli detect
+```bash
+# Search for terms starting with prefix
+curl -s "http://localhost:5000/api/explore/search?q=infla&limit=20" | python -m json.tool
 
-    # Check for new alerts
-    NEW_ALERTS=$(find results/alerts -mtime -1 -name "*.txt" | wc -l)
+# Expected: ["inflation", "inflationary", "inflated"]
+```
 
-    if [ $NEW_ALERTS -gt 0 ]; then
-        echo "🚨 NEW LANGUAGE SHIFT DETECTED!"
-        echo "Found $NEW_ALERTS new alerts:"
-        find results/alerts -mtime -1 -name "*.txt" -exec echo "  - {}" \;
-    else
-        echo "✓ No new shifts detected"
-    fi
-else
-    echo "No new documents available"
-fi
+---
+
+## Protocol 6: Using MILA Stance Analysis
+
+**Purpose:** Get AI-powered hawkish/dovish classification
+
+**Prerequisites:**
+- ANTHROPIC_API_KEY set (cloud or local routing)
+
+**Via Web Interface:**
+
+1. Visit: http://localhost:5000/explainability
+2. Select statement date
+3. View stance classification, confidence, evidence
+
+**Via API:**
+
+```bash
+# Get stance for specific date
+curl -s "http://localhost:5000/api/explainability/stance/2021-12-15" | python -m json.tool
+
+# Expected output:
+# {
+#   "date": "2021-12-15",
+#   "stance": "hawkish",
+#   "confidence": 88,
+#   "score": 0.78,
+#   "evidence": ["remove transitory language", "signal faster tapering", ...],
+#   "explanation": "The December 2021 statement marks a clear hawkish shift...",
+#   "cached": true
+# }
+
+# Check API cost
+curl -s "http://localhost:5000/api/explainability/cost" | python -m json.tool
+
+# Expected: {"total_cost": 0.47, "calls_made": 156, "calls_cached": 144}
+```
+
+**Stance Timeline:**
+
+```bash
+# Get stance evolution over time
+curl -s "http://localhost:5000/api/visualizations/stance-trend?start_date=2020-01-01&end_date=2024-01-01" | python -m json.tool
+
+# Expected: Array of {"date": "...", "stance": "...", "score": ...}
 ```
 
 ---
 
 ## Decision Trees
 
-### Decision Tree 1: What to Download?
+### Decision Tree 1: System Won't Start
 
 ```
-User goal?
-├─ Test system
-│  └─ Download 2021 (known shifts)
-│     Command: download --start-date 2021-01-01 --end-date 2021-12-31 --statements-only
+System won't start
+├─ Check 1: Virtual environment activated?
+│  Command: which python | grep venv
+│  ├─ Not activated → source venv_fedspeak_prod/bin/activate
+│  └─ Activated → Continue
 │
-├─ Monitor recent Fed communications
-│  └─ Download last 90 days
-│     Command: download --start-date $(date -d '90 days ago' +%Y-%m-%d) --statements-only
+├─ Check 2: Dependencies installed?
+│  Command: pip list | grep -E "flask|anthropic|gensim"
+│  ├─ Missing → pip install -r requirements.txt
+│  └─ Installed → Continue
 │
-├─ Historical analysis (specific era)
-│  ├─ COVID era → 2020-01-01 to 2023-12-31
-│  ├─ Post-crisis → 2009-01-01 to 2015-12-31
-│  └─ Custom range → Use specific dates
+├─ Check 3: Port 5000 available?
+│  Command: lsof -i:5000
+│  ├─ In use → kill process: lsof -ti:5000 | xargs kill
+│  └─ Available → Continue
 │
-└─ Complete corpus
-   └─ Download 2008 to present
-      Command: download --start-date 2008-01-01 --statements-only
-      Note: Takes ~60 min, ~500MB
+└─ Check 4: Check logs
+   Command: tail -50 logs/fedspeak.log
+   └─ Look for Python exceptions, import errors
 ```
 
-### Decision Tree 2: Troubleshooting No Shifts Detected
+### Decision Tree 2: MILA Not Working
 
 ```
-No shifts detected
-├─ Check 1: Are there enough documents?
-│  Command: find data/raw -name "*.html" | wc -l
-│  ├─ <3 documents → Need more for baseline calculation
-│  └─ ≥3 documents → Continue
+MILA not working
+├─ Check 1: API key set?
+│  Command: echo $ANTHROPIC_API_KEY
+│  ├─ Empty → Set key (cloud: sk-ant-api03-..., local: sk-ant-999999999999)
+│  └─ Set → Continue
 │
-├─ Check 2: Do keywords appear in corpus?
-│  Command: grep -h "transitory\|patient\|accommodative" data/processed/*.txt | wc -l
-│  ├─ 0 matches → Keywords not in this period (valid result)
-│  └─ >0 matches → Continue
+├─ Check 2: Key format valid?
+│  Command: python -c "from src.explainability.api_router import APIRouter; print(APIRouter.validate_api_key_format('$ANTHROPIC_API_KEY'))"
+│  ├─ Invalid → Fix key format
+│  └─ Valid → Continue
 │
-├─ Check 3: Is date range covering known shifts?
-│  Known shifts: Dec 2021 (transitory), Sep 2018 (accommodative), Mar 2015 (patient)
-│  └─ If date range doesn't include these → No shifts expected (valid result)
+├─ Check 3: Check routing mode
+│  Command: grep "MILA initialized" logs/fedspeak.log | tail -1
+│  ├─ "Anthropic API (cloud)" → Verify real API key, check Anthropic status
+│  ├─ "Claude Code (local)" → Verify Claude Code CLI authenticated
+│  └─ Not found → MILA never initialized, check earlier logs
 │
-└─ Check 4: Are baselines calculated?
-   Command: grep -v "^baseline$" data/metadata/keyword_metrics.csv | grep -v ",0.0$" | wc -l
-   ├─ All baselines 0.0 → Need more historical data
-   └─ Some non-zero → Check detection parameters in config
+└─ Check 4: Test direct API call
+   Command: python -c "from src.explainability.api_router import APIRouter; client = APIRouter.create_client(); print('Client created:', client)"
+   └─ If fails → Check detailed error message
 ```
 
----
+### Decision Tree 3: No Shifts Detected
 
-## Configuration Adjustments
-
-**Common configuration changes:**
-
-**Add new keyword:**
-
-```bash
-# Edit config
-cat >> config/config.yaml << 'EOF'
-
-  - word: "soft landing"
-    type: "addition"
-    context: "economic outlook"
-    shift_id: "SHIFT-2024-01"
-    significance: "Describes Fed goal to reduce inflation without recession"
-    enabled: true
-    priority: "medium"
-    synonyms:
-      - "smooth transition"
-      - "gradual adjustment"
-EOF
-
-# Re-analyze to pick up new keyword
-python -m fedspeak.cli analyze --force
-python -m fedspeak.cli detect
 ```
-
-**Adjust detection sensitivity:**
-
-```bash
-# Make detection more sensitive (lower thresholds)
-# Edit detection section in config/config.yaml:
-#   sustained_removal_threshold: 2  (was 3)
-#   min_baseline_samples: 2         (was 3)
-
-# Re-run detection
-python -m fedspeak.cli detect
-```
-
----
-
-## Testing Protocol
-
-**Run unit tests:**
-
-```bash
-# All tests
-pytest tests/ -v
-
-# Expected: 68 passed
-
-# With coverage
-pytest tests/ --cov=fedspeak --cov-report=term
-
-# Expected: ~67% coverage
-```
-
-**Validate with known test case:**
-
-```bash
-# Download 2021, should detect transitory removal on Dec 15
-python -m fedspeak.cli download --start-date 2021-01-01 --end-date 2021-12-31 --statements-only
-python -m fedspeak.cli extract
-python -m fedspeak.cli analyze
-python -m fedspeak.cli detect
-
-# Verify expected alert exists
-test -f results/alerts/ALERT-20211215-removal-transitory.txt && echo "✓ TEST PASSED" || echo "✗ TEST FAILED"
+No shifts detected (expected vs unexpected)
+├─ Check 1: Is this expected?
+│  ├─ Monitoring last 90 days → Shifts are rare, 0 detections is common
+│  ├─ Testing on 2021 corpus → Should detect "transitory" removal Dec 15
+│  └─ Full historical corpus → Should detect multiple shifts (2015, 2018, 2021, ...)
+│
+├─ Check 2: Are statements being processed?
+│  Command: find data/processed -name "*.txt" | wc -l
+│  ├─ 0 files → No statements downloaded yet, monitor will download on first run
+│  └─ >0 files → Statements exist, continue
+│
+├─ Check 3: Is detector running?
+│  Command: grep "Running Word2Vec detection" logs/fedspeak.log
+│  ├─ Not found → Detector not running, check monitor logs
+│  └─ Found → Detector ran, continue
+│
+└─ Check 4: Are thresholds too strict?
+   Command: grep "similarity.*detected" logs/fedspeak.log
+   ├─ Many "below threshold but not significant" → Lower similarity threshold in config
+   └─ No candidates → Genuinely no shifts in period (valid)
 ```
 
 ---
 
 ## Error Handling
 
-**Capture and handle errors:**
+**Common Errors and Solutions:**
 
+**Error: `ModuleNotFoundError: No module named 'anthropic'`**
 ```bash
-# Run with error handling
-if python -m fedspeak.cli download --start-date 2021-01-01 --end-date 2021-12-31 --statements-only; then
-    echo "Download succeeded"
-else
-    EXIT_CODE=$?
-    echo "Download failed with code $EXIT_CODE"
+# Solution: Install dependencies
+pip install -r requirements.txt
+```
 
-    # Check common issues
-    if ! ping -c 1 www.federalreserve.gov &>/dev/null; then
-        echo "Network issue: Cannot reach Federal Reserve website"
-    fi
+**Error: `ValueError: No API key provided`**
+```bash
+# Solution: Set API key
+export ANTHROPIC_API_KEY="sk-ant-999999999999"  # Local routing
+# Or:
+export ANTHROPIC_API_KEY="sk-ant-api03-YOUR_KEY"  # Cloud API
+```
 
-    # Check disk space
-    DISK_FREE=$(df . | tail -1 | awk '{print $4}')
-    if [ $DISK_FREE -lt 100000 ]; then
-        echo "Disk space low: Only ${DISK_FREE}KB available"
-    fi
+**Error: `FileNotFoundError: [Errno 2] No such file or directory: 'prototypes/results/fed_word2vec.model'`**
+```bash
+# Solution: Word2Vec model missing (shouldn't happen in production)
+# If model is truly missing, system will fail. Check if file exists:
+ls -lh prototypes/results/fed_word2vec.model
+# Model should be ~1MB. If missing, contact maintainer.
+```
 
-    exit $EXIT_CODE
-fi
+**Error: `Address already in use` (port 5000)**
+```bash
+# Solution: Kill process using port 5000
+lsof -ti:5000 | xargs kill
+
+# Then restart dashboard
+python src/dashboard/app.py
+```
+
+**Error: `FRED API rate limit exceeded`**
+```bash
+# Solution: Market validation will be skipped temporarily
+# System continues working, alerts may be Tier 2/3 instead of Tier 1
+# Wait 1 hour for rate limit to reset, or use FRED API key (optional)
 ```
 
 ---
 
-## Performance Expectations
+## Monitoring Operations
 
-| Operation | Documents | Expected Time | Disk Usage |
-|-----------|-----------|---------------|------------|
-| Download | 8 (1 year) | ~15-30 sec | ~2MB |
-| Download | 150 (full corpus) | ~60 min | ~500MB |
-| Extract | 8 | <1 sec | ~200KB |
-| Extract | 150 | <10 sec | ~5MB |
-| Analyze | 8 | <1 sec | ~50KB |
-| Analyze | 150 | <1 sec | ~1MB |
-| Detect | 8 | <1 sec | ~100KB |
-| Detect | 150 | <2 sec | ~5MB |
+**Check System Health:**
 
-**Bottleneck:** Download is rate-limited to 1 second per document (respect Fed servers)
+```bash
+# Are services running?
+curl -s http://localhost:5000/api/stats >/dev/null && echo "Dashboard: UP" || echo "Dashboard: DOWN"
+
+# Check logs for errors
+tail -100 logs/fedspeak.log | grep ERROR
+# Expected: No output (or only warnings, not errors)
+
+# Check disk space (cache can grow large)
+du -sh data/*
+# Expected:
+#   50M   data/alerts
+#   500M  data/market_cache
+#   200M  data/media_cache
+#   1M    data/mila_cache
+#   10M   data/processed
+```
+
+**Log Analysis:**
+
+```bash
+# Recent activity
+tail -50 logs/fedspeak.log
+
+# Search for specific events
+grep "Shift detected" logs/fedspeak.log
+
+# Count detection runs today
+TODAY=$(date +%Y-%m-%d)
+grep "$TODAY.*Running Word2Vec detection" logs/fedspeak.log | wc -l
+
+# Check MILA usage
+grep "MILA analysis" logs/fedspeak.log | tail -20
+```
+
+**Performance Metrics:**
+
+```bash
+# Average detection time
+grep "Detection completed in" logs/fedspeak.log | awk '{print $NF}' | sed 's/s//' | \
+awk '{sum+=$1; count++} END {print "Average:", sum/count, "seconds"}'
+
+# Cache hit rates
+grep "cache hit" logs/fedspeak.log | wc -l
+grep "cache miss" logs/fedspeak.log | wc -l
+# Higher hit rate = lower costs
+```
 
 ---
 
-## Agent Workflow Template
+## Autonomous Execution Template
 
-**Complete autonomous execution:**
+**Complete autonomous workflow:**
 
 ```bash
 #!/bin/bash
@@ -791,117 +814,133 @@ set -e  # Exit on error
 echo "=== FedSpeak Autonomous Execution ==="
 
 # 1. Environment check
-echo "[1/6] Checking environment..."
-python -c "from fedspeak import cli" || { echo "ERROR: Module import failed"; exit 1; }
+echo "[1/7] Checking environment..."
+python -c "from src.core.shift_detector import ShiftDetector" || {
+    echo "ERROR: Module import failed"
+    echo "ACTION: Run 'pip install -r requirements.txt'"
+    exit 1
+}
 
-# 2. Download
-echo "[2/6] Downloading documents..."
-python -m fedspeak.cli download --start-date 2021-01-01 --end-date 2021-12-31 --statements-only
+# 2. Configuration check
+echo "[2/7] Checking configuration..."
+if [ -z "$ANTHROPIC_API_KEY" ]; then
+    echo "WARNING: ANTHROPIC_API_KEY not set"
+    echo "MILA will be disabled. Set to 'sk-ant-999999999999' for local routing."
+    echo "Continuing without MILA..."
+fi
 
-# 3. Extract
-echo "[3/6] Extracting text..."
-python -m fedspeak.cli extract
+# 3. Start dashboard (background)
+echo "[3/7] Starting dashboard..."
+python src/dashboard/app.py &
+DASHBOARD_PID=$!
+sleep 3  # Wait for startup
 
-# 4. Analyze
-echo "[4/6] Analyzing keywords..."
-python -m fedspeak.cli analyze
+# Verify dashboard is running
+curl -s http://localhost:5000/api/stats >/dev/null || {
+    echo "ERROR: Dashboard failed to start"
+    kill $DASHBOARD_PID 2>/dev/null
+    exit 1
+}
+echo "Dashboard started (PID: $DASHBOARD_PID)"
 
-# 5. Detect
-echo "[5/6] Detecting shifts..."
-python -m fedspeak.cli detect
+# 4. Run monitor once
+echo "[4/7] Running shift detection..."
+python src/monitor.py
 
-# 6. Report
-echo "[6/6] Generating report..."
-ALERT_COUNT=$(find results/alerts -name "*.txt" 2>/dev/null | wc -l)
-
-echo ""
-echo "=== EXECUTION COMPLETE ==="
-echo "Alerts generated: $ALERT_COUNT"
+# 5. Check results
+echo "[5/7] Analyzing results..."
+ALERT_COUNT=$(find data/alerts -name "ALERT-*.json" 2>/dev/null | wc -l)
+echo "Total alerts: $ALERT_COUNT"
 
 if [ $ALERT_COUNT -gt 0 ]; then
+    # Get tier distribution
+    echo "Alert tier distribution:"
+    grep -h '"tier":' data/alerts/*.json | awk '{print $2}' | tr -d ',' | sort | uniq -c
+
+    # Show recent shifts
     echo ""
-    echo "Shifts detected:"
-    for alert in results/alerts/*.txt; do
-        grep "Word:" "$alert" | head -1
-        grep "Shift Type:" "$alert" | head -1
-        grep "Document:.*-" "$alert" | head -1
-        echo "---"
+    echo "Recent shifts detected:"
+    find data/alerts -name "ALERT-*.json" -mtime -7 | while read alert; do
+        python -c "
+import json
+with open('$alert') as f:
+    a = json.load(f)
+print(f\"  {a['alert_id']}: {a['term']} ({a['tier']}, {a['confidence']})\")
+"
     done
 fi
 
+# 6. Run tests
+echo "[6/7] Running validation tests..."
+pytest tests/ -q --tb=no 2>&1 | tail -5
+
+# 7. Cleanup
+echo "[7/7] Cleanup..."
+kill $DASHBOARD_PID 2>/dev/null || true
+
+echo ""
+echo "=== EXECUTION COMPLETE ==="
+echo "Dashboard PID: $DASHBOARD_PID (stopped)"
+echo "Alerts: $ALERT_COUNT"
+echo "Logs: logs/fedspeak.log"
 exit 0
 ```
 
 ---
 
-## API Response Formats
+## API Reference Quick Guide
 
-**For programmatic parsing:**
+**Dashboard API:**
+- `GET /api/alerts` - List alerts (supports filtering: ?tier=1&confidence=high&start_date=2021-01-01)
+- `GET /api/alerts/<alert_id>` - Get specific alert
+- `GET /api/alerts.csv` - Export all alerts to CSV
+- `GET /api/stats` - System statistics
 
-**JSON Alert Structure:**
-```json
-{
-  "alert_id": "ALERT-20211215-removal-transitory",
-  "timestamp": "2024-01-15T14:30:00",
-  "shift_type": "removal",  // "emergence" or "removal"
-  "word": "transitory",
-  "document": {
-    "doc_id": "monetary20211215a",
-    "doc_type": "policy_statement",
-    "date": "2021-12-15"
-  },
-  "change": {
-    "previous_count": 2.3,
-    "current_count": 0,
-    "change_description": "2.3 → 0",
-    "synonym_breakdown": {
-      "transitory": 2,
-      "transient": 1,
-      "temporary": 0
-    }
-  },
-  "synonym_details": {
-    "primary_word": "transitory",
-    "synonyms_present": ["transitory", "transient"],
-    "synonym_counts": {...},
-    "total_synonyms_tracked": 3
-  },
-  "confidence": "high",
-  "visualization": "results/visualizations/transitory_timeline.png"
-}
-```
+**Word2Vec Explorer API:**
+- `GET /api/explore/similar?word={term}&topn=10` - Find similar terms
+- `GET /api/explore/proximity?word={term}` - Calculate policy proximity
+- `GET /api/explore/similarity?word1={term1}&word2={term2}` - Word-to-word similarity
+- `GET /api/explore/vocabulary` - Model statistics
+- `GET /api/explore/search?q={query}&limit=20` - Autocomplete search
 
-**Metrics CSV Structure:**
-```csv
-date,doc_id,doc_type,word,count,is_group,primary_word,baseline
-2021-12-15,monetary20211215a,policy_statement,transitory,0,False,transitory,2.3
-2021-12-15,monetary20211215a,policy_statement,transient,0,False,transitory,0.8
-2021-12-15,monetary20211215a,policy_statement,transitory_GROUP,0,True,transitory,3.1
-```
+**MILA Explainability API:**
+- `GET /api/explainability/stance/<date>` - Get stance analysis for statement
+- `GET /api/explainability/cost` - API cost tracking
+- `GET /api/visualizations/stance-trend?start_date={date}&end_date={date}` - Stance timeline
+
+See API_DOCUMENTATION.md for complete reference with examples.
 
 ---
 
 ## Summary Checklist
 
-**Before executing pipeline:**
-- [ ] Python 3.8+ installed
-- [ ] In project root (requirements.txt exists)
-- [ ] Dependencies installed (pip install -r requirements.txt)
-- [ ] Directories created (data/, results/)
-- [ ] Config exists (config/config.yaml)
+**Before executing autonomous workflow:**
+- [ ] Python 3.11+ installed
+- [ ] Virtual environment activated (venv_fedspeak_prod)
+- [ ] Dependencies installed (`pip install -r requirements.txt`)
+- [ ] ANTHROPIC_API_KEY set (cloud or local routing)
+- [ ] Directories exist (data/, logs/)
+- [ ] Word2Vec model exists (prototypes/results/fed_word2vec.model)
+- [ ] Port 5000 available
 
-**After each stage:**
-- [ ] Download: Files in data/raw/, >0 documents
-- [ ] Extract: Files in data/processed/, extraction rate >90%
-- [ ] Analyze: keyword_metrics.csv exists, >10 rows
-- [ ] Detect: Alerts in results/alerts/, visualizations in results/visualizations/
+**After system start:**
+- [ ] Dashboard accessible (http://localhost:5000)
+- [ ] API endpoints responding (`/api/stats`)
+- [ ] Monitor running (check logs/fedspeak.log)
+- [ ] No errors in logs (`grep ERROR logs/fedspeak.log`)
 
 **Validation:**
-- [ ] Run pytest tests/ (68 passed expected)
-- [ ] Test known case: 2021 corpus detects transitory removal Dec 15
+- [ ] Run test suite (`pytest tests/` → 175 passed)
+- [ ] Check known shift (December 2021 "transitory" detected)
+- [ ] Verify routing mode (check logs for "via Anthropic API (cloud)" or "via Claude Code (local)")
 
 ---
 
-**Last Updated:** 2025-01-06
-**Optimized for:** Claude Code, autonomous AI agents
-**Companion to:** RUNBOOK.md (human-oriented guide)
+**Last Updated:** November 9, 2025
+**System Version:** FedSpeak v1.0 (Word2Vec + Multi-Signal + MILA)
+**Optimized for:** Claude Code, autonomous AI agents, DevOps automation
+**Companion Guides:**
+- USER_GUIDE.md (human analysts)
+- PRODUCTION_RUNBOOK.md (operations/deployment)
+- API_DOCUMENTATION.md (API reference)
+- LAYMAN_GUIDE.md (non-technical overview)

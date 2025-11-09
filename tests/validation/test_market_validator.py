@@ -16,24 +16,26 @@ class TestMarketValidator:
                 FREDClient()
 
     def test_determine_tier_high_confidence_validated(self):
-        """Test tier determination for high confidence + market validated."""
+        """Test tier determination for high confidence + market validated + media validated (Phase 6)."""
         # Create validator with mocked clients
         with patch('src.validation.market_validator.FREDClient'):
             with patch('src.validation.market_validator.YahooClient'):
                 validator = MarketValidator()
 
-                tier_num, tier_name = validator.determine_tier('high', True)
+                # Tier 1: Triple signal (statistical + market + media)
+                tier_num, tier_name = validator.determine_tier('high', True, True)
 
                 assert tier_num == 1
                 assert tier_name == 'tier_1'
 
     def test_determine_tier_high_confidence_not_validated(self):
-        """Test tier determination for high confidence but not market validated."""
+        """Test tier determination for high confidence + dual signal (Phase 6)."""
         with patch('src.validation.market_validator.FREDClient'):
             with patch('src.validation.market_validator.YahooClient'):
                 validator = MarketValidator()
 
-                tier_num, tier_name = validator.determine_tier('high', False)
+                # Tier 2: Dual signal (statistical + market OR statistical + media)
+                tier_num, tier_name = validator.determine_tier('high', True, False)
 
                 assert tier_num == 2
                 assert tier_name == 'tier_2'

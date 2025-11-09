@@ -426,6 +426,8 @@ GET /api/explore/search?q=inf&limit=5
 
 ## MILA Explainability API
 
+**API Routing**: MILA supports cloud API (Anthropic) or local routing (Claude Code Max) based on API key pattern. Routing is automatic and transparent - all endpoints work identically regardless of mode. See Configuration section in USER_GUIDE.md for setup details.
+
 ### GET `/api/explainability/stance/<date>`
 
 Get MILA stance analysis for a specific FOMC statement.

@@ -525,6 +525,38 @@ docker run -e ANTHROPIC_API_KEY="..." fedspeak:latest
 Environment="ANTHROPIC_API_KEY=..."
 ```
 
+**MILA API Routing Modes**:
+
+FedSpeak supports two routing modes for the Anthropic API:
+
+**Option 1: Anthropic Cloud API (Production)**
+```bash
+# Get API key from https://console.anthropic.com
+export ANTHROPIC_API_KEY="sk-ant-api03-YOUR_ACTUAL_KEY"
+
+# Cost: ~$0.003 per statement (<$5/year ongoing)
+# Verification: Check logs for "via Anthropic API (cloud)"
+```
+
+**Option 2: Claude Code Max Local Routing (Development)**
+```bash
+# Set placeholder API key (all 9s pattern signals local routing)
+export ANTHROPIC_API_KEY="sk-ant-999999999999"
+
+# How it works: System detects all-9s pattern and routes to Claude Code Max
+# Cost: Free (uses Claude Code Max subscription)
+# Verification: Check logs for "via Claude Code (local inference)"
+```
+
+The routing is completely automatic - the system detects the "all 9s" pattern (12+ consecutive 9s in the last segment after the final hyphen) and routes accordingly. Behavior is identical from the user perspective regardless of routing mode.
+
+**Verification**: After starting services, check logs:
+```bash
+grep "MILA initialized" logs/fedspeak.log | tail -1
+# Cloud: "MILA initialized with model: claude-3-5-sonnet-20241022 via Anthropic API (cloud)"
+# Local: "MILA initialized with model: claude-3-5-sonnet-20241022 via Claude Code (local)"
+```
+
 **Verifying Configuration**:
 ```bash
 # Test configuration loading

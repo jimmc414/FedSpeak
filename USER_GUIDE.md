@@ -558,6 +558,22 @@ Steps:
 
 ## MILA Stance Analysis
 
+### MILA Configuration
+
+MILA requires an Anthropic API key. FedSpeak supports two routing modes:
+
+**Option 1: Anthropic Cloud API (Production)**
+- Set `ANTHROPIC_API_KEY="sk-ant-api03-YOUR_ACTUAL_KEY"` (get from https://console.anthropic.com)
+- Cost: ~$0.003 per statement (<$5/year ongoing)
+- Best for: Production deployments, guaranteed uptime
+
+**Option 2: Claude Code Max Local Routing (Development)**
+- Set `ANTHROPIC_API_KEY="sk-ant-999999999999"` (all 9s signals local routing)
+- Cost: Free (uses Claude Code Max subscription)
+- Best for: Development, testing, avoiding API costs
+
+The system automatically detects which mode to use based on the API key pattern. If no key is set, MILA is disabled (other features continue working).
+
 ### What is MILA?
 
 **MILA** (Monetary Insight via LLM Analysis) uses Claude 3.5 Sonnet to classify FOMC statements as:

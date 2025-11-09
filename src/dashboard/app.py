@@ -13,12 +13,25 @@ from io import StringIO
 
 from flask import Flask, render_template, request, jsonify, Response
 from src.config.settings import get_settings
+from src.exploration import Word2VecExplorer, PolicyProximityScorer
 
 logger = logging.getLogger(__name__)
 
 # Create Flask app
 app = Flask(__name__, template_folder='../../templates')
 app.config['JSON_SORT_KEYS'] = False
+
+# Phase 7: Initialize Word2Vec explorer (singleton, loaded once)
+try:
+    word2vec_explorer = Word2VecExplorer()
+    policy_proximity = PolicyProximityScorer(explorer=word2vec_explorer)
+    word2vec_enabled = True
+    logger.info("Word2Vec exploration enabled")
+except Exception as e:
+    logger.warning(f"Word2Vec exploration disabled: {e}")
+    word2vec_explorer = None
+    policy_proximity = None
+    word2vec_enabled = False
 
 
 def load_alerts(alert_dir: Path, max_age_days: Optional[int] = None) -> List[Dict]:
@@ -326,6 +339,109 @@ def api_stats():
     stats['terms'] = dict(sorted(stats['terms'].items(), key=lambda x: x[1], reverse=True))
 
     return jsonify(stats)
+
+
+# ============================================================================
+# Phase 7: Word2Vec Exploration Routes
+# ============================================================================
+
+@app.route('/explore')
+def explore():
+    """Word2Vec exploration dashboard."""
+    if not word2vec_enabled:
+        return render_template('error.html',
+                             error="Word2Vec exploration is not available. Model not loaded."), 503
+
+    # Get vocabulary stats for initial page load
+    vocab_stats = word2vec_explorer.get_vocabulary_stats()
+
+    return render_template(
+        'word2vec_explorer.html',
+        vocab_stats=vocab_stats,
+        word2vec_enabled=word2vec_enabled
+    )
+
+
+@app.route('/api/explore/similar')
+def api_explore_similar():
+    """API endpoint: Find similar words."""
+    if not word2vec_enabled:
+        return jsonify({'success': False, 'error': 'Word2Vec not available'}), 503
+
+    word = request.args.get('word')
+    if not word:
+        return jsonify({'success': False, 'error': 'Missing required parameter: word'}), 400
+
+    topn = int(request.args.get('topn', 10))
+
+    # Limit topn to reasonable range
+    topn = max(1, min(topn, 50))
+
+    result = word2vec_explorer.get_similar_terms(word, topn=topn)
+    return jsonify(result)
+
+
+@app.route('/api/explore/similarity')
+def api_explore_similarity():
+    """API endpoint: Calculate pairwise similarity."""
+    if not word2vec_enabled:
+        return jsonify({'success': False, 'error': 'Word2Vec not available'}), 503
+
+    word1 = request.args.get('word1')
+    word2 = request.args.get('word2')
+
+    if not word1 or not word2:
+        return jsonify({
+            'success': False,
+            'error': 'Missing required parameters: word1, word2'
+        }), 400
+
+    result = word2vec_explorer.calculate_similarity(word1, word2)
+    return jsonify(result)
+
+
+@app.route('/api/explore/vocabulary')
+def api_explore_vocabulary():
+    """API endpoint: Get vocabulary statistics."""
+    if not word2vec_enabled:
+        return jsonify({'success': False, 'error': 'Word2Vec not available'}), 503
+
+    result = word2vec_explorer.get_vocabulary_stats()
+    return jsonify(result)
+
+
+@app.route('/api/explore/proximity')
+def api_explore_proximity():
+    """API endpoint: Calculate policy proximity score."""
+    if not word2vec_enabled:
+        return jsonify({'success': False, 'error': 'Word2Vec not available'}), 503
+
+    word = request.args.get('word')
+    if not word:
+        return jsonify({'success': False, 'error': 'Missing required parameter: word'}), 400
+
+    result = policy_proximity.calculate_proximity_score(word)
+    return jsonify(result)
+
+
+@app.route('/api/explore/search')
+def api_explore_search():
+    """API endpoint: Search vocabulary (autocomplete)."""
+    if not word2vec_enabled:
+        return jsonify({'success': False, 'error': 'Word2Vec not available'}), 503
+
+    query = request.args.get('q', '')
+    if not query or len(query) < 2:
+        return jsonify({
+            'success': False,
+            'error': 'Query must be at least 2 characters'
+        }), 400
+
+    limit = int(request.args.get('limit', 20))
+    limit = max(1, min(limit, 50))
+
+    result = word2vec_explorer.search_vocabulary(query, limit=limit)
+    return jsonify(result)
 
 
 def main():

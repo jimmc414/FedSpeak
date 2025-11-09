@@ -21,6 +21,9 @@ pytz==2023.3  # Timezone handling for market hours
 transformers==4.35.0  # HuggingFace transformers for FinBERT sentiment analysis
 torch==2.1.0  # PyTorch for FinBERT model inference (CPU version)
 
+# Phase 7: Word2Vec exploration dashboard dependencies
+gensim==4.3.2  # Word2Vec model training and semantic similarity analysis
+
 # Development dependencies
 pytest==7.4.3
 pytest-cov==4.1.0

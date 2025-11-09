@@ -1,0 +1,568 @@
+{% extends "base.html" %}
+
+{% block title %}Word2Vec Explorer - FedSpeak{% endblock %}
+
+{% block extra_css %}
+<style>
+    .search-container {
+        background: linear-gradient(135deg, #1f3b73 0%, #2d5aa0 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .search-box {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .search-input {
+        font-size: 1.2rem;
+        padding: 0.75rem 1.25rem;
+        border: none;
+        border-radius: 50px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .autocomplete-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 1000;
+        margin-top: 0.5rem;
+        display: none;
+    }
+
+    .autocomplete-dropdown.show {
+        display: block;
+    }
+
+    .autocomplete-item {
+        padding: 0.75rem 1.25rem;
+        cursor: pointer;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .autocomplete-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .autocomplete-item:last-child {
+        border-bottom: none;
+    }
+
+    .similarity-bar {
+        height: 24px;
+        background: linear-gradient(90deg, #2d5aa0 0%, #4a90e2 100%);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 400px;
+        margin: 1.5rem 0;
+    }
+
+    .proximity-gauge {
+        position: relative;
+        height: 300px;
+    }
+
+    .results-container {
+        min-height: 200px;
+    }
+
+    .loading-spinner {
+        display: none;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .loading-spinner.show {
+        display: block;
+    }
+
+    .word-tag {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        margin: 0.25rem;
+        background-color: #e9ecef;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .word-tag:hover {
+        background-color: #2d5aa0;
+        color: white;
+    }
+
+    .stat-box {
+        text-align: center;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2d5aa0;
+    }
+
+    .stat-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Search Header -->
+<div class="search-container">
+    <div class="container">
+        <h1 class="text-center mb-4">
+            <i class="bi bi-search"></i> Word2Vec Semantic Explorer
+        </h1>
+        <p class="text-center mb-4">
+            Explore semantic relationships in Federal Reserve policy language
+        </p>
+        <div class="search-box">
+            <div class="input-group input-group-lg">
+                <input
+                    type="text"
+                    id="wordSearch"
+                    class="form-control search-input"
+                    placeholder="Enter a Fed term (e.g., inflation, accommodative, patient)..."
+                    autocomplete="off"
+                >
+                <button class="btn btn-light" type="button" id="searchBtn">
+                    <i class="bi bi-search"></i> Explore
+                </button>
+            </div>
+            <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container-fluid">
+    <!-- Vocabulary Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-bar-chart"></i> Vocabulary Statistics
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="stat-box">
+                                <div class="stat-number">{{ "{:,}".format(vocab_stats.vocabulary_size|default(0)) }}</div>
+                                <div class="stat-label">Total Words</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box">
+                                <div class="stat-number">{{ vocab_stats.multi_word_phrases_count|default(0) }}</div>
+                                <div class="stat-label">Multi-Word Phrases</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box">
+                                <div class="stat-number">179</div>
+                                <div class="stat-label">FOMC Statements</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box">
+                                <div class="stat-number">100</div>
+                                <div class="stat-label">Vector Dimensions</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Try These Examples -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-lightbulb"></i> Try These Examples
+                </div>
+                <div class="card-body">
+                    <p class="mb-2"><strong>Click to explore:</strong></p>
+                    {% for term in vocab_stats.interesting_terms %}
+                    <span class="word-tag" onclick="exploreWord('{{ term }}')">{{ term }}</span>
+                    {% endfor %}
+                    <span class="word-tag" onclick="exploreWord('committee')">committee</span>
+                    <span class="word-tag" onclick="exploreWord('rate')">rate</span>
+                    <span class="word-tag" onclick="exploreWord('economy')">economy</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-container" id="resultsContainer" style="display: none;">
+        <!-- Similar Words -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-diagram-3"></i> Most Similar Words to "<span id="queryWord"></span>"
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="similarityChart"></canvas>
+                        </div>
+                        <div id="similarWordsList" class="mt-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Policy Proximity -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-bullseye"></i> Policy Proximity Score
+                    </div>
+                    <div class="card-body">
+                        <div class="proximity-gauge">
+                            <canvas id="proximityGauge"></canvas>
+                        </div>
+                        <div id="proximityDetails" class="mt-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Seed Scores -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-list-check"></i> Similarity to Policy Seed Terms
+                    </div>
+                    <div class="card-body">
+                        <div id="seedScoresList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Analyzing semantic relationships...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<!-- HTMX for dynamic updates -->
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+<script>
+// Global variables
+let similarityChart = null;
+let proximityChart = null;
+let autocompleteTimeout = null;
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('wordSearch');
+    const searchBtn = document.getElementById('searchBtn');
+
+    // Search button click
+    searchBtn.addEventListener('click', function() {
+        const word = searchInput.value.trim();
+        if (word) {
+            exploreWord(word);
+        }
+    });
+
+    // Enter key in search box
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            const word = searchInput.value.trim();
+            if (word) {
+                exploreWord(word);
+            }
+        }
+    });
+
+    // Autocomplete on input
+    searchInput.addEventListener('input', function(e) {
+        clearTimeout(autocompleteTimeout);
+        const query = e.target.value.trim();
+
+        if (query.length >= 2) {
+            autocompleteTimeout = setTimeout(() => fetchAutocomplete(query), 300);
+        } else {
+            hideAutocomplete();
+        }
+    });
+
+    // Hide autocomplete on click outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.search-box')) {
+            hideAutocomplete();
+        }
+    });
+});
+
+// Fetch autocomplete suggestions
+async function fetchAutocomplete(query) {
+    try {
+        const response = await fetch(`/api/explore/search?q=${encodeURIComponent(query)}&limit=10`);
+        const data = await response.json();
+
+        if (data.success && data.matches.length > 0) {
+            showAutocomplete(data.matches);
+        } else {
+            hideAutocomplete();
+        }
+    } catch (error) {
+        console.error('Autocomplete error:', error);
+        hideAutocomplete();
+    }
+}
+
+// Show autocomplete dropdown
+function showAutocomplete(matches) {
+    const dropdown = document.getElementById('autocompleteDropdown');
+    dropdown.innerHTML = matches.map(word =>
+        `<div class="autocomplete-item" onclick="selectWord('${word}')">${word}</div>`
+    ).join('');
+    dropdown.classList.add('show');
+}
+
+// Hide autocomplete dropdown
+function hideAutocomplete() {
+    const dropdown = document.getElementById('autocompleteDropdown');
+    dropdown.classList.remove('show');
+}
+
+// Select word from autocomplete
+function selectWord(word) {
+    document.getElementById('wordSearch').value = word;
+    hideAutocomplete();
+    exploreWord(word);
+}
+
+// Main exploration function
+async function exploreWord(word) {
+    // Update search box
+    document.getElementById('wordSearch').value = word;
+    hideAutocomplete();
+
+    // Show loading
+    document.getElementById('loadingSpinner').classList.add('show');
+    document.getElementById('resultsContainer').style.display = 'none';
+
+    try {
+        // Fetch similar words and proximity in parallel
+        const [similarResponse, proximityResponse] = await Promise.all([
+            fetch(`/api/explore/similar?word=${encodeURIComponent(word)}&topn=10`),
+            fetch(`/api/explore/proximity?word=${encodeURIComponent(word)}`)
+        ]);
+
+        const similarData = await similarResponse.json();
+        const proximityData = await proximityResponse.json();
+
+        if (!similarData.success) {
+            alert(`Error: ${similarData.error}`);
+            return;
+        }
+
+        // Update query word display
+        document.getElementById('queryWord').textContent = similarData.word_normalized;
+
+        // Render similar words chart
+        renderSimilarityChart(similarData.similar);
+
+        // Render proximity gauge
+        renderProximityGauge(proximityData);
+
+        // Render seed scores list
+        renderSeedScores(proximityData.seed_scores);
+
+        // Show results
+        document.getElementById('resultsContainer').style.display = 'block';
+
+    } catch (error) {
+        console.error('Exploration error:', error);
+        alert('Failed to explore word. Please try again.');
+    } finally {
+        // Hide loading
+        document.getElementById('loadingSpinner').classList.remove('show');
+    }
+}
+
+// Render similarity bar chart
+function renderSimilarityChart(similarWords) {
+    const ctx = document.getElementById('similarityChart').getContext('2d');
+
+    // Destroy existing chart
+    if (similarityChart) {
+        similarityChart.destroy();
+    }
+
+    // Prepare data
+    const labels = similarWords.map(item => item.word);
+    const scores = similarWords.map(item => item.score);
+
+    // Create chart
+    similarityChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Similarity Score',
+                data: scores,
+                backgroundColor: 'rgba(45, 90, 160, 0.8)',
+                borderColor: 'rgba(45, 90, 160, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return 'Similarity: ' + context.parsed.x.toFixed(4);
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 1.0,
+                    title: {
+                        display: true,
+                        text: 'Cosine Similarity'
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Render proximity gauge chart
+function renderProximityGauge(proximityData) {
+    const ctx = document.getElementById('proximityGauge').getContext('2d');
+
+    // Destroy existing chart
+    if (proximityChart) {
+        proximityChart.destroy();
+    }
+
+    if (!proximityData.success) {
+        document.getElementById('proximityDetails').innerHTML =
+            `<div class="alert alert-warning">${proximityData.error}</div>`;
+        return;
+    }
+
+    const score = proximityData.proximity_score;
+
+    // Create doughnut chart (gauge style)
+    proximityChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [score, 1 - score],
+                backgroundColor: [
+                    score > 0.5 ? 'rgba(45, 90, 160, 0.8)' : 'rgba(251, 192, 45, 0.8)',
+                    'rgba(233, 236, 239, 0.3)'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            circumference: 180,
+            rotation: -90,
+            cutout: '75%',
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: false
+                }
+            }
+        }
+    });
+
+    // Display score details
+    const detailsHtml = `
+        <div class="text-center">
+            <h3 class="mb-2">${(score * 100).toFixed(1)}%</h3>
+            <p class="text-muted mb-3">Policy Relevance Score</p>
+            <p class="small">
+                <strong>Closest seed:</strong> ${proximityData.closest_seed?.seed || 'N/A'}
+                (${(proximityData.closest_seed?.similarity || 0).toFixed(3)})
+            </p>
+        </div>
+    `;
+    document.getElementById('proximityDetails').innerHTML = detailsHtml;
+}
+
+// Render seed scores list
+function renderSeedScores(seedScores) {
+    if (!seedScores || seedScores.length === 0) {
+        document.getElementById('seedScoresList').innerHTML =
+            '<p class="text-muted">No seed scores available</p>';
+        return;
+    }
+
+    const scoresHtml = seedScores.map(item => `
+        <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+                <strong>${item.seed}</strong>
+                <span class="badge bg-primary">${item.similarity.toFixed(4)}</span>
+            </div>
+            <div class="progress" style="height: 8px;">
+                <div class="progress-bar" role="progressbar"
+                     style="width: ${(item.similarity * 100).toFixed(1)}%; background-color: #2d5aa0;"
+                     aria-valuenow="${item.similarity}"
+                     aria-valuemin="0" aria-valuemax="1">
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    document.getElementById('seedScoresList').innerHTML = scoresHtml;
+}
+</script>
+{% endblock %}

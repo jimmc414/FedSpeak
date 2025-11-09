@@ -22,27 +22,27 @@ FedSpeak is an automated system that reads Federal Reserve press releases and id
 
 ## Key Features
 
-### 🎯 **Intelligent Detection**
+### **Intelligent Detection**
 - **Word2Vec Semantic Analysis**: Measures how Fed term usage has changed contextually (not just word frequency)
 - **Triple Validation**: Confirms shifts with statistical detection + market reaction + media coverage
 - **70-75% Precision**: Tier 1 (triple-validated) alerts achieve 70-75% accuracy vs. 53.8% baseline
 
-### 📊 **Multi-Signal Validation**
+### **Multi-Signal Validation**
 - **Market Data**: FRED API (Treasury yields), Yahoo Finance (VIX, S&P 500)
 - **Media Coverage**: GDELT Project (100K+ news sources), FinBERT sentiment analysis
 - **Three-Tier System**: Gold/Silver/Bronze classification by confidence level
 
-### 🤖 **AI-Powered Explanations**
+### **AI-Powered Explanations**
 - **MILA Framework**: Claude 3.5 Sonnet classifies statements as hawkish/dovish/neutral
 - **Human-Readable**: Plain-English explanations with key evidence phrases
 - **Cost-Effective**: ~$0.003 per statement, cached results, <$5/year ongoing cost
 
-### 📈 **Interactive Dashboards**
+### **Interactive Dashboards**
 - **Real-Time Monitoring**: Flask dashboard with filtering, pagination, CSV export
 - **Word2Vec Explorer**: Semantic similarity search, policy proximity analysis
 - **MILA Stance Viewer**: Timeline of Fed policy evolution, statement comparisons
 
-### ⚡ **Production-Ready**
+### **Production-Ready**
 - **Real-Time**: RSS feed polling every 5 minutes, alerts within minutes of release
 - **Comprehensive Testing**: 175 tests passing (100%), 83% coverage, Pylint 10.0/10
 - **Full Documentation**: 4,000+ lines covering deployment, usage, API reference
@@ -56,20 +56,20 @@ On December 15, 2021, the Federal Reserve removed the word **"transitory"** when
 
 ### How FedSpeak Detected It
 
-**✅ Signal 1: Semantic Analysis**
+**Signal 1: Semantic Analysis**
 - Term: "inflation"
 - Old context: ["elevated", "transitory", "persist", "temporary"]
 - New context: ["elevated", "remain", "coming months", "declining"]
 - **Similarity: 68%** (below 85% threshold) → **SHIFT DETECTED**
 
-**✅ Signal 2: Market Reaction**
+**Signal 2: Market Reaction**
 - 2-Year Treasury: +10.2 bps (0.63% → 0.73%)
 - 10-Year Treasury: +6.8 bps (1.43% → 1.50%)
 - VIX: +12.3% (18.2 → 20.4)
 - S&P 500: -0.9%
 - **Market Score: 0.72** (threshold 0.5) → **VALIDATED**
 
-**✅ Signal 3: Media Coverage**
+**Signal 3: Media Coverage**
 - Articles: 247 (threshold: 50)
 - Unique sources: 89 (Bloomberg, Reuters, WSJ, FT)
 - Sentiment: Hawkish (+0.78)
@@ -78,7 +78,7 @@ On December 15, 2021, the Federal Reserve removed the word **"transitory"** when
 ### FedSpeak Alert Generated
 
 ```
-🥇 TIER 1 ALERT (Triple Validated - Highest Precision)
+TIER 1 ALERT (Triple Validated - Highest Precision)
 
 Statement Date: December 15, 2021
 Term: "inflation"
@@ -86,9 +86,9 @@ Shift: Removal of "transitory" framing
 Confidence: HIGH
 
 Validation:
-✅ Statistical Signal: DETECTED (68% similarity)
-✅ Market Reaction: CONFIRMED (score 0.72, treasuries +10bps)
-✅ Media Coverage: CONFIRMED (247 articles, 89 sources)
+[PASS] Statistical Signal: DETECTED (68% similarity)
+[PASS] Market Reaction: CONFIRMED (score 0.72, treasuries +10bps)
+[PASS] Media Coverage: CONFIRMED (247 articles, 89 sources)
 
 MILA Analysis (Claude 3.5 Sonnet):
 Stance: Hawkish (88/100 confidence)
@@ -263,9 +263,9 @@ Not every language change is meaningful. FedSpeak validates shifts with three in
 
 | Tier | Signals | Precision | Use Case |
 |------|---------|-----------|----------|
-| **🥇 Tier 1** | Statistical + Market + Media | 70-75% | High priority, likely significant |
-| **🥈 Tier 2** | Two signals (any combination) | 55-65% | Medium priority, monitor closely |
-| **🥉 Tier 3** | Single signal only | 30-45% | Low priority, informational |
+| **Tier 1** | Statistical + Market + Media | 70-75% | High priority, likely significant |
+| **Tier 2** | Two signals (any combination) | 55-65% | Medium priority, monitor closely |
+| **Tier 3** | Single signal only | 30-45% | Low priority, informational |
 
 ### 5. AI Explanation (MILA Framework)
 
@@ -620,13 +620,13 @@ See [PRODUCTION_RUNBOOK.md](docs/PRODUCTION_RUNBOOK.md) for detailed deployment 
 
 ## Roadmap
 
-### Completed (Phase 0-9) ✅
-- ✅ Core Word2Vec detection
-- ✅ Multi-signal validation (market + media)
-- ✅ MILA AI explanations
-- ✅ Interactive dashboards
-- ✅ Real-time monitoring
-- ✅ Comprehensive documentation
+### Completed (Phase 0-9)
+- Core Word2Vec detection
+- Multi-signal validation (market + media)
+- MILA AI explanations
+- Interactive dashboards
+- Real-time monitoring
+- Comprehensive documentation
 
 ### Future Enhancements (Optional)
 
@@ -651,7 +651,7 @@ See [PRODUCTION_RUNBOOK.md](docs/PRODUCTION_RUNBOOK.md) for detailed deployment 
 - Integration with trading platforms (Alpaca, Interactive Brokers)
 - Backtested trading strategies
 - Automated position recommendations
-- ⚠️ Requires regulatory compliance
+- WARNING: Requires regulatory compliance
 
 **Phase 14: Mobile App**
 - iOS/Android app

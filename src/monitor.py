@@ -16,6 +16,7 @@ from src.monitoring import RSSMonitor
 from src.core import ImprovedDetector
 from src.distribution import AlertDeduplicator, EmailSender
 from src.validation import MarketValidator
+from src.validation import MediaValidator
 from src.config import setup_logging
 from src.config.settings import get_settings
 from src.exceptions import DataError, DetectionError
@@ -53,6 +54,16 @@ class FOMCMonitor:
             self.market_validator = None
             market_validation_enabled = False
 
+        # Phase 6: Media coverage validation component
+        try:
+            self.media_validator = MediaValidator()
+            media_validation_enabled = self.media_validator.enabled
+        except Exception as e:
+            logger.warning(f"Media validation initialization failed: {e}")
+            logger.warning("Continuing without media validation (FinBERT model may not be loaded)")
+            self.media_validator = None
+            media_validation_enabled = False
+
         # Load configured terms to monitor
         self.monitored_terms = self._load_monitored_terms()
 
@@ -63,6 +74,7 @@ class FOMCMonitor:
         logger.info(f"FOMCMonitor initialized. Monitoring {len(self.monitored_terms)} terms")
         logger.info(f"Email distribution: {'enabled' if self.email_sender.enabled else 'disabled'}")
         logger.info(f"Market validation: {'enabled' if market_validation_enabled else 'disabled'}")
+        logger.info(f"Media validation: {'enabled' if media_validation_enabled else 'disabled'}")
 
     def _load_monitored_terms(self) -> List[str]:
         """Load list of terms to monitor from config.
@@ -207,6 +219,9 @@ Alert ID: {alert['alert_id']}
                             }
 
                             # Phase 5: Market validation
+                            market_validation = None
+                            market_validated = False
+
                             if self.market_validator and self.market_validator.enabled:
                                 try:
                                     market_validation = self.market_validator.validate_shift(
@@ -214,33 +229,67 @@ Alert ID: {alert['alert_id']}
                                         term=term,
                                         shift_type=detection['shift_type']
                                     )
-                                    tier_num, tier_name = self.market_validator.determine_tier(
-                                        detection['confidence'],
-                                        market_validation['validated']
-                                    )
-
-                                    # Add market validation fields to alert
-                                    alert['market_validation'] = market_validation
-                                    alert['tier'] = tier_num
-                                    alert['tier_name'] = tier_name
-                                    alert['confidence_original'] = detection['confidence']
-                                    alert['confidence_adjusted'] = tier_name
+                                    market_validated = market_validation['validated']
 
                                     logger.info(
-                                        f"Market validation: {market_validation['validated']} "
-                                        f"(score: {market_validation['market_score']:.2f}, tier: {tier_num})"
+                                        f"Market validation: {market_validated} "
+                                        f"(score: {market_validation['market_score']:.2f})"
                                     )
                                 except Exception as e:
                                     logger.warning(f"Market validation failed for {alert['alert_id']}: {e}")
-                                    # Continue without market validation
-                                    alert['market_validation'] = None
-                                    alert['tier'] = 2  # Default to Tier 2 (statistical only)
-                                    alert['tier_name'] = 'tier_2'
+                                    market_validation = None
+                                    market_validated = False
+
+                            # Phase 6: Media coverage validation
+                            media_validation = None
+                            media_validated = False
+
+                            if self.media_validator and self.media_validator.enabled:
+                                try:
+                                    media_validation = self.media_validator.validate_shift(
+                                        date=detection['date'],
+                                        term=term,
+                                        shift_type=detection['shift_type']
+                                    )
+                                    media_validated = media_validation['validated']
+
+                                    logger.info(
+                                        f"Media validation: {media_validated} "
+                                        f"(coverage: {media_validation['coverage_volume']}, "
+                                        f"sources: {media_validation['source_diversity']}, "
+                                        f"sentiment: {media_validation['hybrid_sentiment']:.2f})"
+                                    )
+                                except Exception as e:
+                                    logger.warning(f"Media validation failed for {alert['alert_id']}: {e}")
+                                    media_validation = None
+                                    media_validated = False
+
+                            # Multi-signal tier determination (Phase 6 enhancement)
+                            if self.market_validator and self.market_validator.enabled:
+                                tier_num, tier_name = self.market_validator.determine_tier(
+                                    detection['confidence'],
+                                    market_validated,
+                                    media_validated  # Phase 6: Pass media validation
+                                )
                             else:
-                                # Market validation disabled
-                                alert['market_validation'] = None
-                                alert['tier'] = 2  # Default to Tier 2
-                                alert['tier_name'] = 'tier_2'
+                                # Fallback when market validator not available
+                                tier_num = 3
+                                tier_name = 'tier_3'
+
+                            # Add validation fields to alert
+                            alert['market_validation'] = market_validation
+                            alert['media_validation'] = media_validation
+                            alert['tier'] = tier_num
+                            alert['tier_name'] = tier_name
+                            alert['confidence_original'] = detection['confidence']
+                            alert['confidence_adjusted'] = tier_name
+
+                            logger.info(
+                                f"Alert tier: {tier_num} ({tier_name}) - "
+                                f"Statistical: {detection['confidence']}, "
+                                f"Market: {market_validated}, "
+                                f"Media: {media_validated}"
+                            )
 
                             # Check for duplicate
                             if not self.deduplicator.should_distribute(alert):

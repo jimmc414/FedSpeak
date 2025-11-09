@@ -179,31 +179,60 @@ class MarketValidator:
     def determine_tier(
         self,
         statistical_confidence: str,
-        market_validated: bool
+        market_validated: bool,
+        media_validated: Optional[bool] = None
     ) -> Tuple[int, str]:
         """
-        Determine alert tier based on statistical confidence and market validation.
+        Determine alert tier based on statistical confidence and external validation.
+
+        Phase 6 Enhancement: Multi-signal validation (statistical + market + media)
 
         Args:
             statistical_confidence: Original detector confidence ("high", "medium", "low")
             market_validated: Whether market data validated the shift
+            media_validated: Whether media coverage validated the shift (optional, Phase 6)
 
         Returns:
             Tuple of (tier_number, tier_name):
-                (1, "tier_1"): Statistical + Market validated (highest quality)
-                (2, "tier_2"): Statistical only, not market validated
-                (3, "tier_3"): Low statistical confidence (informational)
+                Tier 1 - Triple validated (statistical + market + media)
+                Tier 2 - Dual validated (statistical + market OR media)
+                Tier 3 - Statistical only (low confidence or no external validation)
+
+        Three-Tier System:
+            - Tier 1: Statistical (high/medium) + Market + Media validated
+                      Gold standard with all three signals confirming
+            - Tier 2: Statistical (high/medium) + (Market OR Media) validated
+                      Strong evidence with statistical plus one external signal
+            - Tier 3: Statistical only or low confidence
+                      Statistical detection without external confirmation
         """
+        # Low statistical confidence always goes to Tier 3
         if statistical_confidence == "low":
             return (3, "tier_3")
 
+        # High/medium statistical confidence
         if statistical_confidence in ["high", "medium"]:
-            if market_validated:
-                return (1, "tier_1")  # Best quality: both signals
-            else:
-                return (2, "tier_2")  # Statistical only
+            # Count external validation signals
+            external_signals = 0
 
-        # Fallback
+            if market_validated:
+                external_signals += 1
+
+            if media_validated is not None and media_validated:
+                external_signals += 1
+
+            # Tier determination based on external signal count
+            if external_signals >= 2:
+                # Both market and media validated = Tier 1 (triple validation)
+                return (1, "tier_1")
+            elif external_signals == 1:
+                # One external signal = Tier 2 (dual validation)
+                return (2, "tier_2")
+            else:
+                # No external signals = Tier 3 (statistical only)
+                return (3, "tier_3")
+
+        # Fallback for unknown confidence levels
         logger.warning(f"Unknown confidence level: {statistical_confidence}")
         return (3, "tier_3")
 

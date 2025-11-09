@@ -279,3 +279,105 @@ market_validation:
     start_date: "2009-01-01"
     end_date: "2024-12-31"
     output_dir: "results/market_validation/"
+
+# Phase 6: Media Coverage Validation Configuration
+media_validation:
+  enabled: true
+
+  # API Configuration
+  apis:
+    gdelt:
+      enabled: true
+      base_url: "https://api.gdeltproject.org/api/v2"
+      rate_limit: null  # Unlimited (GDELT is free)
+      timeout: 30  # seconds
+      search_window_hours: 24  # 24 hours post-FOMC for media coverage
+
+    finbert:
+      enabled: true
+      model_name: "yiyanghkust/finbert-tone"  # Finance-specific BERT
+      device: "cpu"  # or "cuda" if GPU available
+      batch_size: 8
+
+  # Indicators and Thresholds
+  indicators:
+    coverage_volume:
+      enabled: true
+      threshold_articles: 50  # Minimum 50 articles mentioning term
+      weight: 0.35
+      description: "Number of articles mentioning the term within 24 hours"
+
+    source_diversity:
+      enabled: true
+      threshold_sources: 15  # Minimum 15 unique sources
+      weight: 0.35
+      description: "Number of unique news sources covering the shift"
+
+    sentiment_significance:
+      enabled: true
+      threshold_abs_score: 0.3  # |avg sentiment| >= 0.3
+      weight: 0.30
+      description: "Absolute average sentiment score (hybrid FinBERT + GDELT)"
+
+  # Sentiment Analysis Settings
+  sentiment:
+    top_n_articles: 20  # Analyze sentiment of top 20 articles (efficiency)
+    min_article_length: 50  # Minimum words for sentiment analysis
+    hybrid_weights:
+      gdelt_tone: 0.4  # Weight for GDELT tone scores
+      finbert_sentiment: 0.6  # Weight for FinBERT predictions
+
+    # Priority news sources (high-quality financial journalism)
+    priority_sources:
+      - "reuters.com"
+      - "bloomberg.com"
+      - "wsj.com"
+      - "ft.com"
+      - "nytimes.com"
+      - "cnbc.com"
+      - "marketwatch.com"
+      - "apnews.com"
+      - "federalreserve.gov"
+      - "economist.com"
+
+  # Validation Criteria
+  validation:
+    min_score: 0.6  # Need 60% of weighted indicators
+    min_indicators: 2  # At least 2 indicators must trigger
+
+  # Multi-Signal Tier Rules (Statistical + Market + Media)
+  tiers:
+    tier_1:  # Triple validated (Statistical + Market + Media)
+      statistical_confidence: ["high", "medium"]
+      market_validated: true
+      media_validated: true
+      description: "Gold standard - all three signals confirm shift"
+
+    tier_2:  # Dual validated (Statistical + Market OR Media)
+      statistical_confidence: ["high", "medium"]
+      external_validated: 1  # At least 1 external signal (market or media)
+      description: "Strong evidence - statistical plus one external signal"
+
+    tier_3:  # Statistical only
+      statistical_confidence: ["high", "medium"]
+      external_validated: 0
+      description: "Statistical detection only, no external confirmation"
+
+  # Storage
+  storage:
+    cache_dir: "data/media_cache/"
+    retention_days: 90
+    format: "json"
+
+  # GDELT Search Configuration
+  search:
+    query_template: "(FOMC OR \"Federal Reserve\") AND {term} AND (statement OR policy OR monetary)"
+    source_language: "english"
+    max_records: 250  # GDELT limit per query
+
+    # Keywords to exclude (reduce noise)
+    exclude_keywords:
+      - "opinion"
+      - "editorial"
+      - "blog"
+      - "comment"

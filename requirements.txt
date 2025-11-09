@@ -17,6 +17,10 @@ fredapi==0.5.1  # FRED (Federal Reserve Economic Data) API client
 yfinance==0.2.31  # Yahoo Finance for intraday market data (VIX, S&P500)
 pytz==2023.3  # Timezone handling for market hours
 
+# Phase 6: Media coverage validation dependencies
+transformers==4.35.0  # HuggingFace transformers for FinBERT sentiment analysis
+torch==2.1.0  # PyTorch for FinBERT model inference (CPU version)
+
 # Development dependencies
 pytest==7.4.3
 pytest-cov==4.1.0

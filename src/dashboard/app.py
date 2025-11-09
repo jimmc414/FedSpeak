@@ -33,6 +33,20 @@ except Exception as e:
     policy_proximity = None
     word2vec_enabled = False
 
+# Phase 8: Initialize MILA analyzer (singleton, loaded once)
+try:
+    from src.explainability import MILAAnalyzer
+    mila_analyzer = MILAAnalyzer()
+    mila_enabled = mila_analyzer.is_enabled()
+    if mila_enabled:
+        logger.info("MILA stance analysis enabled")
+    else:
+        logger.warning("MILA disabled (missing ANTHROPIC_API_KEY)")
+except Exception as e:
+    logger.warning(f"MILA initialization failed: {e}")
+    mila_analyzer = None
+    mila_enabled = False
+
 
 def load_alerts(alert_dir: Path, max_age_days: Optional[int] = None) -> List[Dict]:
     """Load all alert JSON files from directory.
@@ -442,6 +456,252 @@ def api_explore_search():
 
     result = word2vec_explorer.search_vocabulary(query, limit=limit)
     return jsonify(result)
+
+
+# ============================================================================
+# Phase 8: MILA Explainability & Visualization Routes
+# ============================================================================
+
+@app.route('/explainability')
+def explainability():
+    """MILA stance analysis dashboard."""
+    if not mila_enabled:
+        return render_template(
+            'error.html',
+            error="MILA is not available. Set ANTHROPIC_API_KEY to enable."
+        ), 503
+
+    # Load available statements for dropdown
+    statements = _get_statement_list()
+
+    return render_template(
+        'explainability.html',
+        statements=statements,
+        mila_enabled=mila_enabled
+    )
+
+
+@app.route('/explainability/compare')
+def explainability_compare():
+    """Statement comparison view."""
+    if not mila_enabled:
+        return render_template(
+            'error.html',
+            error="MILA is not available. Set ANTHROPIC_API_KEY to enable."
+        ), 503
+
+    # Get query parameters
+    date1 = request.args.get('date1')
+    date2 = request.args.get('date2')
+
+    # Load available statements
+    statements = _get_statement_list()
+
+    # If both dates provided, load comparison data
+    if date1 and date2:
+        try:
+            import difflib
+            from pathlib import Path
+
+            # Load statements
+            data_dir = Path('data/processed')
+            stmt1_path = data_dir / f'policy_statement_{date1}.txt'
+            stmt2_path = data_dir / f'policy_statement_{date2}.txt'
+
+            if not stmt1_path.exists() or not stmt2_path.exists():
+                return render_template(
+                    'error.html',
+                    error=f"Statement files not found for {date1} or {date2}"
+                ), 404
+
+            with open(stmt1_path, 'r', encoding='utf-8') as f:
+                text1 = f.read()
+            with open(stmt2_path, 'r', encoding='utf-8') as f:
+                text2 = f.read()
+
+            # Get MILA analyses
+            stance1 = mila_analyzer.analyze_stance(text1, date1)
+            stance2 = mila_analyzer.analyze_stance(text2, date2)
+
+            # Generate diff HTML
+            diff = difflib.HtmlDiff()
+            diff_html = diff.make_table(
+                text1.splitlines(),
+                text2.splitlines(),
+                fromdesc=f"Statement {date1}",
+                todesc=f"Statement {date2}",
+                context=True,
+                numlines=3
+            )
+
+            return render_template(
+                'comparison.html',
+                statements=statements,
+                date1=date1,
+                date2=date2,
+                date1_display=_format_date(date1),
+                date2_display=_format_date(date2),
+                stance1=stance1,
+                stance2=stance2,
+                text1=text1.replace('\n', '<br>'),
+                text2=text2.replace('\n', '<br>'),
+                diff_html=diff_html
+            )
+
+        except Exception as e:
+            logger.error(f"Comparison failed: {e}")
+            return render_template(
+                'error.html',
+                error=f"Failed to load comparison: {str(e)}"
+            ), 500
+
+    # No dates provided, show selector only
+    return render_template(
+        'comparison.html',
+        statements=statements,
+        date1=None,
+        date2=None
+    )
+
+
+@app.route('/api/explainability/stance/<date>')
+def api_stance(date):
+    """API endpoint: Get MILA stance analysis for a statement."""
+    if not mila_enabled:
+        return jsonify({'success': False, 'error': 'MILA not available'}), 503
+
+    try:
+        from pathlib import Path
+
+        # Load statement text
+        data_dir = Path('data/processed')
+        stmt_path = data_dir / f'policy_statement_{date}.txt'
+
+        if not stmt_path.exists():
+            return jsonify({
+                'success': False,
+                'error': f'Statement not found for date {date}'
+            }), 404
+
+        with open(stmt_path, 'r', encoding='utf-8') as f:
+            statement_text = f.read()
+
+        # Get stance analysis
+        result = mila_analyzer.analyze_stance(statement_text, date)
+
+        # Add statement text to response
+        result['statement_text'] = statement_text
+        result['date'] = date
+
+        return jsonify(result)
+
+    except Exception as e:
+        logger.error(f"Stance API error for {date}: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@app.route('/api/explainability/cost')
+def api_cost():
+    """API endpoint: Get MILA cost summary."""
+    if not mila_enabled:
+        return jsonify({'success': False, 'error': 'MILA not available'}), 503
+
+    try:
+        summary = mila_analyzer.get_cost_summary()
+        return jsonify({'success': True, **summary})
+    except Exception as e:
+        logger.error(f"Cost summary error: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@app.route('/api/visualizations/stance-trend')
+def api_stance_trend():
+    """API endpoint: Get historical stance trend data."""
+    if not mila_enabled:
+        return jsonify({'success': False, 'error': 'MILA not available'}), 503
+
+    try:
+        from pathlib import Path
+
+        # Get all cached stance analyses
+        cache_dir = Path('data/mila_cache/stance')
+        if not cache_dir.exists():
+            return jsonify({
+                'success': True,
+                'timeline': [],
+                'message': 'No cached analyses yet'
+            })
+
+        import json
+        timeline = []
+
+        for cache_file in sorted(cache_dir.glob('*.json')):
+            try:
+                with open(cache_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+
+                # Extract date from metadata
+                date = data.get('metadata', {}).get('date', cache_file.stem)
+
+                timeline.append({
+                    'date': date,
+                    'stance': data.get('stance'),
+                    'score': data.get('score'),
+                    'confidence': data.get('confidence')
+                })
+            except Exception as e:
+                logger.warning(f"Failed to load {cache_file}: {e}")
+                continue
+
+        # Sort by date
+        timeline.sort(key=lambda x: x['date'])
+
+        return jsonify({
+            'success': True,
+            'timeline': timeline,
+            'count': len(timeline)
+        })
+
+    except Exception as e:
+        logger.error(f"Stance trend error: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+def _get_statement_list():
+    """Helper: Get list of available statements."""
+    from pathlib import Path
+
+    data_dir = Path('data/processed')
+    statements = []
+
+    for file_path in sorted(data_dir.glob('policy_statement_*.txt'), reverse=True):
+        date = file_path.stem.replace('policy_statement_', '')
+        statements.append({
+            'date': date,
+            'display_date': _format_date(date),
+            'doc_type': 'Policy Statement'
+        })
+
+    return statements
+
+
+def _format_date(date_str):
+    """Helper: Format YYYYMMDD date to readable format."""
+    try:
+        from datetime import datetime
+        dt = datetime.strptime(date_str, '%Y%m%d')
+        return dt.strftime('%B %d, %Y')
+    except:
+        return date_str
 
 
 def main():

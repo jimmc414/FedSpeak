@@ -24,6 +24,9 @@ torch==2.1.0  # PyTorch for FinBERT model inference (CPU version)
 # Phase 7: Word2Vec exploration dashboard dependencies
 gensim==4.3.2  # Word2Vec model training and semantic similarity analysis
 
+# Phase 8: MILA Framework & Visualizations dependencies
+anthropic==0.39.0  # Anthropic Claude API for LLM stance analysis
+
 # Development dependencies
 pytest==7.4.3
 pytest-cov==4.1.0

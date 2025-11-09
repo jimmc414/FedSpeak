@@ -64,6 +64,17 @@ class FOMCMonitor:
             self.media_validator = None
             media_validation_enabled = False
 
+        # Phase 8: MILA stance analysis component
+        try:
+            from src.explainability import MILAAnalyzer
+            self.mila_analyzer = MILAAnalyzer()
+            mila_enabled = self.mila_analyzer.is_enabled()
+        except Exception as e:
+            logger.warning(f"MILA initialization failed: {e}")
+            logger.warning("Continuing without MILA stance analysis (ANTHROPIC_API_KEY may not be set)")
+            self.mila_analyzer = None
+            mila_enabled = False
+
         # Load configured terms to monitor
         self.monitored_terms = self._load_monitored_terms()
 
@@ -75,6 +86,7 @@ class FOMCMonitor:
         logger.info(f"Email distribution: {'enabled' if self.email_sender.enabled else 'disabled'}")
         logger.info(f"Market validation: {'enabled' if market_validation_enabled else 'disabled'}")
         logger.info(f"Media validation: {'enabled' if media_validation_enabled else 'disabled'}")
+        logger.info(f"MILA stance analysis: {'enabled' if mila_enabled else 'disabled'}")
 
     def _load_monitored_terms(self) -> List[str]:
         """Load list of terms to monitor from config.
@@ -264,6 +276,33 @@ Alert ID: {alert['alert_id']}
                                     media_validation = None
                                     media_validated = False
 
+                            # Phase 8: MILA stance analysis (for high-confidence detections)
+                            mila_analysis = None
+
+                            if detection['confidence'] == 'high' and hasattr(self, 'mila_analyzer') and self.mila_analyzer:
+                                try:
+                                    # Load statement text
+                                    stmt_file = Path('data/processed') / f"policy_statement_{detection['date']}.txt"
+                                    if stmt_file.exists():
+                                        with open(stmt_file, 'r', encoding='utf-8') as f:
+                                            statement_text = f.read()
+
+                                        mila_analysis = self.mila_analyzer.analyze_stance(
+                                            statement_text,
+                                            detection['date']
+                                        )
+
+                                        logger.info(
+                                            f"MILA analysis: {mila_analysis['stance']} "
+                                            f"(score: {mila_analysis['score']:.2f}, "
+                                            f"confidence: {mila_analysis['confidence']:.2f})"
+                                        )
+                                    else:
+                                        logger.warning(f"Statement file not found for MILA: {stmt_file}")
+                                except Exception as e:
+                                    logger.warning(f"MILA analysis failed for {alert['alert_id']}: {e}")
+                                    mila_analysis = None
+
                             # Multi-signal tier determination (Phase 6 enhancement)
                             if self.market_validator and self.market_validator.enabled:
                                 tier_num, tier_name = self.market_validator.determine_tier(
@@ -279,6 +318,7 @@ Alert ID: {alert['alert_id']}
                             # Add validation fields to alert
                             alert['market_validation'] = market_validation
                             alert['media_validation'] = media_validation
+                            alert['mila_analysis'] = mila_analysis  # Phase 8
                             alert['tier'] = tier_num
                             alert['tier_name'] = tier_name
                             alert['confidence_original'] = detection['confidence']

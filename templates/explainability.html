@@ -1,0 +1,455 @@
+{% extends "base.html" %}
+
+{% block title %}MILA Stance Analysis - FedSpeak{% endblock %}
+
+{% block extra_css %}
+<style>
+    .search-container {
+        background: linear-gradient(135deg, #1f3b73 0%, #2d5aa0 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .statement-selector {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .stance-gauge-container {
+        position: relative;
+        height: 300px;
+        margin: 1.5rem 0;
+    }
+
+    .stance-badge-hawkish {
+        background-color: #d32f2f;
+        color: white;
+    }
+
+    .stance-badge-dovish {
+        background-color: #2e7d32;
+        color: white;
+    }
+
+    .stance-badge-neutral {
+        background-color: #757575;
+        color: white;
+    }
+
+    .key-phrase {
+        background-color: #fff3cd;
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+        font-weight: 500;
+    }
+
+    .statement-text {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        text-align: justify;
+    }
+
+    .timeline-container {
+        position: relative;
+        height: 400px;
+        margin: 1.5rem 0;
+    }
+
+    .loading-spinner {
+        display: none;
+        text-align: center;
+        padding: 3rem;
+    }
+
+    .loading-spinner.show {
+        display: block;
+    }
+
+    .cost-widget {
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="search-container">
+    <div class="container">
+        <h1 class="text-center mb-4">
+            <i class="bi bi-chat-left-text"></i> MILA Stance Analysis
+        </h1>
+        <p class="text-center mb-4">
+            Monetary Insight via LLM Analysis - Understanding Federal Reserve Policy Stance
+        </p>
+
+        <!-- Statement Selector -->
+        <div class="statement-selector">
+            <select id="statementSelector" class="form-select form-select-lg" onchange="loadStance()">
+                <option value="">Select a statement to analyze...</option>
+                {% for stmt in statements %}
+                <option value="{{ stmt.date }}">{{ stmt.display_date }} - {{ stmt.doc_type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container-fluid">
+    <!-- Cost & Stats Row -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="h3 text-primary" id="totalCost">$0.00</div>
+                    <div class="text-muted small">Total MILA Cost</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="h3 text-primary" id="monthCost">$0.00</div>
+                    <div class="text-muted small">This Month</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="h3 text-primary" id="cacheHitRate">0%</div>
+                    <div class="text-muted small">Cache Hit Rate</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="h3 text-primary" id="totalAnalyses">0</div>
+                    <div class="text-muted small">Analyses Cached</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Container -->
+    <div id="resultsContainer" style="display: none;">
+        <!-- Stance Overview Row -->
+        <div class="row mb-4">
+            <!-- Stance Gauge -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-speedometer"></i> Policy Stance
+                    </div>
+                    <div class="card-body">
+                        <div class="stance-gauge-container">
+                            <canvas id="stanceGauge"></canvas>
+                        </div>
+                        <div class="text-center mt-3">
+                            <h4>
+                                <span class="badge" id="stanceBadge">-</span>
+                            </h4>
+                            <p class="mb-1">
+                                <strong>Confidence:</strong> <span id="confidenceText">-</span>
+                            </p>
+                            <p class="mb-0">
+                                <strong>Score:</strong> <span id="scoreText">-</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explanation -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-lightbulb"></i> MILA Explanation
+                    </div>
+                    <div class="card-body">
+                        <div id="explanationText" class="mb-3">
+                            <p class="text-muted">Select a statement to see analysis...</p>
+                        </div>
+                        <div id="keyPhrasesContainer" style="display: none;">
+                            <h6>Key Supporting Phrases:</h6>
+                            <ul id="keyPhrasesList"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statement Text -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-file-text"></i> Statement Text
+                        <span class="float-end">
+                            <span id="statementDate" class="badge bg-secondary">-</span>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <div id="statementText" class="statement-text">
+                            <p class="text-muted">Select a statement to view...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historical Timeline -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-graph-up"></i> Historical Stance Trend
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline-container">
+                            <canvas id="timelineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="row mb-4">
+            <div class="col-md-12 text-center">
+                <a href="/explainability/compare" class="btn btn-primary" id="compareBtn" style="display: none;">
+                    <i class="bi bi-arrow-left-right"></i> Compare with Another Statement
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Analyzing policy stance...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+// Global variables
+let stanceGaugeChart = null;
+let timelineChart = null;
+let currentDate = null;
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Load cost summary
+    loadCostSummary();
+});
+
+// Load stance analysis for selected statement
+async function loadStance() {
+    const selector = document.getElementById('statementSelector');
+    const date = selector.value;
+
+    if (!date) {
+        document.getElementById('resultsContainer').style.display = 'none';
+        return;
+    }
+
+    currentDate = date;
+
+    // Show loading
+    document.getElementById('loadingSpinner').classList.add('show');
+    document.getElementById('resultsContainer').style.display = 'none';
+
+    try {
+        // Fetch stance analysis
+        const response = await fetch(`/api/explainability/stance/${date}`);
+        const data = await response.json();
+
+        if (!data.success) {
+            alert(`Error: ${data.error || 'Failed to load stance analysis'}`);
+            return;
+        }
+
+        // Render results
+        renderStanceGauge(data);
+        renderExplanation(data);
+        renderStatementText(data);
+
+        // Load historical timeline
+        await loadTimeline();
+
+        // Show compare button
+        document.getElementById('compareBtn').style.display = 'inline-block';
+        document.getElementById('compareBtn').href = `/explainability/compare?date1=${date}`;
+
+        // Show results
+        document.getElementById('resultsContainer').style.display = 'block';
+
+        // Refresh cost summary
+        loadCostSummary();
+
+    } catch (error) {
+        console.error('Failed to load stance:', error);
+        alert('Failed to load stance analysis. Please try again.');
+    } finally {
+        document.getElementById('loadingSpinner').classList.remove('show');
+    }
+}
+
+// Render stance gauge
+function renderStanceGauge(data) {
+    const ctx = document.getElementById('stanceGauge').getContext('2d');
+
+    // Destroy existing chart
+    if (stanceGaugeChart) {
+        stanceGaugeChart.destroy();
+    }
+
+    // Normalize score to 0-1 range (from -1 to +1)
+    const normalizedScore = (data.score + 1) / 2;
+
+    // Determine color
+    let color;
+    if (data.stance === 'hawkish') {
+        color = 'rgba(211, 47, 47, 0.8)';  // Red
+    } else if (data.stance === 'dovish') {
+        color = 'rgba(46, 125, 50, 0.8)';  // Green
+    } else {
+        color = 'rgba(117, 117, 117, 0.8)';  // Gray
+    }
+
+    // Create gauge (half-doughnut)
+    stanceGaugeChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [normalizedScore, 1 - normalizedScore],
+                backgroundColor: [color, 'rgba(233, 236, 239, 0.3)'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            circumference: 180,
+            rotation: -90,
+            cutout: '70%',
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false }
+            }
+        }
+    });
+
+    // Update text displays
+    const badge = document.getElementById('stanceBadge');
+    badge.textContent = data.stance.toUpperCase();
+    badge.className = `badge stance-badge-${data.stance}`;
+
+    document.getElementById('confidenceText').textContent = `${(data.confidence * 100).toFixed(1)}%`;
+    document.getElementById('scoreText').textContent = data.score.toFixed(2);
+}
+
+// Render explanation
+function renderExplanation(data) {
+    document.getElementById('explanationText').innerHTML = `<p>${data.explanation}</p>`;
+
+    if (data.key_phrases && data.key_phrases.length > 0) {
+        const phrasesList = document.getElementById('keyPhrasesList');
+        phrasesList.innerHTML = data.key_phrases.map(phrase =>
+            `<li><span class="key-phrase">"${phrase}"</span></li>`
+        ).join('');
+        document.getElementById('keyPhrasesContainer').style.display = 'block';
+    } else {
+        document.getElementById('keyPhrasesContainer').style.display = 'none';
+    }
+}
+
+// Render statement text
+function renderStatementText(data) {
+    document.getElementById('statementDate').textContent = data.date || currentDate;
+    document.getElementById('statementText').innerHTML = `<p>${data.statement_text || 'Statement text not available'}</p>`;
+}
+
+// Load historical timeline
+async function loadTimeline() {
+    try {
+        const response = await fetch('/api/visualizations/stance-trend');
+        const data = await response.json();
+
+        if (!data.success || !data.timeline || data.timeline.length === 0) {
+            console.warn('No timeline data available');
+            return;
+        }
+
+        const ctx = document.getElementById('timelineChart').getContext('2d');
+
+        // Destroy existing chart
+        if (timelineChart) {
+            timelineChart.destroy();
+        }
+
+        // Create timeline chart
+        timelineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.timeline.map(d => d.date),
+                datasets: [{
+                    label: 'Policy Stance',
+                    data: data.timeline.map(d => d.score),
+                    borderColor: '#2d5aa0',
+                    backgroundColor: 'rgba(45, 90, 160, 0.1)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        min: -1,
+                        max: 1,
+                        title: {
+                            display: true,
+                            text: 'Stance Score (Dovish ← → Hawkish)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+    } catch (error) {
+        console.error('Failed to load timeline:', error);
+    }
+}
+
+// Load cost summary
+async function loadCostSummary() {
+    try {
+        const response = await fetch('/api/explainability/cost');
+        const data = await response.json();
+
+        if (data.success) {
+            document.getElementById('totalCost').textContent = `$${data.total_cost.toFixed(2)}`;
+            document.getElementById('monthCost').textContent = `$${data.cost_this_month.toFixed(2)}`;
+            document.getElementById('cacheHitRate').textContent = `${(data.cache_hit_rate * 100).toFixed(1)}%`;
+            document.getElementById('totalAnalyses').textContent = data.cached_analyses || 0;
+        }
+    } catch (error) {
+        console.error('Failed to load cost summary:', error);
+    }
+}
+</script>
+{% endblock %}

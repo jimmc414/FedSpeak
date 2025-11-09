@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block title %}Statement Comparison - FedSpeak{% endblock %}
+
+{% block extra_css %}
+<style>
+    .comparison-header {
+        background: linear-gradient(135deg, #1f3b73 0%, #2d5aa0 100%);
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .stance-comparison {
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .diff-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: monospace;
+        font-size: 0.9rem;
+    }
+
+    .diff-table td {
+        padding: 0.25rem 0.5rem;
+        border: 1px solid #e9ecef;
+        vertical-align: top;
+    }
+
+    .diff-line-added {
+        background-color: #d4edda;
+    }
+
+    .diff-line-removed {
+        background-color: #f8d7da;
+    }
+
+    .diff-line-unchanged {
+        background-color: #f8f9fa;
+    }
+
+    .statement-column {
+        padding: 1.5rem;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        background: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="comparison-header">
+    <div class="container">
+        <h1 class="text-center">
+            <i class="bi bi-arrow-left-right"></i> Statement Comparison
+        </h1>
+        <p class="text-center mb-0">Side-by-side analysis of Federal Reserve policy statements</p>
+    </div>
+</div>
+
+<!-- Selector Form -->
+<div class="container-fluid mb-4">
+    <div class="card">
+        <div class="card-body">
+            <form id="comparisonForm" class="row g-3">
+                <div class="col-md-5">
+                    <label for="date1" class="form-label">First Statement</label>
+                    <select id="date1" name="date1" class="form-select" required>
+                        <option value="">Select statement...</option>
+                        {% for stmt in statements %}
+                        <option value="{{ stmt.date }}" {% if date1 == stmt.date %}selected{% endif %}>
+                            {{ stmt.display_date }} - {{ stmt.doc_type }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label for="date2" class="form-label">Second Statement</label>
+                    <select id="date2" name="date2" class="form-select" required>
+                        <option value="">Select statement...</option>
+                        {% for stmt in statements %}
+                        <option value="{{ stmt.date }}" {% if date2 == stmt.date %}selected{% endif %}>
+                            {{ stmt.display_date }} - {{ stmt.doc_type }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> Compare
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if date1 and date2 %}
+<!-- Comparison Results -->
+<div class="container-fluid">
+    <!-- Stance Comparison -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-speedometer"></i> Stance Comparison
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 stance-comparison">
+                            <h5 class="text-center mb-3">{{ date1_display }}</h5>
+                            <div class="text-center">
+                                <h2>
+                                    <span class="badge stance-badge-{{ stance1.stance }}">
+                                        {{ stance1.stance|upper }}
+                                    </span>
+                                </h2>
+                                <p class="mb-1">Score: {{ stance1.score }}</p>
+                                <p class="mb-1">Confidence: {{ (stance1.confidence * 100)|round(1) }}%</p>
+                            </div>
+                            <hr>
+                            <p><small>{{ stance1.explanation }}</small></p>
+                        </div>
+                        <div class="col-md-6 stance-comparison">
+                            <h5 class="text-center mb-3">{{ date2_display }}</h5>
+                            <div class="text-center">
+                                <h2>
+                                    <span class="badge stance-badge-{{ stance2.stance }}">
+                                        {{ stance2.stance|upper }}
+                                    </span>
+                                </h2>
+                                <p class="mb-1">Score: {{ stance2.score }}</p>
+                                <p class="mb-1">Confidence: {{ (stance2.confidence * 100)|round(1) }}%</p>
+                            </div>
+                            <hr>
+                            <p><small>{{ stance2.explanation }}</small></p>
+                        </div>
+                    </div>
+
+                    <!-- Stance Delta -->
+                    {% if stance1.score and stance2.score %}
+                    <div class="alert alert-info mt-3">
+                        <strong>Stance Change:</strong>
+                        {% set delta = stance2.score - stance1.score %}
+                        {% if delta > 0.1 %}
+                        Shifted <strong>{{ (delta * 100)|round(1) }}%</strong> more hawkish
+                        {% elif delta < -0.1 %}
+                        Shifted <strong>{{ (-delta * 100)|round(1) }}%</strong> more dovish
+                        {% else %}
+                        Relatively unchanged ({{ (delta * 100)|round(1) }}% difference)
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Text Comparison -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="bi bi-file-diff"></i> Text Comparison
+                    <div class="btn-group btn-group-sm float-end" role="group">
+                        <input type="radio" class="btn-check" name="viewMode" id="sideBySide" checked onclick="switchView('side')">
+                        <label class="btn btn-outline-secondary" for="sideBySide">Side-by-Side</label>
+                        <input type="radio" class="btn-check" name="viewMode" id="diffView" onclick="switchView('diff')">
+                        <label class="btn btn-outline-secondary" for="diffView">Diff View</label>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Side-by-Side View -->
+                    <div id="sideBySideView">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="statement-column">
+                                    <h6 class="text-muted mb-3">{{ date1_display }}</h6>
+                                    <div style="max-height: 600px; overflow-y: auto;">
+                                        {{ text1|safe }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="statement-column">
+                                    <h6 class="text-muted mb-3">{{ date2_display }}</h6>
+                                    <div style="max-height: 600px; overflow-y: auto;">
+                                        {{ text2|safe }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diff View -->
+                    <div id="diffViewContainer" style="display: none;">
+                        <div style="max-height: 600px; overflow-y: auto;">
+                            {{ diff_html|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="row mb-4">
+        <div class="col-md-12 text-center">
+            <a href="/explainability" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Stance Analysis
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Handle form submission
+document.getElementById('comparisonForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const date1 = document.getElementById('date1').value;
+    const date2 = document.getElementById('date2').value;
+
+    if (date1 && date2) {
+        window.location.href = `/explainability/compare?date1=${date1}&date2=${date2}`;
+    } else {
+        alert('Please select both statements to compare');
+    }
+});
+
+// Switch between side-by-side and diff view
+function switchView(mode) {
+    if (mode === 'side') {
+        document.getElementById('sideBySideView').style.display = 'block';
+        document.getElementById('diffViewContainer').style.display = 'none';
+    } else {
+        document.getElementById('sideBySideView').style.display = 'none';
+        document.getElementById('diffViewContainer').style.display = 'block';
+    }
+}
+</script>
+{% endblock %}

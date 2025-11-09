@@ -381,3 +381,40 @@ media_validation:
       - "editorial"
       - "blog"
       - "comment"
+
+# Phase 8: MILA Framework & Explainability
+explainability:
+  mila:
+    enabled: true
+    provider: "anthropic"  # LLM provider (anthropic/openai)
+    api_key: "${ANTHROPIC_API_KEY}"  # API key from environment variable
+    model: "claude-3-5-sonnet-20241022"  # Claude model for stance analysis
+    max_tokens: 2048  # Maximum tokens for response
+    temperature: 0.1  # Low temperature for consistency (0.0-1.0)
+
+    # Cost Control
+    budget_alert_threshold: 500.0  # Alert if monthly cost exceeds this (USD)
+    daily_request_limit: 100  # Maximum API calls per day (safety limit)
+
+    # Caching
+    cache_dir: "data/mila_cache"
+    cache_retention_days: 365  # Keep stance analyses for 1 year (statements don't change)
+
+    # Stance Scoring
+    stance_definitions:
+      hawkish: "Favors tighter monetary policy (rate increases, reducing accommodation)"
+      dovish: "Favors looser monetary policy (rate cuts, maintaining accommodation)"
+      neutral: "Balanced or data-dependent stance"
+
+  # Visualization Settings
+  visualizations:
+    enabled: true
+    timeline_default_range_years: 2  # Default to last 2 years
+    chart_theme: "professional"  # Chart.js theme
+
+  # Dashboard Settings
+  dashboard:
+    enabled: true
+    default_statement_limit: 50  # Number of statements to show in dropdowns
+    enable_comparison_view: true  # Allow side-by-side statement comparison
+    enable_diff_view: true  # Show text diff between statements

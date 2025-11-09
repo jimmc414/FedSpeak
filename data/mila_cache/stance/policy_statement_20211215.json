@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "stance": "hawkish",
+  "score": 0.75,
+  "confidence": 0.9,
+  "explanation": "The statement signals tightening policy with emphasis on inflation control.",
+  "key_phrases": [
+    "reduce inflation",
+    "raise rates",
+    "price stability"
+  ],
+  "error": null,
+  "metadata": {
+    "cached_at": "2025-11-08T23:34:42.236301",
+    "date": "20211215",
+    "doc_type": "policy_statement",
+    "cache_version": "1.0"
+  }
+}

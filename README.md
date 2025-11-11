@@ -401,25 +401,25 @@ For important shifts, Claude 3.5 Sonnet provides:
 FedSpeak includes comprehensive documentation for all audiences:
 
 ### For Everyone
-- **[LAYMAN_GUIDE.md](docs/LAYMAN_GUIDE.md)** (~15,000 words): Complete non-technical explanation with real-world examples and analogies
+- **[LAYMAN_GUIDE.md](LAYMAN_GUIDE.md)** (~15,000 words): Complete non-technical explanation with real-world examples and analogies
 
 ### For Analysts & Users
-- **[USER_GUIDE.md](docs/USER_GUIDE.md)** (850 lines): Dashboard usage, alert interpretation, Word2Vec explorer, MILA guide, FAQ
+- **[USER_GUIDE.md](USER_GUIDE.md)** (850 lines): Dashboard usage, alert interpretation, Word2Vec explorer, MILA guide, FAQ
 
 ### For Operators & DevOps
-- **[PRODUCTION_RUNBOOK.md](docs/PRODUCTION_RUNBOOK.md)** (650 lines): Deployment (local/AWS/Docker/systemd), monitoring, troubleshooting, rollback procedures
+- **[PRODUCTION_RUNBOOK.md](PRODUCTION_RUNBOOK.md)** (650 lines): Deployment (local/AWS/Docker/systemd), monitoring, troubleshooting, rollback procedures
 
 ### For Developers
-- **[API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md)** (450 lines): All endpoints (dashboard, Word2Vec, MILA), request/response formats, examples (Python/curl/JavaScript)
+- **[API_DOCUMENTATION.md](API_DOCUMENTATION.md)** (450 lines): All endpoints (dashboard, Word2Vec, MILA), request/response formats, examples (Python/curl/JavaScript)
 
 ### For Claude Code Autonomous Operation
 - **[AGENT_GUIDE.md](AGENT_GUIDE.md)** (950 lines): Protocols for autonomous execution by Claude Code AI assistant, including state checks, decision trees, error handling, and API routing configuration
 
 ### For Stakeholders
-- **[PROJECT_RETROSPECTIVE.md](docs/PROJECT_RETROSPECTIVE.md)** (1,000 lines): Full project summary, ROI analysis, metrics, skills demonstrated, suitable for portfolio/resume
+- **[PROJECT_RETROSPECTIVE.md](docs/build_documents/PROJECT_RETROSPECTIVE.md)** (1,000 lines): Full project summary, ROI analysis, metrics, skills demonstrated, suitable for portfolio/resume
 
 ### Phase Completion Reports
-- **[PHASE_0_COMPLETION.md](docs/PHASE_0_COMPLETION.md)** through **[PHASE_9_COMPLETION.md](docs/PHASE_9_COMPLETION.md)**: Detailed implementation documentation for each development phase
+- **[PHASE_0_COMPLETION.md](docs/build_documents/PHASE_0_COMPLETION.md)** through **[PHASE_9_COMPLETION.md](docs/build_documents/PHASE_9_COMPLETION.md)**: Detailed implementation documentation for each development phase
 
 ---
 
@@ -630,7 +630,7 @@ GET /api/explainability/cost
 GET /api/visualizations/stance-trend?start_date=2020-01-01
 ```
 
-See [API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md) for complete reference with examples.
+See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for complete reference with examples.
 
 ---
 
@@ -725,7 +725,7 @@ sudo systemctl enable fedspeak-monitor
 sudo systemctl start fedspeak-monitor
 ```
 
-See [PRODUCTION_RUNBOOK.md](docs/PRODUCTION_RUNBOOK.md) for detailed deployment guides.
+See [PRODUCTION_RUNBOOK.md](PRODUCTION_RUNBOOK.md) for detailed deployment guides.
 
 ---
 
@@ -800,7 +800,7 @@ See [PRODUCTION_RUNBOOK.md](docs/PRODUCTION_RUNBOOK.md) for detailed deployment 
 - Research enablement: $50K-100K (publishable findings)
 - Costs avoided: $13K (failed methods not implemented)
 
-**ROI**: 492-1,758% (see [PROJECT_RETROSPECTIVE.md](docs/PROJECT_RETROSPECTIVE.md) for details)
+**ROI**: 492-1,758% (see [PROJECT_RETROSPECTIVE.md](docs/build_documents/PROJECT_RETROSPECTIVE.md) for details)
 
 ---
 
@@ -813,8 +813,6 @@ Contributions are welcome! Areas for improvement:
 3. **Machine Learning**: Alternative detection models (BERT, GPT)
 4. **Testing**: Increase coverage from 83% to 90%+
 5. **Documentation**: Translate to other languages
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
@@ -853,7 +851,7 @@ MIT License - See [LICENSE](LICENSE) file for details.
 
 - **GitHub Issues**: https://github.com/jimmc414/FedSpeak/issues
 - **Documentation**: See [docs/](docs/) directory
-- **Questions**: See [FAQ in USER_GUIDE.md](docs/USER_GUIDE.md#faq)
+- **Questions**: See [FAQ in USER_GUIDE.md](USER_GUIDE.md#faq)
 
 ---
 
@@ -862,11 +860,11 @@ MIT License - See [LICENSE](LICENSE) file for details.
 | Resource | Description |
 |----------|-------------|
 | **[Installation](#quick-start)** | Get started in 5 minutes |
-| **[User Guide](docs/USER_GUIDE.md)** | How to use dashboards and interpret alerts |
-| **[Layman's Guide](docs/LAYMAN_GUIDE.md)** | Non-technical overview with examples |
-| **[API Docs](docs/API_DOCUMENTATION.md)** | Programmatic access reference |
-| **[Production Runbook](docs/PRODUCTION_RUNBOOK.md)** | Deployment and operations |
-| **[Project Retrospective](docs/PROJECT_RETROSPECTIVE.md)** | Full project summary and ROI |
+| **[User Guide](USER_GUIDE.md)** | How to use dashboards and interpret alerts |
+| **[Layman's Guide](LAYMAN_GUIDE.md)** | Non-technical overview with examples |
+| **[API Docs](API_DOCUMENTATION.md)** | Programmatic access reference |
+| **[Production Runbook](PRODUCTION_RUNBOOK.md)** | Deployment and operations |
+| **[Project Retrospective](docs/build_documents/PROJECT_RETROSPECTIVE.md)** | Full project summary and ROI |
 
 ---
 

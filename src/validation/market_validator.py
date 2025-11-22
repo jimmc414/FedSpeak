@@ -9,10 +9,10 @@ import logging
 from datetime import datetime
 from typing import Dict, Optional, Tuple
 
-from src.config.settings import get_settings
-from src.validation.fred_client import FREDClient
-from src.validation.yahoo_client import YahooClient
-from src.validation.cache import MarketDataCache
+from ..config.settings import get_settings
+from .fred_client import FREDClient
+from .yahoo_client import YahooClient
+from .cache import MarketDataCache
 
 logger = logging.getLogger(__name__)
 

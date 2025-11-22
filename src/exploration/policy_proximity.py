@@ -10,7 +10,7 @@ Date: November 8, 2025
 
 import logging
 from typing import List, Dict, Optional
-from src.exploration.word2vec_service import Word2VecExplorer
+from .word2vec_service import Word2VecExplorer
 
 logger = logging.getLogger(__name__)
 

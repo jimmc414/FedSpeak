@@ -13,8 +13,8 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from src.config.settings import get_settings
-from src.exceptions import DataError
+from ..config.settings import get_settings
+from ..exceptions import DataError
 
 logger = logging.getLogger(__name__)
 
@@ -48,7 +48,8 @@ class EmailSender:
         self.recipients = settings.get('distribution.email.recipients', default=[])
 
         # Setup Jinja2 for email templates
-        template_dir = Path('templates')
+        # Use project root relative path (src/distribution/../../templates)
+        template_dir = Path(__file__).parent.parent.parent / 'templates'
         template_dir.mkdir(exist_ok=True)
 
         self.jinja_env = Environment(loader=FileSystemLoader(template_dir))

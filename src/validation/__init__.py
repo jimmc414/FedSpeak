@@ -6,11 +6,11 @@ This module provides external validation for language shift detections:
 - Phase 6: Media coverage validation (GDELT, FinBERT sentiment)
 """
 
-from src.validation.market_validator import MarketValidator
-from src.validation.fred_client import FREDClient
-from src.validation.yahoo_client import YahooClient
-from src.validation.cache import MarketDataCache
-from src.validation.media_validator import MediaValidator
+from .market_validator import MarketValidator
+from .fred_client import FREDClient
+from .yahoo_client import YahooClient
+from .cache import MarketDataCache
+from .media_validator import MediaValidator
 
 __all__ = [
     'MarketValidator',

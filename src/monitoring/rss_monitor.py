@@ -14,8 +14,8 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup
 
-from src.config.settings import get_settings
-from src.exceptions import DataError
+from ..config.settings import get_settings
+from ..exceptions import DataError
 
 logger = logging.getLogger(__name__)
 

@@ -8,8 +8,8 @@ Phase 6: Media Coverage & Multi-Signal Validation
 - Media cache for storing and managing article data
 """
 
-from src.external.gdelt_client import GDELTClient
-from src.external.media_cache import MediaDataCache
+from .gdelt_client import GDELTClient
+from .media_cache import MediaDataCache
 
 __all__ = [
     'GDELTClient',

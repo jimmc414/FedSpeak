@@ -18,10 +18,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-from src.config.settings import get_settings
-from src.external.gdelt_client import GDELTClient
-from src.external.media_cache import MediaDataCache
-from src.validation.sentiment_analyzer import HybridSentimentScorer
+from ..config.settings import get_settings
+from ..external.gdelt_client import GDELTClient
+from ..external.media_cache import MediaDataCache
+from .sentiment_analyzer import HybridSentimentScorer
 
 logger = logging.getLogger(__name__)
 

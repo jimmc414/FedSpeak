@@ -10,8 +10,8 @@ Phase 7: Word2Vec Exploration Dashboard
 - Interactive exploration dashboard
 """
 
-from src.exploration.word2vec_service import Word2VecExplorer
-from src.exploration.policy_proximity import PolicyProximityScorer
+from .word2vec_service import Word2VecExplorer
+from .policy_proximity import PolicyProximityScorer
 
 __all__ = [
     'Word2VecExplorer',

@@ -8,7 +8,7 @@ import logging
 from pathlib import Path
 from typing import Dict, Optional
 
-from src.config.settings import get_settings
+from ..config.settings import get_settings
 
 logger = logging.getLogger(__name__)
 

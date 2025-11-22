@@ -22,7 +22,7 @@ from pathlib import Path
 
 import anthropic
 
-from src.config.settings import Settings
+from ..config.settings import Settings
 
 logger = logging.getLogger(__name__)
 

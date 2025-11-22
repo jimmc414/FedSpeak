@@ -8,18 +8,18 @@ import logging
 import time
 import sys
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Tuple
 import json
 from datetime import datetime
 
-from src.monitoring import RSSMonitor
-from src.core import ImprovedDetector
-from src.distribution import AlertDeduplicator, EmailSender
-from src.validation import MarketValidator
-from src.validation import MediaValidator
-from src.config import setup_logging
-from src.config.settings import get_settings
-from src.exceptions import DataError, DetectionError
+from .monitoring import RSSMonitor
+from .core import ImprovedDetector
+from .distribution import AlertDeduplicator, EmailSender
+from .validation import MarketValidator
+from .validation import MediaValidator
+from .config import setup_logging
+from .config.settings import get_settings
+from .exceptions import DataError, DetectionError
 
 logger = logging.getLogger(__name__)
 
@@ -66,7 +66,7 @@ class FOMCMonitor:
 
         # Phase 8: MILA stance analysis component
         try:
-            from src.explainability import MILAAnalyzer
+            from .explainability import MILAAnalyzer
             self.mila_analyzer = MILAAnalyzer()
             mila_enabled = self.mila_analyzer.is_enabled()
         except Exception as e:
@@ -110,7 +110,7 @@ class FOMCMonitor:
 
         return monitored
 
-    def _load_all_statements(self) -> tuple[List[str], Dict[str, str]]:
+    def _load_all_statements(self) -> Tuple[List[str], Dict[str, str]]:
         """Load all policy statements from processed directory.
 
         Returns:
@@ -282,7 +282,8 @@ Alert ID: {alert['alert_id']}
                             if detection['confidence'] == 'high' and hasattr(self, 'mila_analyzer') and self.mila_analyzer:
                                 try:
                                     # Load statement text
-                                    stmt_file = Path('data/processed') / f"policy_statement_{detection['date']}.txt"
+                                    data_dir = Path(self.settings.get('corpus.data_dir', default='data')) / self.settings.get('corpus.processed_subdir', default='processed')
+                                    stmt_file = data_dir / f"policy_statement_{detection['date']}.txt"
                                     if stmt_file.exists():
                                         with open(stmt_file, 'r', encoding='utf-8') as f:
                                             statement_text = f.read()

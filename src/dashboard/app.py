@@ -12,8 +12,8 @@ import csv
 from io import StringIO
 
 from flask import Flask, render_template, request, jsonify, Response
-from src.config.settings import get_settings
-from src.exploration import Word2VecExplorer, PolicyProximityScorer
+from ..config.settings import get_settings
+from ..exploration import Word2VecExplorer, PolicyProximityScorer
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ except Exception as e:
 
 # Phase 8: Initialize MILA analyzer (singleton, loaded once)
 try:
-    from src.explainability import MILAAnalyzer
+    from ..explainability import MILAAnalyzer
     mila_analyzer = MILAAnalyzer()
     mila_enabled = mila_analyzer.is_enabled()
     if mila_enabled:
@@ -504,7 +504,8 @@ def explainability_compare():
             from pathlib import Path
 
             # Load statements
-            data_dir = Path('data/processed')
+            settings = get_settings()
+            data_dir = Path(settings.get('corpus.data_dir', default='data')) / settings.get('corpus.processed_subdir', default='processed')
             stmt1_path = data_dir / f'policy_statement_{date1}.txt'
             stmt2_path = data_dir / f'policy_statement_{date2}.txt'
 
@@ -574,7 +575,8 @@ def api_stance(date):
         from pathlib import Path
 
         # Load statement text
-        data_dir = Path('data/processed')
+        settings = get_settings()
+        data_dir = Path(settings.get('corpus.data_dir', default='data')) / settings.get('corpus.processed_subdir', default='processed')
         stmt_path = data_dir / f'policy_statement_{date}.txt'
 
         if not stmt_path.exists():
@@ -680,7 +682,8 @@ def _get_statement_list():
     """Helper: Get list of available statements."""
     from pathlib import Path
 
-    data_dir = Path('data/processed')
+    settings = get_settings()
+    data_dir = Path(settings.get('corpus.data_dir', default='data')) / settings.get('corpus.processed_subdir', default='processed')
     statements = []
 
     for file_path in sorted(data_dir.glob('policy_statement_*.txt'), reverse=True):
